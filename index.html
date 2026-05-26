@@ -28,10 +28,21 @@
     .tag{display:inline-flex;align-items:center;min-height:26px;padding:4px 8px;border-radius:999px;background:#e8f3f1;color:#0b5d57;font-size:12px;font-weight:800;white-space:nowrap}.tag.warn{background:#fff7db;color:var(--amber)}.tag.danger{background:#fee4e2;color:var(--red)}.tag.blue{background:#dbeafe;color:#1d4ed8}
     .row-actions{display:flex;justify-content:flex-end;gap:7px}.icon-button{width:34px;height:34px;border-radius:8px;background:#eef3f7;color:var(--ink);display:inline-grid;place-items:center}.icon-button svg{width:17px;height:17px}.empty{padding:28px 18px;color:var(--muted);text-align:center}.chart{padding:18px;display:grid;gap:14px}.bar-row{display:grid;grid-template-columns:126px 1fr 96px;gap:12px;align-items:center;font-size:13px}.bar-track{height:14px;background:#eef3f7;border-radius:999px;overflow:hidden}.bar{height:100%;width:0;background:var(--blue)}.bar.expense{background:#f59e0b}.bar.net{background:var(--accent)}
     .modal-backdrop{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:14px;background:rgba(15,23,42,.55)}.modal-backdrop[hidden]{display:none}.modal{width:min(820px,calc(100vw - 28px));max-height:calc(100vh - 28px);overflow:auto}.modal-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}.modal-head h3{margin:0;font-size:19px}.form{padding:18px 20px 20px;display:grid;gap:14px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.modal-actions{display:flex;justify-content:flex-end;gap:10px;padding-top:4px}.file-input{display:none}.hidden{display:none!important}
+    .auth-screen{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:20px;background:var(--wash)}.auth-screen[hidden]{display:none}.auth-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:grid;gap:14px}.auth-card h2{margin:0}.auth-card p{margin:0;color:var(--muted);line-height:1.45}.status-line{font-size:13px;color:var(--muted);min-height:20px}.db-badge{font-size:12px;color:#b7c0ca;padding:0 8px}
     @media(max-width:1120px){.grid{grid-template-columns:1fr}} @media(max-width:780px){.app-shell{grid-template-columns:1fr}aside{position:sticky;top:0;z-index:5;padding:14px;gap:14px}.brand{padding:0}.brand h1{font-size:18px}.month-picker{padding:10px}nav{grid-template-columns:repeat(5,1fr)}.nav-button{justify-content:center;min-height:42px;padding:9px}.nav-button span{display:none}.side-actions{grid-template-columns:1fr 1fr;margin-top:0}main{padding:18px 14px 28px}.topbar{align-items:stretch;flex-direction:column}.actions{justify-content:stretch}.actions button{flex:1}.topbar h2{font-size:24px}.form-grid{grid-template-columns:1fr}} @media(max-width:520px){.bar-row{grid-template-columns:86px 1fr}.bar-row strong{grid-column:2}}
   </style>
 </head>
 <body>
+  <div id="authScreen" class="auth-screen" hidden>
+    <form id="authForm" class="auth-card">
+      <h2>Repair Ledger Login</h2>
+      <p id="authHelp">Sign in with an approved account. Only users added in Supabase can read or write shop records.</p>
+      <div><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" required></div>
+      <div><label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" required></div>
+      <div class="actions"><button id="signInBtn" class="primary" type="submit">Sign in</button><button id="signUpBtn" class="secondary" type="button">Create account</button></div>
+      <p id="authStatus" class="status-line"></p>
+    </form>
+  </div>
   <div class="app-shell">
     <aside>
       <div class="brand"><div class="brand-mark">R</div><div><h1>Repair Ledger</h1><p>Monthly shop tracker</p></div></div>
@@ -43,7 +54,7 @@
         <button class="nav-button" data-view="technicians" title="Technicians"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2"/><circle cx="12" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg><span>Technicians</span></button>
         <button class="nav-button" data-view="profit" title="Shop Profit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"/></svg><span>Profit</span></button>
       </nav>
-      <div class="side-actions"><button id="exportBtn" class="ghost">Export CSV</button><button id="importBtn" class="ghost">Import CSV</button><input id="importFile" class="file-input" type="file" accept=".csv,text/csv"></div>
+      <div class="side-actions"><div id="dbStatus" class="db-badge">Local mode</div><button id="exportBtn" class="ghost">Export CSV</button><button id="importBtn" class="ghost">Import CSV</button><button id="signOutBtn" class="ghost" hidden>Sign out</button><input id="importFile" class="file-input" type="file" accept=".csv,text/csv"></div>
     </aside>
     <main>
       <section class="topbar">
@@ -113,16 +124,22 @@
     </form>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
+    const SUPABASE_URL = "";
+    const SUPABASE_ANON_KEY = "";
     const STORAGE_KEY = "repair-ledger-v4";
     const DRAFT_KEY = "repair-ledger-open-draft-v1";
     const OLD_KEYS = ["repair-ledger-v3", "repair-ledger-v2", "repair-ledger-v1"];
     const money = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
     const expenseCategories = ["Supplier payment", "Inventory", "Tools", "Rent", "Utilities", "Marketing", "Shipping", "Other"];
     const els = {};
-    ["month","pageTitle","pageSubtitle","metrics","chart","supplierSummary","inventorySummary","techSummary","repairsTable","expensesTable","techniciansTable","profitTable","dashboardView","repairsView","expensesView","techniciansView","profitView","addRepairBtn","addExpenseBtn","addTechBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","repairDate","customerName","deviceType","serialNumber","repairTitle","invoiceAmount","partSource","partsCost","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes"].forEach(id => els[id] = document.getElementById(id));
+    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","month","pageTitle","pageSubtitle","metrics","chart","supplierSummary","inventorySummary","techSummary","repairsTable","expensesTable","techniciansTable","profitTable","dashboardView","repairsView","expensesView","techniciansView","profitView","addRepairBtn","addExpenseBtn","addTechBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","repairDate","customerName","deviceType","serialNumber","repairTitle","invoiceAmount","partSource","partsCost","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes"].forEach(id => els[id] = document.getElementById(id));
     let records = loadRecords();
     let currentView = "dashboard";
+    let db = null;
+    let currentUser = null;
+    let dbReady = false;
     els.month.value = new Date().toISOString().slice(0, 7);
     document.querySelectorAll(".nav-button").forEach(button => button.addEventListener("click", () => setView(button.dataset.view)));
     document.querySelectorAll("[data-quick]").forEach(button => button.addEventListener("click", () => openDialog(button.dataset.quick)));
@@ -142,10 +159,96 @@
     els.exportBtn.addEventListener("click", exportCsv);
     els.importBtn.addEventListener("click", () => els.importFile.click());
     els.importFile.addEventListener("change", importCsv);
+    els.authForm.addEventListener("submit", signIn);
+    els.signUpBtn.addEventListener("click", signUp);
+    els.signOutBtn.addEventListener("click", signOut);
     render();
     restoreDraft();
+    initDatabase();
 
     function today(offsetDays = 0) { const date = new Date(); date.setDate(date.getDate() + offsetDays); return date.toISOString().slice(0, 10); }
+    function isSupabaseConfigured() {
+      return SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY.length > 20 && window.supabase;
+    }
+    async function initDatabase() {
+      if (!isSupabaseConfigured()) {
+        els.dbStatus.textContent = "Local mode - add Supabase keys";
+        return;
+      }
+      db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const { data } = await db.auth.getSession();
+      currentUser = data.session?.user || null;
+      db.auth.onAuthStateChange((_event, session) => {
+        currentUser = session?.user || null;
+        if (currentUser) loadRemoteRecords();
+        else showLogin("Please sign in.");
+      });
+      if (currentUser) await loadRemoteRecords();
+      else showLogin("Please sign in.");
+    }
+    function showLogin(message = "") {
+      dbReady = false;
+      els.authStatus.textContent = message;
+      els.authScreen.hidden = false;
+      els.signOutBtn.hidden = true;
+      els.dbStatus.textContent = "Supabase - signed out";
+    }
+    function showApp() {
+      els.authScreen.hidden = true;
+      els.signOutBtn.hidden = false;
+      els.dbStatus.textContent = `Supabase - ${currentUser?.email || "signed in"}`;
+    }
+    async function signIn(event) {
+      event.preventDefault();
+      if (!db) return;
+      els.authStatus.textContent = "Signing in...";
+      const { error } = await db.auth.signInWithPassword({ email:els.authEmail.value.trim(), password:els.authPassword.value });
+      els.authStatus.textContent = error ? error.message : "Signed in.";
+    }
+    async function signUp() {
+      if (!db) return;
+      els.authStatus.textContent = "Creating account...";
+      const { error } = await db.auth.signUp({ email:els.authEmail.value.trim(), password:els.authPassword.value });
+      els.authStatus.textContent = error ? error.message : "Account created. Ask the owner to add this user in app_members, then sign in.";
+    }
+    async function signOut() {
+      if (!db) return;
+      await db.auth.signOut();
+    }
+    function toDbRow(record) {
+      return { id:record.id, record_type:record.type, record_date:record.date || today(), data:record, updated_by:currentUser?.id || null, created_by:currentUser?.id || null };
+    }
+    function fromDbRow(row) {
+      return normalizeRecord({ ...row.data, id:row.id, type:row.record_type, date:row.record_date });
+    }
+    async function loadRemoteRecords() {
+      if (!db || !currentUser) return;
+      els.dbStatus.textContent = "Supabase - loading...";
+      const { data, error } = await db.from("repair_records").select("*").order("record_date", { ascending:false });
+      if (error) {
+        showLogin(error.message.includes("row-level security") ? "You are signed in but not approved for this app yet." : error.message);
+        return;
+      }
+      records = (data || []).map(fromDbRow);
+      dbReady = true;
+      showApp();
+      render();
+    }
+    async function syncRecord(record) {
+      if (!dbReady) return;
+      const { error } = await db.from("repair_records").upsert(toDbRow(record));
+      if (error) alert(`Database save failed: ${error.message}`);
+    }
+    async function deleteRemoteRecord(id) {
+      if (!dbReady) return;
+      const { error } = await db.from("repair_records").delete().eq("id", id);
+      if (error) alert(`Database delete failed: ${error.message}`);
+    }
+    async function syncAllRecords() {
+      if (!dbReady || !records.length) return;
+      const { error } = await db.from("repair_records").upsert(records.map(toDbRow));
+      if (error) alert(`Database sync failed: ${error.message}`);
+    }
     function loadRecords() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) { try { return JSON.parse(saved).map(normalizeRecord).filter(notQaRecord); } catch {} }
@@ -166,7 +269,10 @@
     function notQaRecord(record) {
       return !["QA Customer", "Draft Customer", "QA Parts Supplier"].includes(record.customer || record.vendor || record.technician || "");
     }
-    function persist() { localStorage.setItem(STORAGE_KEY, JSON.stringify(records)); }
+    function persist() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+      syncAllRecords();
+    }
     function setView(view) { currentView = view; document.querySelectorAll(".nav-button").forEach(button => button.classList.toggle("active", button.dataset.view === view)); render(); }
     function monthRecords() { return records.filter(record => record.date && record.date.slice(0, 7) === els.month.value); }
     function allRepairs() { return records.filter(record => record.type === "repair"); }
@@ -312,7 +418,7 @@
     }
     function bindRowActions() {
       document.querySelectorAll("[data-edit]").forEach(b => b.addEventListener("click", () => { const record = records.find(r => r.id === b.dataset.edit); if (record) openDialog(record.type, record); }));
-      document.querySelectorAll("[data-delete]").forEach(b => b.addEventListener("click", () => { const record = records.find(r => r.id === b.dataset.delete); if (!record || !confirm("Delete this record?")) return; records = records.filter(r => r.id !== record.id); persist(); render(); }));
+      document.querySelectorAll("[data-delete]").forEach(b => b.addEventListener("click", async () => { const record = records.find(r => r.id === b.dataset.delete); if (!record || !confirm("Delete this record?")) return; records = records.filter(r => r.id !== record.id); localStorage.setItem(STORAGE_KEY, JSON.stringify(records)); await deleteRemoteRecord(record.id); render(); }));
       document.querySelectorAll("[data-pay-supplier]").forEach(b => b.addEventListener("click", () => openDialog("expense", { type:"expense", category:"Supplier payment", linkedRepairId:b.dataset.paySupplier, paid:true })));
       document.querySelectorAll("[data-invoice]").forEach(b => b.addEventListener("click", () => printInvoice(b.dataset.invoice)));
     }
@@ -367,7 +473,7 @@
         localStorage.removeItem(DRAFT_KEY);
       }
     }
-    function saveRecord(event) {
+    async function saveRecord(event) {
       event.preventDefault();
       const type = els.recordType.value;
       const record = type === "repair"
@@ -375,7 +481,7 @@
         : type === "expense"
           ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.expenseDate.value || today(), category:els.expenseCategory.value, vendor:els.vendorName.value.trim(), amount:Number(els.expenseAmount.value || 0), paid:els.expensePaid.value === "paid", linkedRepairId:els.linkedRepair.value, notes:els.expenseNotes.value.trim() }
           : { id:els.recordId.value || crypto.randomUUID(), type, date:els.techDate.value || today(), technician:els.techName.value.trim(), direction:els.techDirection.value, reason:els.techReason.value.trim(), amount:Number(els.techAmount.value || 0), paidAmount:Number(els.techPaidAmount.value || 0), notes:els.techNotes.value.trim() };
-      records = records.filter(r => r.id !== record.id).concat(record); persist(); localStorage.removeItem(DRAFT_KEY); els.recordDialog.hidden = true; render();
+      records = records.filter(r => r.id !== record.id).concat(record); localStorage.setItem(STORAGE_KEY, JSON.stringify(records)); await syncRecord(record); localStorage.removeItem(DRAFT_KEY); els.recordDialog.hidden = true; render();
     }
     function printInvoice(id) {
       const r = records.find(record => record.id === id); if (!r) return;

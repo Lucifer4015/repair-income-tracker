@@ -24,7 +24,28 @@ Use the invoice button on a repair row to print a customer invoice.
 
 This is a static web app, so it can be hosted by services like GitHub Pages, Netlify, Vercel, Cloudflare Pages, or any normal web hosting account. Upload `index.html` and open the hosted URL from your phone or computer.
 
-For shared multi-device data, the next version should add a real database and login system. This first version keeps data private on each browser.
+## Supabase database and login
+
+The app is ready for Supabase Auth and database storage.
+
+1. Create a Supabase project.
+2. In Supabase, open **SQL Editor** and run `supabase-schema.sql`.
+3. In Supabase **Authentication**, enable email/password sign-in.
+4. Sign up with your owner email in the app.
+5. In Supabase **Authentication > Users**, copy your user UUID.
+6. Run the owner insert shown at the bottom of `supabase-schema.sql`.
+7. In `index.html`, paste your project values:
+
+```js
+const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";
+const SUPABASE_ANON_KEY = "YOUR-ANON-PUBLIC-KEY";
+```
+
+8. Host `index.html` online.
+
+To give another person access, let them create an account, copy their user UUID from Supabase, then insert them into `app_members` as `writer` or `reader`.
+
+When Supabase is configured and the user is approved in `app_members`, repair records are loaded from and saved to the database. Deleting a row in the app deletes it from the database.
 
 ## Git executable path
 
