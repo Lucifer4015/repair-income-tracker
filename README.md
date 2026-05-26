@@ -1,5 +1,5 @@
 # Repair Ledger
-
+https://lucifer4015.github.io/repair-income-tracker/
 A responsive repair-shop tracker for monthly repairs, customer payment status, supplier balances, supplier/tool/inventory expenses, and net profit.
 
 ## Use the app
