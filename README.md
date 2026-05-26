@@ -68,3 +68,4 @@ Add this folder to PATH:
 ```text
 C:\Program Files\Git\cmd
 ```
+# repair income tracker 
