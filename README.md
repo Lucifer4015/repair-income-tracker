@@ -1,6 +1,6 @@
 # Repair Ledger
-https://lucifer4015.github.io/repair-income-tracker/
-A responsive repair-shop tracker for monthly repairs, customer payment status, supplier balances, supplier/tool/inventory expenses, and net profit.
+
+A responsive repair-shop tracker for monthly repairs, customer payment status, supplier balances, supplier/tool/inventory expenses, technician profiles, cleared balance history, and net profit.
 
 ## Use the app
 
@@ -10,11 +10,33 @@ Your records are saved in the browser on the same device using local storage. Us
 
 Repair records include customer name, device type, exact serial/IMEI, repair description, invoice amount, customer payment status, part source, and part cost.
 
+The **Repairs** page has three sub-pages:
+
+- **Waiting repair** for newly added repairs that still need work.
+- **Ready pickup** for repairs finished and waiting for the customer.
+- **Picked up / paid** for completed repairs collected by the customer.
+
+When adding one device, you can add multiple repair lines for the same serial number. Each line has its own customer price and part cost, and the app totals them on the repair.
+
 For each repair, choose whether parts came from a supplier or from shop inventory. Supplier parts appear in the supplier balance. Inventory parts appear in a separate inventory balance and can be marked paid or pending.
+
+The top search bar works across the app. Type manually to find a customer, serial/IMEI, supplier, technician, device, repair item, or note, or use the filter beside it to focus the app on repairs, paid/pending items, supplier, inventory, technician, or shop data.
+
+The dashboard shows current, uncleared balances. Use **Clear** on individual rows or **Clear current balances** to move the current month into the **Cleared Data** page. Clearing does not delete records; it marks them as settled so the dashboard starts fresh.
+
+The **Cleared Data** page has its own dedicated view for cleared balances and can filter by all time, single day, week/range, month, date range, customer name, technician name, serial number, or device text. It calculates gross, collected, expenses, net, shop profit, and technician salary automatically for the filtered records.
+
+The **Supplier** page has its own dedicated view for supplier parts and payments. It shows supplier parts used in repairs, payments made to suppliers, totals paid, remaining supplier balance, payment dates, repair items, customer/device details, and date/search filters.
+
+Repair, supplier, expense, technician, and cleared-data pages include search and date filters. Repairs can also be filtered by customer payment status, supplier/inventory source, and paid/pending part balances. Expenses can be filtered to supplier payments or inventory. Cleared Data can focus on shop, supplier, inventory, technician, or repair data.
 
 Expense records can be general business expenses or linked to a specific repair. Use **Supplier payment** with a related supplier repair to reduce the remaining supplier balance for the parts used in that repair.
 
 The **Technicians** tab tracks what the shop owes each technician and what each technician owes the shop. Enter the reason, total amount, paid amount, and the app calculates the remaining balance.
+
+Technicians are managed as profiles. Repairs can be assigned to a technician profile; if none is selected, they go to the default technician profile. Technician salary share, advances, technician-owes-shop balances, and shop-owes-technician balances are calculated per profile.
+
+Use **Add technician profile** to create another technician. Use **Add balance / advance** or the Balance/Advance buttons in a profile row to add money the shop owes the technician, money the technician owes the shop, or salary advances. Advances reduce the technician's salary due automatically.
 
 The **Profit** tab splits positive net income 50/50 between shop profit and technician income. If the technician owes money to the shop, that debt is subtracted from the technician half first. The remaining technician half becomes salary due from the shop.
 
@@ -68,4 +90,3 @@ Add this folder to PATH:
 ```text
 C:\Program Files\Git\cmd
 ```
-# repair income tracker 

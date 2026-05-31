@@ -21,15 +21,16 @@
     input,select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);padding:10px 11px;min-height:42px}
     nav{display:grid;gap:8px}.nav-button{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:10px 12px;border-radius:8px;background:transparent;color:#dbe2e8;text-align:left}.nav-button svg{width:19px;height:19px;flex:0 0 19px}.nav-button.active{background:#f9fafb;color:#17212b;font-weight:800}
     .side-actions{margin-top:auto;display:grid;gap:10px}.ghost{min-height:42px;border:1px solid rgba(255,255,255,.22);border-radius:8px;background:transparent;color:#f9fafb;padding:10px 12px;text-align:center}
-    main{padding:26px;display:grid;gap:22px;align-content:start}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.topbar h2{margin:0;font-size:28px;line-height:1.15}.topbar p{margin:6px 0 0;color:var(--muted)}
+    main{padding:26px;display:grid;gap:22px;align-content:start}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.topbar h2{margin:0;font-size:28px;line-height:1.15}.topbar p{margin:6px 0 0;color:var(--muted)}.global-search{display:grid;grid-template-columns:1fr 190px;gap:10px}
     .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.primary,.secondary,.small-action{min-height:42px;border-radius:8px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 13px;white-space:nowrap}.primary{background:var(--accent);color:#fff}.primary:hover{background:var(--accent-dark)}.secondary,.small-action{background:#eef3f7;color:var(--ink)}
     .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px}.metric,.panel,.modal{background:var(--paper);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}.metric{padding:16px;min-height:112px;display:grid;align-content:space-between;gap:12px}.metric span{color:var(--muted);font-size:13px;font-weight:750}.metric strong{font-size:25px;line-height:1}.net-positive strong{color:var(--green)}.net-negative strong{color:var(--red)}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{overflow:hidden}.panel-header{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.panel-header h3{margin:0;font-size:17px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:840px}th,td{text-align:left;padding:12px 14px;border-bottom:1px solid #edf1f4;font-size:14px;vertical-align:middle}th{color:var(--muted);font-size:12px;text-transform:uppercase;background:#fbfcfd}tr:last-child td{border-bottom:0}.amount{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.muted{color:var(--muted)}.nowrap{white-space:nowrap}
     .tag{display:inline-flex;align-items:center;min-height:26px;padding:4px 8px;border-radius:999px;background:#e8f3f1;color:#0b5d57;font-size:12px;font-weight:800;white-space:nowrap}.tag.warn{background:#fff7db;color:var(--amber)}.tag.danger{background:#fee4e2;color:var(--red)}.tag.blue{background:#dbeafe;color:#1d4ed8}
     .row-actions{display:flex;justify-content:flex-end;gap:7px}.icon-button{width:34px;height:34px;border-radius:8px;background:#eef3f7;color:var(--ink);display:inline-grid;place-items:center}.icon-button svg{width:17px;height:17px}.empty{padding:28px 18px;color:var(--muted);text-align:center}.chart{padding:18px;display:grid;gap:14px}.bar-row{display:grid;grid-template-columns:126px 1fr 96px;gap:12px;align-items:center;font-size:13px}.bar-track{height:14px;background:#eef3f7;border-radius:999px;overflow:hidden}.bar{height:100%;width:0;background:var(--blue)}.bar.expense{background:#f59e0b}.bar.net{background:var(--accent)}
+    .subnav,.filters{display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfcfd}.subnav button{min-height:38px;border-radius:8px;background:#eef3f7;color:var(--ink);font-weight:800;padding:8px 12px}.subnav button.active{background:var(--accent);color:#fff}.filters>*{flex:1;min-width:150px}.line-items{display:grid;gap:10px}.line-item{display:grid;grid-template-columns:1fr 130px 130px 34px;gap:10px;align-items:end}.line-item button{margin-bottom:0}
     .modal-backdrop{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:14px;background:rgba(15,23,42,.55)}.modal-backdrop[hidden]{display:none}.modal{width:min(820px,calc(100vw - 28px));max-height:calc(100vh - 28px);overflow:auto}.modal-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}.modal-head h3{margin:0;font-size:19px}.form{padding:18px 20px 20px;display:grid;gap:14px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.modal-actions{display:flex;justify-content:flex-end;gap:10px;padding-top:4px}.file-input{display:none}.hidden{display:none!important}
     .auth-screen{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:20px;background:var(--wash)}.auth-screen[hidden]{display:none}.auth-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:grid;gap:14px}.auth-card h2{margin:0}.auth-card p{margin:0;color:var(--muted);line-height:1.45}.status-line{font-size:13px;color:var(--muted);min-height:20px}.db-badge{font-size:12px;color:#b7c0ca;padding:0 8px}
-    @media(max-width:1120px){.grid{grid-template-columns:1fr}} @media(max-width:780px){.app-shell{grid-template-columns:1fr}aside{position:sticky;top:0;z-index:5;padding:14px;gap:14px}.brand{padding:0}.brand h1{font-size:18px}.month-picker{padding:10px}nav{grid-template-columns:repeat(5,1fr)}.nav-button{justify-content:center;min-height:42px;padding:9px}.nav-button span{display:none}.side-actions{grid-template-columns:1fr 1fr;margin-top:0}main{padding:18px 14px 28px}.topbar{align-items:stretch;flex-direction:column}.actions{justify-content:stretch}.actions button{flex:1}.topbar h2{font-size:24px}.form-grid{grid-template-columns:1fr}} @media(max-width:520px){.bar-row{grid-template-columns:86px 1fr}.bar-row strong{grid-column:2}}
+    @media(max-width:1120px){.grid{grid-template-columns:1fr}} @media(max-width:780px){.app-shell{grid-template-columns:1fr}aside{position:sticky;top:0;z-index:5;padding:14px;gap:14px}.brand{padding:0}.brand h1{font-size:18px}.month-picker{padding:10px}nav{grid-template-columns:repeat(4,1fr)}.nav-button{justify-content:center;min-height:42px;padding:9px}.nav-button span{display:none}.side-actions{grid-template-columns:1fr 1fr;margin-top:0}main{padding:18px 14px 28px}.topbar{align-items:stretch;flex-direction:column}.global-search{grid-template-columns:1fr}.actions{justify-content:stretch}.actions button{flex:1}.topbar h2{font-size:24px}.form-grid,.line-item{grid-template-columns:1fr}.line-item .icon-button{width:100%}} @media(max-width:520px){.bar-row{grid-template-columns:86px 1fr}.bar-row strong{grid-column:2}}
   </style>
 </head>
 <body>
@@ -50,30 +51,46 @@
       <nav aria-label="Main views">
         <button class="nav-button active" data-view="dashboard" title="Dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h8V3H3v10Zm10 8h8V3h-8v18ZM3 21h8v-6H3v6Z"/></svg><span>Dashboard</span></button>
         <button class="nav-button" data-view="repairs" title="Repairs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m14.7 6.3 3 3M5 19l4.6-1.2L20 7.4 16.6 4 6.2 14.4 5 19Z"/></svg><span>Repairs</span></button>
+        <button class="nav-button" data-view="supplier" title="Supplier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15v6M21 18h-6"/></svg><span>Supplier</span></button>
         <button class="nav-button" data-view="expenses" title="Expenses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="M4 10h16M8 15h3"/></svg><span>Expenses</span></button>
         <button class="nav-button" data-view="technicians" title="Technicians"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2"/><circle cx="12" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg><span>Technicians</span></button>
         <button class="nav-button" data-view="profit" title="Shop Profit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"/></svg><span>Profit</span></button>
+        <button class="nav-button" data-view="archive" title="Cleared Data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 2 5-7"/></svg><span>Cleared</span></button>
       </nav>
       <div class="side-actions"><div id="dbStatus" class="db-badge">Local mode</div><button id="exportBtn" class="ghost">Export CSV</button><button id="importBtn" class="ghost">Import CSV</button><button id="signOutBtn" class="ghost" hidden>Sign out</button><input id="importFile" class="file-input" type="file" accept=".csv,text/csv"></div>
     </aside>
     <main>
       <section class="topbar">
         <div><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Track repairs, customer payments, parts balances, technician balances, and net cash by month.</p></div>
-        <div class="actions"><button id="addRepairBtn" class="primary">Add repair</button><button id="addExpenseBtn" class="secondary">Add expense</button><button id="addTechBtn" class="secondary">Add technician</button></div>
+        <div class="actions"><button id="addRepairBtn" class="primary">Add repair</button><button id="addExpenseBtn" class="secondary">Add expense</button><button id="addTechBtn" class="secondary">Add balance</button><button id="addTechProfileBtn" class="secondary">Add technician profile</button><button id="clearBalancesBtn" class="secondary">Clear current balances</button></div>
       </section>
+      <section class="global-search"><input id="globalSearch" type="search" placeholder="Search anywhere: customer, serial, supplier, technician, notes"><select id="globalFilter"><option value="all">All data</option><option value="repair">Repairs</option><option value="paid">Paid</option><option value="pending">Pending</option><option value="supplier">Supplier</option><option value="inventory">Inventory</option><option value="technician">Technician</option><option value="shop">Shop</option></select></section>
       <section id="dashboardView">
         <div class="metrics" id="metrics"></div>
         <div class="grid" style="margin-top:18px">
           <section class="panel"><div class="panel-header"><h3>Month breakdown</h3></div><div class="chart" id="chart"></div></section>
           <section class="panel"><div class="panel-header"><h3>Supplier balances</h3><button class="small-action" data-quick="expense">Pay supplier</button></div><div class="table-wrap" id="supplierSummary"></div></section>
           <section class="panel"><div class="panel-header"><h3>Inventory parts balances</h3></div><div class="table-wrap" id="inventorySummary"></div></section>
-          <section class="panel"><div class="panel-header"><h3>Technician balances</h3><button class="small-action" data-quick="technician">Add technician</button></div><div class="table-wrap" id="techSummary"></div></section>
+          <section class="panel"><div class="panel-header"><h3>Technician balances</h3><button class="small-action" data-quick="technician">Add balance</button></div><div class="table-wrap" id="techSummary"></div></section>
         </div>
       </section>
-      <section id="repairsView" class="panel" hidden><div class="panel-header"><h3>Repairs</h3><button class="small-action" data-quick="repair">Add repair</button></div><div class="table-wrap" id="repairsTable"></div></section>
-      <section id="expensesView" class="panel" hidden><div class="panel-header"><h3>Expenses and supplier payments</h3><button class="small-action" data-quick="expense">Add expense</button></div><div class="table-wrap" id="expensesTable"></div></section>
-      <section id="techniciansView" class="panel" hidden><div class="panel-header"><h3>Technicians</h3><button class="small-action" data-quick="technician">Add technician</button></div><div class="table-wrap" id="techniciansTable"></div></section>
+      <section id="repairsView" class="panel" hidden><div class="panel-header"><h3>Repairs</h3><button class="small-action" data-quick="repair">Add repair</button></div><div class="subnav"><button class="active" data-repair-status="waiting">Waiting repair</button><button data-repair-status="ready">Ready pickup</button><button data-repair-status="picked_up">Picked up / paid</button></div><div class="filters"><input id="repairSearch" type="search" placeholder="Customer, serial, device"><select id="repairPaymentFilter"><option value="all">All customer payments</option><option value="paid">Customer paid</option><option value="pending">Customer pending</option></select><select id="repairPartSourceFilter"><option value="all">Supplier or inventory</option><option value="supplier">Supplier parts</option><option value="inventory">Inventory parts</option></select><select id="repairPartBalanceFilter"><option value="all">All part balances</option><option value="paid">Parts paid</option><option value="pending">Parts pending</option></select><input id="repairStart" type="date"><input id="repairEnd" type="date"></div><div class="table-wrap" id="repairsTable"></div></section>
+      <section id="supplierView" class="panel" hidden><div class="panel-header"><h3>Supplier payments and balances</h3><button class="small-action" data-quick="expense">Pay supplier</button></div><div class="filters"><input id="supplierSearch" type="search" placeholder="Supplier, customer, serial, item"><input id="supplierStart" type="date"><input id="supplierEnd" type="date"></div><div class="metrics" id="supplierMetrics" style="padding:14px 18px"></div><div class="table-wrap" id="supplierTable"></div></section>
+      <section id="expensesView" class="panel" hidden><div class="panel-header"><h3>Expenses and supplier payments</h3><button class="small-action" data-quick="expense">Add expense</button></div><div class="filters"><input id="expenseSearch" type="search" placeholder="Supplier, vendor, notes"><select id="expenseFilterCategory"><option value="all">All categories</option><option value="Supplier payment">Supplier payments</option><option value="Inventory">Inventory</option><option value="Tools">Tools</option><option value="Other">Other</option></select><input id="expenseStart" type="date"><input id="expenseEnd" type="date"></div><div class="table-wrap" id="expensesTable"></div></section>
+      <section id="techniciansView" class="panel" hidden><div class="panel-header"><h3>Technician profiles</h3><div class="actions"><button class="small-action" data-quick="technician_profile">Add profile</button><button class="small-action" data-quick="technician">Add balance / advance</button></div></div><div class="filters"><input id="techSearch" type="search" placeholder="Technician, reason, notes"><input id="techStart" type="date"><input id="techEnd" type="date"></div><div class="table-wrap" id="techniciansTable"></div></section>
       <section id="profitView" class="panel" hidden><div class="panel-header"><h3>Shop profit split</h3></div><div class="table-wrap" id="profitTable"></div></section>
+      <section id="archiveView" class="panel" hidden>
+        <div class="panel-header"><h3>Cleared data</h3></div>
+        <div class="filters">
+          <select id="archivePeriod"><option value="all">All time</option><option value="day">Single day</option><option value="week">Week / range</option><option value="month">Month</option></select>
+          <select id="archiveType"><option value="all">All data</option><option value="shop">Shop data</option><option value="supplier">Supplier data</option><option value="inventory">Inventory data</option><option value="technician">Technician data</option><option value="repair">Repair data</option></select>
+          <input id="archiveStart" type="date">
+          <input id="archiveEnd" type="date">
+          <input id="archiveSearch" type="search" placeholder="Search customer, serial, technician">
+        </div>
+        <div class="metrics" id="archiveMetrics" style="padding:14px 18px"></div>
+        <div class="table-wrap" id="archiveTable"></div>
+      </section>
     </main>
   </div>
 
@@ -88,12 +105,17 @@
             <div><label for="customerName">Customer name</label><input id="customerName" type="text" placeholder="Customer name"></div>
             <div><label for="deviceType">Device type</label><input id="deviceType" type="text" placeholder="iPhone, laptop, tablet"></div>
             <div><label for="serialNumber">Exact serial / IMEI</label><input id="serialNumber" type="text" placeholder="Serial number or IMEI"></div>
-            <div><label for="repairTitle">Repair done</label><input id="repairTitle" type="text" placeholder="Screen replacement"></div>
-            <div><label for="invoiceAmount">Customer price (€)</label><input id="invoiceAmount" type="number" min="0" step="0.01"></div>
+            <div><label for="repairTechnician">Technician</label><select id="repairTechnician"></select></div>
+            <div><label for="repairStatus">Repair status</label><select id="repairStatus"><option value="waiting">Waiting to be repaired</option><option value="ready">Ready for pickup</option><option value="picked_up">Picked up and paid</option></select></div>
             <div><label for="partSource">Part source</label><select id="partSource"><option value="supplier">From supplier</option><option value="inventory">From our inventory</option></select></div>
-            <div><label for="partsCost">Part cost (€)</label><input id="partsCost" type="number" min="0" step="0.01"></div>
             <div><label for="inventoryPaid">Inventory part payment</label><select id="inventoryPaid"><option value="pending">Not paid yet</option><option value="paid">Paid already</option></select></div>
             <div><label for="customerPaid">Customer payment</label><select id="customerPaid"><option value="pending">Pending</option><option value="paid">Paid</option></select></div>
+          </div>
+          <div style="margin-top:14px" class="line-items">
+            <label>Repairs on this device</label>
+            <div id="repairItems"></div>
+            <button id="addRepairItem" class="secondary" type="button">Add another repair</button>
+            <input id="repairTitle" type="hidden"><input id="invoiceAmount" type="hidden"><input id="partsCost" type="hidden">
           </div>
           <div style="margin-top:14px"><label for="repairNotes">Notes</label><textarea id="repairNotes" rows="3" placeholder="Problem, warranty, parts used, or invoice details"></textarea></div>
         </div>
@@ -111,13 +133,20 @@
         <div id="techFields" class="hidden">
           <div class="form-grid">
             <div><label for="techDate">Date</label><input id="techDate" type="date"></div>
-            <div><label for="techName">Technician</label><input id="techName" type="text" placeholder="Technician name"></div>
-            <div><label for="techDirection">Balance direction</label><select id="techDirection"><option value="shop_owes_tech">Shop owes technician</option><option value="tech_owes_shop">Technician owes shop</option></select></div>
+            <div><label for="techName">Technician</label><select id="techName"></select></div>
+            <div><label for="techDirection">Balance direction</label><select id="techDirection"><option value="shop_owes_tech">Shop owes technician</option><option value="tech_owes_shop">Technician owes shop</option><option value="advance_salary">Advance salary paid</option></select></div>
             <div><label for="techAmount">Total amount (€)</label><input id="techAmount" type="number" min="0" step="0.01"></div>
             <div><label for="techPaidAmount">Paid amount (€)</label><input id="techPaidAmount" type="number" min="0" step="0.01"></div>
             <div><label for="techReason">For what</label><input id="techReason" type="text" placeholder="Labor, cash advance, tools, parts"></div>
           </div>
           <div style="margin-top:14px"><label for="techNotes">Notes</label><textarea id="techNotes" rows="3" placeholder="Extra detail about the balance or payment"></textarea></div>
+        </div>
+        <div id="techProfileFields" class="hidden">
+          <div class="form-grid">
+            <div><label for="profileName">Technician name</label><input id="profileName" type="text" placeholder="Technician name"></div>
+            <div><label for="profileDefault">Default profile</label><select id="profileDefault"><option value="no">No</option><option value="yes">Yes</option></select></div>
+          </div>
+          <div style="margin-top:14px"><label for="profileNotes">Notes</label><textarea id="profileNotes" rows="3" placeholder="Phone, address, role, or notes"></textarea></div>
         </div>
         <div class="modal-actions"><button class="secondary" type="button" data-close-modal>Cancel</button><button class="primary" type="submit">Save</button></div>
       </div>
@@ -134,15 +163,18 @@
     const money = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
     const expenseCategories = ["Supplier payment", "Inventory", "Tools", "Rent", "Utilities", "Marketing", "Shipping", "Other"];
     const els = {};
-    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","month","pageTitle","pageSubtitle","metrics","chart","supplierSummary","inventorySummary","techSummary","repairsTable","expensesTable","techniciansTable","profitTable","dashboardView","repairsView","expensesView","techniciansView","profitView","addRepairBtn","addExpenseBtn","addTechBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","repairDate","customerName","deviceType","serialNumber","repairTitle","invoiceAmount","partSource","partsCost","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes"].forEach(id => els[id] = document.getElementById(id));
-    let records = loadRecords();
+    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","month","pageTitle","pageSubtitle","globalSearch","globalFilter","metrics","chart","supplierSummary","inventorySummary","techSummary","repairsTable","supplierMetrics","supplierTable","expensesTable","techniciansTable","profitTable","archiveMetrics","archiveTable","archivePeriod","archiveType","archiveStart","archiveEnd","archiveSearch","repairSearch","repairPaymentFilter","repairPartSourceFilter","repairPartBalanceFilter","repairStart","repairEnd","supplierSearch","supplierStart","supplierEnd","expenseSearch","expenseFilterCategory","expenseStart","expenseEnd","techSearch","techStart","techEnd","dashboardView","repairsView","supplierView","expensesView","techniciansView","profitView","archiveView","addRepairBtn","addExpenseBtn","addTechBtn","addTechProfileBtn","clearBalancesBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","techProfileFields","repairDate","customerName","deviceType","serialNumber","repairTechnician","repairStatus","repairItems","addRepairItem","repairTitle","invoiceAmount","partSource","partsCost","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes","profileName","profileDefault","profileNotes"].forEach(id => els[id] = document.getElementById(id));
+    let records = [];
+    records = loadRecords();
     let currentView = "dashboard";
+    let currentRepairStatus = "waiting";
     let db = null;
     let currentUser = null;
     let dbReady = false;
     els.month.value = new Date().toISOString().slice(0, 7);
     document.querySelectorAll(".nav-button").forEach(button => button.addEventListener("click", () => setView(button.dataset.view)));
     document.querySelectorAll("[data-quick]").forEach(button => button.addEventListener("click", () => openDialog(button.dataset.quick)));
+    document.querySelectorAll("[data-repair-status]").forEach(button => button.addEventListener("click", () => setRepairStatus(button.dataset.repairStatus)));
     document.querySelectorAll("[data-close-modal]").forEach(button => button.addEventListener("click", closeDialog));
     els.recordDialog.addEventListener("click", event => { if (event.target === els.recordDialog) closeDialog(); });
     document.addEventListener("keydown", event => { if (event.key === "Escape" && !els.recordDialog.hidden) closeDialog(); });
@@ -155,6 +187,11 @@
     els.addRepairBtn.addEventListener("click", () => openDialog("repair"));
     els.addExpenseBtn.addEventListener("click", () => openDialog("expense"));
     els.addTechBtn.addEventListener("click", () => openDialog("technician"));
+    els.addTechProfileBtn.addEventListener("click", () => openDialog("technician_profile"));
+    els.clearBalancesBtn.addEventListener("click", clearCurrentBalances);
+    [els.archivePeriod, els.archiveType, els.archiveStart, els.archiveEnd, els.archiveSearch].forEach(el => el.addEventListener("input", renderArchive));
+    [els.globalSearch, els.globalFilter, els.repairSearch, els.repairPaymentFilter, els.repairPartSourceFilter, els.repairPartBalanceFilter, els.repairStart, els.repairEnd, els.supplierSearch, els.supplierStart, els.supplierEnd, els.expenseSearch, els.expenseFilterCategory, els.expenseStart, els.expenseEnd, els.techSearch, els.techStart, els.techEnd].forEach(el => el.addEventListener("input", renderTables));
+    els.addRepairItem.addEventListener("click", () => { addRepairItemRow(); saveDraft(); });
     els.recordForm.addEventListener("submit", saveRecord);
     els.exportBtn.addEventListener("click", exportCsv);
     els.importBtn.addEventListener("click", () => els.importFile.click());
@@ -216,10 +253,10 @@
       await db.auth.signOut();
     }
     function toDbRow(record) {
-      return { id:record.id, record_type:record.type, record_date:record.date || today(), data:record, updated_by:currentUser?.id || null, created_by:currentUser?.id || null };
+      return { id:record.id, record_type:record.type === "technician_profile" ? "technician" : record.type, record_date:record.date || today(), data:record, updated_by:currentUser?.id || null, created_by:currentUser?.id || null };
     }
     function fromDbRow(row) {
-      return normalizeRecord({ ...row.data, id:row.id, type:row.record_type, date:row.record_date });
+      return normalizeRecord({ ...row.data, id:row.id, type:row.data?.type || row.record_type, date:row.record_date });
     }
     async function loadRemoteRecords() {
       if (!db || !currentUser) return;
@@ -262,19 +299,109 @@
       ];
     }
     function normalizeRecord(record) {
-      if (record.type === "expense") return { id:record.id || crypto.randomUUID(), type:"expense", date:record.date || today(), category:record.category || "Other", vendor:record.vendor || record.customer || "", amount:Number(record.amount || 0), paid:record.paid !== false && record.paid !== "pending", linkedRepairId:record.linkedRepairId || "", notes:record.notes || "" };
-      if (record.type === "technician") return { id:record.id || crypto.randomUUID(), type:"technician", date:record.date || today(), technician:record.technician || record.techName || "", direction:record.direction || "shop_owes_tech", reason:record.reason || "", amount:Number(record.amount || 0), paidAmount:Number(record.paidAmount || 0), notes:record.notes || "" };
-      return { id:record.id || crypto.randomUUID(), type:"repair", date:record.date || today(), customer:record.customer || "", deviceType:record.deviceType || record.category || "", serialNumber:record.serialNumber || "", title:record.title || record.category || "Repair", amount:Number(record.amount || 0), partSource:record.partSource || "supplier", partsCost:Number(record.partsCost || 0), inventoryPaid:record.inventoryPaid === true || record.inventoryPaid === "paid", customerPaid:record.customerPaid === true || record.customerPaid === "paid", notes:record.notes || "" };
+      if (record.type === "expense") return { id:record.id || crypto.randomUUID(), type:"expense", date:record.date || today(), category:record.category || "Other", vendor:record.vendor || record.customer || "", amount:Number(record.amount || 0), paid:record.paid !== false && record.paid !== "pending", linkedRepairId:record.linkedRepairId || "", settledAt:record.settledAt || "", settlementLabel:record.settlementLabel || "", notes:record.notes || "" };
+      if (record.type === "technician_profile") return { id:record.id || crypto.randomUUID(), type:"technician_profile", date:record.date || today(), name:record.name || record.technician || "Technician", isDefault:record.isDefault === true || record.isDefault === "yes", notes:record.notes || "" };
+      if (record.type === "technician") return { id:record.id || crypto.randomUUID(), type:"technician", date:record.date || today(), technicianId:record.technicianId || findTechnicianIdByName(record.technician || record.techName), technician:record.technician || record.techName || technicianName(record.technicianId), direction:record.direction || "shop_owes_tech", reason:record.reason || "", amount:Number(record.amount || 0), paidAmount:Number(record.paidAmount || 0), settledAt:record.settledAt || "", settlementLabel:record.settlementLabel || "", notes:record.notes || "" };
+      const repairItems = normalizeRepairItems(record);
+      return { id:record.id || crypto.randomUUID(), type:"repair", date:record.date || today(), customer:record.customer || "", deviceType:record.deviceType || record.category || "", serialNumber:record.serialNumber || "", technicianId:record.technicianId || defaultTechnicianId(), status:record.status || "picked_up", repairItems, title:repairItems.map(item => item.title).filter(Boolean).join(", ") || record.title || record.category || "Repair", amount:sumRepairItems(repairItems, "price"), partSource:record.partSource || "supplier", partsCost:sumRepairItems(repairItems, "partCost"), inventoryPaid:record.inventoryPaid === true || record.inventoryPaid === "paid", customerPaid:record.customerPaid === true || record.customerPaid === "paid", settledAt:record.settledAt || "", settlementLabel:record.settlementLabel || "", notes:record.notes || "" };
+    }
+    function normalizeRepairItems(record) {
+      let savedItems = record.repairItems;
+      if (typeof savedItems === "string" && savedItems.trim().startsWith("[")) {
+        try { savedItems = JSON.parse(savedItems); } catch {}
+      }
+      const items = Array.isArray(savedItems) ? savedItems : [{ title:record.title || record.category || "Repair", price:record.amount || 0, partCost:record.partsCost || 0 }];
+      return items.map(item => ({ title:item.title || item.name || "", price:Number(item.price ?? item.amount ?? 0), partCost:Number(item.partCost ?? item.partsCost ?? 0) })).filter(item => item.title || item.price || item.partCost);
+    }
+    function sumRepairItems(items, key) { return items.reduce((total, item) => total + Number(item[key] || 0), 0); }
+    function repairItemsText(repair) {
+      return (repair.repairItems || []).map(item => `${esc(item.title || "Repair")} (${money.format(item.price || 0)} / parts ${money.format(item.partCost || 0)})`).join("<br>");
     }
     function notQaRecord(record) {
       return !["QA Customer", "Draft Customer", "QA Parts Supplier"].includes(record.customer || record.vendor || record.technician || "");
+    }
+    function technicianProfiles() {
+      const profiles = records.filter(record => record.type === "technician_profile");
+      return profiles.length ? profiles : [{ id:"default", type:"technician_profile", name:"Default technician", isDefault:true, notes:"" }];
+    }
+    function defaultTechnicianId() {
+      return technicianProfiles().find(profile => profile.isDefault)?.id || technicianProfiles()[0]?.id || "default";
+    }
+    function technicianName(id) {
+      return technicianProfiles().find(profile => profile.id === id)?.name || "Default technician";
+    }
+    function findTechnicianIdByName(name) {
+      const clean = String(name || "").trim().toLowerCase();
+      return technicianProfiles().find(profile => profile.name.toLowerCase() === clean)?.id || defaultTechnicianId();
+    }
+    function technicianOptions(selected = defaultTechnicianId()) {
+      return technicianProfiles().map(profile => `<option value="${profile.id}" ${profile.id === selected ? "selected" : ""}>${esc(profile.name)}</option>`).join("");
+    }
+    function technicianTransactions(list = monthRecords()) {
+      return list.filter(record => record.type === "technician");
+    }
+    function technicianSalaryShare(profileId, list = monthRecords()) {
+      const repairs = list.filter(record => record.type === "repair" && record.customerPaid);
+      const totalCollected = repairs.reduce((total, repair) => total + Number(repair.amount || 0), 0);
+      const techCollected = repairs.filter(repair => (repair.technicianId || defaultTechnicianId()) === profileId).reduce((total, repair) => total + Number(repair.amount || 0), 0);
+      const base = profitSplit(list).technicianBaseIncome;
+      return totalCollected ? base * (techCollected / totalCollected) : 0;
+    }
+    function technicianBalance(profileId, list = monthRecords()) {
+      const salary = technicianSalaryShare(profileId, list);
+      const transactions = technicianTransactions(list).filter(record => (record.technicianId || findTechnicianIdByName(record.technician)) === profileId);
+      const shopOwes = transactions.filter(record => record.direction === "shop_owes_tech").reduce((total, record) => total + Math.max(0, Number(record.amount || 0) - Number(record.paidAmount || 0)), 0);
+      const deductions = transactions.filter(record => record.direction === "tech_owes_shop" || record.direction === "advance_salary").reduce((total, record) => total + Math.max(0, Number(record.amount || 0) - Number(record.paidAmount || 0)), 0);
+      return { salary, shopOwes, deductions, salaryDue:Math.max(0, salary - deductions), debtRemaining:Math.max(0, deductions - salary), totalOwed:Math.max(0, salary - deductions) + shopOwes };
     }
     function persist() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       syncAllRecords();
     }
     function setView(view) { currentView = view; document.querySelectorAll(".nav-button").forEach(button => button.classList.toggle("active", button.dataset.view === view)); render(); }
-    function monthRecords() { return records.filter(record => record.date && record.date.slice(0, 7) === els.month.value); }
+    function setRepairStatus(status) { currentRepairStatus = status; document.querySelectorAll("[data-repair-status]").forEach(button => button.classList.toggle("active", button.dataset.repairStatus === status)); renderTables(); }
+    function isSettled(record) { return Boolean(record.settledAt); }
+    function monthRecords() { return records.filter(record => !isSettled(record) && record.date && record.date.slice(0, 7) === els.month.value); }
+    function archiveRecords() { return records.filter(isSettled); }
+    function inDateRange(record, start, end) {
+      const date = record.date || "";
+      return (!start || date >= start) && (!end || date <= end);
+    }
+    function textMatch(record, query) {
+      const text = [record.customer, record.serialNumber, record.deviceType, record.title, record.vendor, record.technician, technicianName(record.technicianId), record.reason, record.notes, repairItemsText(record).replaceAll("<br>", " ")].join(" ").toLowerCase();
+      return !query || text.includes(query.toLowerCase());
+    }
+    function globalMatch(record) {
+      const filter = els.globalFilter.value;
+      const typeOk =
+        filter === "all" ||
+        (filter === "repair" && record.type === "repair") ||
+        (filter === "paid" && ((record.type === "repair" && record.customerPaid) || record.paid)) ||
+        (filter === "pending" && ((record.type === "repair" && !record.customerPaid) || record.paid === false)) ||
+        (filter === "supplier" && ((record.type === "expense" && record.category === "Supplier payment") || (record.type === "repair" && record.partSource === "supplier"))) ||
+        (filter === "inventory" && ((record.type === "expense" && record.category === "Inventory") || (record.type === "repair" && record.partSource === "inventory"))) ||
+        (filter === "technician" && (record.type === "technician" || record.type === "technician_profile" || record.technicianId)) ||
+        (filter === "shop" && (record.type === "repair" || (record.type === "expense" && !["Supplier payment","Inventory"].includes(record.category))));
+      return typeOk && textMatch(record, els.globalSearch.value);
+    }
+    function filterRepairs(list) {
+      return list.filter(record => {
+        const balance = partBalanceFor(record);
+        const paymentOk = els.repairPaymentFilter.value === "all" || (els.repairPaymentFilter.value === "paid" ? record.customerPaid : !record.customerPaid);
+        const sourceOk = els.repairPartSourceFilter.value === "all" || record.partSource === els.repairPartSourceFilter.value;
+        const partOk = els.repairPartBalanceFilter.value === "all" || (els.repairPartBalanceFilter.value === "paid" ? balance.remaining <= 0 : balance.remaining > 0);
+        return globalMatch(record) && textMatch(record, els.repairSearch.value) && inDateRange(record, els.repairStart.value, els.repairEnd.value) && paymentOk && sourceOk && partOk;
+      });
+    }
+    function filterExpenses(list) {
+      return list.filter(record => globalMatch(record) && textMatch(record, els.expenseSearch.value) && inDateRange(record, els.expenseStart.value, els.expenseEnd.value) && (els.expenseFilterCategory.value === "all" || record.category === els.expenseFilterCategory.value));
+    }
+    function filterTechnicianRecords(list) {
+      return list.filter(record => globalMatch(record) && textMatch(record, els.techSearch.value) && inDateRange(record, els.techStart.value, els.techEnd.value));
+    }
+    function filterSupplierRecords(list) {
+      return list.filter(record => globalMatch(record) && textMatch(record, els.supplierSearch.value) && inDateRange(record, els.supplierStart.value, els.supplierEnd.value));
+    }
     function allRepairs() { return records.filter(record => record.type === "repair"); }
     function repairLabel(repair) { return `${repair.date} - ${repair.customer || "Customer"} - ${repair.deviceType || "Device"} - ${repair.title || "Repair"}`; }
     function supplierPaidFor(repairId, paidOnly = true) { return records.filter(record => record.type === "expense" && record.linkedRepairId === repairId && record.category === "Supplier payment" && (!paidOnly || record.paid)).reduce((total, record) => total + Number(record.amount || 0), 0); }
@@ -288,7 +415,7 @@
       const techs = list.filter(r => r.type === "technician");
       return techs.reduce((totals, record) => {
         const remaining = Math.max(0, Number(record.amount || 0) - Number(record.paidAmount || 0));
-        if (record.direction === "tech_owes_shop") totals.techOwesShop += remaining;
+        if (record.direction === "tech_owes_shop" || record.direction === "advance_salary") totals.techOwesShop += remaining;
         else totals.shopOwesTech += remaining;
         return totals;
       }, { techOwesShop:0, shopOwesTech:0 });
@@ -319,9 +446,9 @@
       return { repairs, expenses, count:repairs.length, invoiced, collected, customerPending, paidExpenses, supplierRemaining, inventoryRemaining, inventoryPaid, techOwesShop:techs.techOwesShop, shopOwesTech:techs.shopOwesTech, netCash:collected - paidExpenses - inventoryPaid };
     }
     function render() {
-      const titles = { dashboard:["Dashboard","Track repairs, customer payments, parts balances, technician balances, and net cash by month."], repairs:["Repairs","Customer devices, serial numbers, invoices, and payment status."], expenses:["Expenses","Supplier payments, tools, inventory, and general costs."], technicians:["Technicians","Track what technicians owe the shop and what the shop owes technicians."], profit:["Shop Profit","Split positive net income between shop profit and technician salary."] };
+      const titles = { dashboard:["Dashboard","Track repairs, customer payments, parts balances, technician balances, and net cash by month."], repairs:["Repairs","Customer devices, serial numbers, invoices, and payment status."], supplier:["Supplier","See supplier balances, payments, dates, items, and totals."], expenses:["Expenses","Supplier payments, tools, inventory, and general costs."], technicians:["Technicians","Track what technicians owe the shop and what the shop owes technicians."], profit:["Shop Profit","Split positive net income between shop profit and technician salary."], archive:["Cleared Data","Search cleared days, weeks, months, customers, serials, income, expenses, and profit."] };
       els.pageTitle.textContent = titles[currentView][0]; els.pageSubtitle.textContent = titles[currentView][1];
-      els.dashboardView.hidden = currentView !== "dashboard"; els.repairsView.hidden = currentView !== "repairs"; els.expensesView.hidden = currentView !== "expenses"; els.techniciansView.hidden = currentView !== "technicians"; els.profitView.hidden = currentView !== "profit";
+      els.dashboardView.hidden = currentView !== "dashboard"; els.repairsView.hidden = currentView !== "repairs"; els.supplierView.hidden = currentView !== "supplier"; els.expensesView.hidden = currentView !== "expenses"; els.techniciansView.hidden = currentView !== "technicians"; els.profitView.hidden = currentView !== "profit"; els.archiveView.hidden = currentView !== "archive";
       renderMetrics(); renderChart(); renderTables();
     }
     function renderMetrics() {
@@ -339,13 +466,16 @@
       const repairs = list.filter(r => r.type === "repair");
       const expenses = list.filter(r => r.type === "expense");
       const technicians = list.filter(r => r.type === "technician");
-      els.repairsTable.innerHTML = repairsTable(repairs);
-      els.expensesTable.innerHTML = expensesTable(expenses);
-      els.techniciansTable.innerHTML = techniciansTable(technicians);
+      const profiles = technicianProfiles();
+      els.repairsTable.innerHTML = repairsTable(filterRepairs(repairs.filter(r => r.status === currentRepairStatus)));
+      renderSupplierPage(filterSupplierRecords(list));
+      els.expensesTable.innerHTML = expensesTable(filterExpenses(expenses));
+      els.techniciansTable.innerHTML = techniciansTable(profiles, filterTechnicianRecords(list));
       els.profitTable.innerHTML = profitTable(list);
       els.supplierSummary.innerHTML = supplierSummary(repairs);
       els.inventorySummary.innerHTML = inventorySummary(repairs);
       els.techSummary.innerHTML = techSummary(technicians);
+      renderArchive();
       bindRowActions();
     }
     function paymentTag(ok, paidText = "Paid", pendingText = "Pending") { return ok ? `<span class="tag">${paidText}</span>` : `<span class="tag warn">${pendingText}</span>`; }
@@ -358,18 +488,19 @@
       return `<span class="tag danger">Supplier pending</span>`;
     }
     function repairsTable(repairs) {
-      if (!repairs.length) return `<div class="empty">No repairs recorded for this month.</div>`;
-      return `<table><thead><tr><th>Date</th><th>Customer</th><th>Device / serial</th><th>Repair</th><th class="amount">Invoice</th><th>Customer</th><th>Part source</th><th class="amount">Parts left</th><th></th></tr></thead><tbody>${repairs.map(r => {
+      if (!repairs.length) return `<div class="empty">No ${currentRepairStatus === "waiting" ? "waiting repairs" : currentRepairStatus === "ready" ? "repairs ready for pickup" : "picked up repairs"} for this month.</div>`;
+      return `<table><thead><tr><th>Date</th><th>Customer</th><th>Device / serial</th><th>Repairs</th><th class="amount">Customer total</th><th class="amount">Parts total</th><th>Customer</th><th>Part source</th><th class="amount">Parts left</th><th></th></tr></thead><tbody>${repairs.map(r => {
         const balance = partBalanceFor(r);
         const payButton = r.partSource === "inventory" ? "" : `<button class="icon-button" data-pay-supplier="${r.id}" title="Pay supplier" aria-label="Pay supplier">$</button>`;
-        return `<tr><td>${esc(r.date)}</td><td>${esc(r.customer || "-")}</td><td><strong>${esc(r.deviceType || "-")}</strong><br><span class="muted">${esc(r.serialNumber || "No serial")}</span></td><td>${esc(r.title || "Repair")}<br><span class="muted">${esc(r.notes || "")}</span></td><td class="amount">${money.format(r.amount || 0)}</td><td>${paymentTag(r.customerPaid,"Paid","Payment pending")}</td><td>${supplierStatus(r)}</td><td class="amount">${money.format(balance.remaining)}</td><td><div class="row-actions"><button class="icon-button" data-invoice="${r.id}" title="Print invoice" aria-label="Print invoice">#</button>${payButton}<button class="icon-button" data-edit="${r.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${r.id}" title="Delete" aria-label="Delete">X</button></div></td></tr>`;
+        const statusButton = r.status === "waiting" ? `<button class="small-action" data-mark-ready="${r.id}">Ready</button>` : r.status === "ready" ? `<button class="small-action" data-mark-picked="${r.id}">Picked up</button>` : "";
+        return `<tr><td>${esc(r.date)}</td><td>${esc(r.customer || "-")}<br><span class="muted">${esc(technicianName(r.technicianId))}</span></td><td><strong>${esc(r.deviceType || "-")}</strong><br><span class="muted">${esc(r.serialNumber || "No serial")}</span></td><td>${repairItemsText(r)}<br><span class="muted">${esc(r.notes || "")}</span></td><td class="amount">${money.format(r.amount || 0)}</td><td class="amount">${money.format(r.partsCost || 0)}</td><td>${paymentTag(r.customerPaid,"Paid","Payment pending")}</td><td>${supplierStatus(r)}</td><td class="amount">${money.format(balance.remaining)}</td><td><div class="row-actions">${statusButton}<button class="small-action" data-clear-record="${r.id}">Clear</button><button class="icon-button" data-invoice="${r.id}" title="Print invoice" aria-label="Print invoice">#</button>${payButton}<button class="icon-button" data-edit="${r.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${r.id}" title="Delete" aria-label="Delete">X</button></div></td></tr>`;
       }).join("")}</tbody></table>`;
     }
     function expensesTable(expenses) {
       if (!expenses.length) return `<div class="empty">No expenses recorded for this month.</div>`;
       return `<table><thead><tr><th>Date</th><th>Category</th><th>Supplier / vendor</th><th>Related repair</th><th>Status</th><th>Notes</th><th class="amount">Amount</th><th></th></tr></thead><tbody>${expenses.map(e => {
         const repair = records.find(r => r.id === e.linkedRepairId);
-        return `<tr><td>${esc(e.date)}</td><td><span class="tag ${e.category === "Supplier payment" ? "" : "blue"}">${esc(e.category)}</span></td><td>${esc(e.vendor || "-")}</td><td>${repair ? esc(repairLabel(repair)) : "<span class='muted'>General expense</span>"}</td><td>${paymentTag(e.paid,"Paid","Pending")}</td><td>${esc(e.notes || "-")}</td><td class="amount">${money.format(e.amount || 0)}</td><td><div class="row-actions"><button class="icon-button" data-edit="${e.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${e.id}" title="Delete" aria-label="Delete">X</button></div></td></tr>`;
+        return `<tr><td>${esc(e.date)}</td><td><span class="tag ${e.category === "Supplier payment" ? "" : "blue"}">${esc(e.category)}</span></td><td>${esc(e.vendor || "-")}</td><td>${repair ? esc(repairLabel(repair)) : "<span class='muted'>General expense</span>"}</td><td>${paymentTag(e.paid,"Paid","Pending")}</td><td>${esc(e.notes || "-")}</td><td class="amount">${money.format(e.amount || 0)}</td><td><div class="row-actions"><button class="small-action" data-clear-record="${e.id}">Clear</button><button class="icon-button" data-edit="${e.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${e.id}" title="Delete" aria-label="Delete">X</button></div></td></tr>`;
       }).join("")}</tbody></table>`;
     }
     function supplierSummary(repairs) {
@@ -380,6 +511,20 @@
         return `<tr><td>${esc(repairLabel(r))}</td><td class="amount">${money.format(r.partsCost || 0)}</td><td class="amount">${money.format(paid)}</td><td class="amount">${money.format(remaining)}</td><td><button class="small-action" data-pay-supplier="${r.id}">Pay</button></td></tr>`;
       }).join("")}</tbody></table>`;
     }
+    function renderSupplierPage(list) {
+      const repairs = list.filter(record => record.type === "repair" && record.partSource === "supplier" && Number(record.partsCost || 0) > 0);
+      const payments = list.filter(record => record.type === "expense" && record.category === "Supplier payment");
+      const totalParts = repairs.reduce((total, repair) => total + Number(repair.partsCost || 0), 0);
+      const totalPaid = payments.filter(payment => payment.paid).reduce((total, payment) => total + Number(payment.amount || 0), 0);
+      const remaining = Math.max(0, totalParts - totalPaid);
+      els.supplierMetrics.innerHTML = [["Supplier parts", money.format(totalParts)], ["Paid supplier", money.format(totalPaid)], ["Remaining", money.format(remaining)], ["Payments", payments.length]].map(([label,value]) => `<article class="metric"><span>${label}</span><strong>${value}</strong></article>`).join("");
+      const rows = [
+        ...repairs.map(repair => ({ date:repair.date, kind:"Part used", name:repairLabel(repair), detail:repairItemsText(repair), amount:repair.partsCost || 0, paid:supplierPaidFor(repair.id), remaining:partBalanceFor(repair).remaining })),
+        ...payments.map(payment => ({ date:payment.date, kind:"Payment made", name:payment.vendor || "Supplier", detail:payment.notes || "Supplier payment", amount:payment.amount || 0, paid:payment.paid ? payment.amount || 0 : 0, remaining:0 }))
+      ].sort((a,b) => b.date.localeCompare(a.date));
+      if (!rows.length) { els.supplierTable.innerHTML = `<div class="empty">No supplier data matches this filter.</div>`; return; }
+      els.supplierTable.innerHTML = `<table><thead><tr><th>Date</th><th>Type</th><th>Supplier / repair</th><th>For what</th><th class="amount">Amount</th><th class="amount">Paid</th><th class="amount">Remaining</th></tr></thead><tbody>${rows.map(row => `<tr><td>${esc(row.date)}</td><td>${esc(row.kind)}</td><td>${esc(row.name)}</td><td>${row.kind === "Part used" ? row.detail : esc(row.detail)}</td><td class="amount">${money.format(row.amount)}</td><td class="amount">${money.format(row.paid)}</td><td class="amount">${money.format(row.remaining)}</td></tr>`).join("")}</tbody></table>`;
+    }
     function inventorySummary(repairs) {
       const inventory = repairs.filter(r => r.partSource === "inventory" && Number(r.partsCost || 0) > 0);
       if (!inventory.length) return `<div class="empty">No repairs used parts from inventory this month.</div>`;
@@ -388,18 +533,23 @@
         return `<tr><td>${esc(repairLabel(r))}</td><td>${paymentTag(r.inventoryPaid,"Inventory paid","Inventory pending")}</td><td class="amount">${money.format(balance.cost)}</td><td class="amount">${money.format(balance.remaining)}</td></tr>`;
       }).join("")}</tbody></table>`;
     }
-    function techniciansTable(technicians) {
-      if (!technicians.length) return `<div class="empty">No technician balances recorded for this month.</div>`;
-      return `<table><thead><tr><th>Date</th><th>Technician</th><th>For what</th><th>Direction</th><th class="amount">Total</th><th class="amount">Paid</th><th class="amount">Remaining</th><th>Notes</th><th></th></tr></thead><tbody>${technicians.map(t => {
-        const remaining = Math.max(0, Number(t.amount || 0) - Number(t.paidAmount || 0));
-        const direction = t.direction === "tech_owes_shop" ? "Technician owes shop" : "Shop owes technician";
-        return `<tr><td>${esc(t.date)}</td><td>${esc(t.technician || "-")}</td><td>${esc(t.reason || "-")}</td><td><span class="tag ${t.direction === "tech_owes_shop" ? "blue" : "warn"}">${direction}</span></td><td class="amount">${money.format(t.amount || 0)}</td><td class="amount">${money.format(t.paidAmount || 0)}</td><td class="amount">${money.format(remaining)}</td><td>${esc(t.notes || "-")}</td><td><div class="row-actions"><button class="icon-button" data-edit="${t.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${t.id}" title="Delete" aria-label="Delete">X</button></div></td></tr>`;
+    function techniciansTable(profiles, list) {
+      if (!profiles.length) return `<div class="empty">No technician profiles recorded.</div>`;
+      return `<table><thead><tr><th>Technician profile</th><th class="amount">Assigned repairs</th><th class="amount">Salary share</th><th class="amount">Advances / owes shop</th><th class="amount">Other shop owes</th><th class="amount">Salary due</th><th>Notes</th><th></th></tr></thead><tbody>${profiles.map(profile => {
+        const balance = technicianBalance(profile.id, list);
+        const assigned = list.filter(record => record.type === "repair" && (record.technicianId || defaultTechnicianId()) === profile.id).length;
+        const defaultTag = profile.isDefault ? " <span class='tag blue'>Default</span>" : "";
+        const editButtons = profile.id === "default" ? "" : `<button class="icon-button" data-edit="${profile.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${profile.id}" title="Delete" aria-label="Delete">X</button>`;
+        return `<tr><td><strong>${esc(profile.name)}</strong>${defaultTag}</td><td class="amount">${assigned}</td><td class="amount">${money.format(balance.salary)}</td><td class="amount">${money.format(balance.deductions)}</td><td class="amount">${money.format(balance.shopOwes)}</td><td class="amount">${money.format(balance.totalOwed)}</td><td>${esc(profile.notes || "-")}</td><td><div class="row-actions"><button class="small-action" data-add-tech-balance="${profile.id}">Balance</button><button class="small-action" data-add-tech-advance="${profile.id}">Advance</button>${editButtons}</div></td></tr>`;
       }).join("")}</tbody></table>`;
     }
     function techSummary(technicians) {
-      if (!technicians.length) return `<div class="empty">No technician balances recorded for this month.</div>`;
       const totals = technicianTotals(technicians);
-      return `<table><thead><tr><th>Balance</th><th class="amount">Remaining</th></tr></thead><tbody><tr><td>Shop owes technicians</td><td class="amount">${money.format(totals.shopOwesTech)}</td></tr><tr><td>Technicians owe shop</td><td class="amount">${money.format(totals.techOwesShop)}</td></tr></tbody></table>`;
+      const profileRows = technicianProfiles().map(profile => {
+        const balance = technicianBalance(profile.id);
+        return `<tr><td>${esc(profile.name)} salary due</td><td class="amount">${money.format(balance.totalOwed)}</td></tr>`;
+      }).join("");
+      return `<table><thead><tr><th>Balance</th><th class="amount">Remaining</th></tr></thead><tbody>${profileRows}<tr><td>Manual shop owes technicians</td><td class="amount">${money.format(totals.shopOwesTech)}</td></tr><tr><td>Manual tech owes shop / advances</td><td class="amount">${money.format(totals.techOwesShop)}</td></tr></tbody></table>`;
     }
     function profitTable(list) {
       const split = profitSplit(list);
@@ -416,21 +566,113 @@
         <tr><td>Total shop owes technician</td><td>Technician salary due plus other unpaid technician balances</td><td class="amount">${money.format(split.totalShopOwesTechnician)}</td></tr>
       </tbody></table>`;
     }
+    function filteredArchiveRecords() {
+      const period = els.archivePeriod.value;
+      const type = els.archiveType.value;
+      const query = els.archiveSearch.value.trim().toLowerCase();
+      let start = els.archiveStart.value;
+      let end = els.archiveEnd.value;
+      if (period === "day") end = start;
+      if (period === "month" && start) { start = `${start.slice(0, 7)}-01`; const d = new Date(start); d.setMonth(d.getMonth() + 1); d.setDate(0); end = d.toISOString().slice(0, 10); }
+      return archiveRecords().filter(record => {
+        const date = (record.settledAt || record.date || "").slice(0, 10);
+        const matchesDate = (!start || date >= start) && (!end || date <= end);
+        const matchesType =
+          type === "all" ||
+          (type === "supplier" && record.type === "expense" && record.category === "Supplier payment") ||
+          (type === "inventory" && ((record.type === "expense" && record.category === "Inventory") || (record.type === "repair" && record.partSource === "inventory"))) ||
+          (type === "technician" && record.type === "technician") ||
+          (type === "repair" && record.type === "repair") ||
+          (type === "shop" && (record.type === "repair" || (record.type === "expense" && !["Supplier payment","Inventory"].includes(record.category))));
+        return matchesDate && matchesType && globalMatch(record) && textMatch(record, query);
+      });
+    }
+    function renderArchive() {
+      if (!els.archiveTable) return;
+      const list = filteredArchiveRecords();
+      const t = totals(list);
+      const split = profitSplit(list);
+      const items = [["Gross", money.format(t.invoiced)], ["Collected", money.format(t.collected)], ["Expenses", money.format(t.paidExpenses + t.inventoryPaid)], ["Net", money.format(t.netCash)], ["Shop profit", money.format(split.adjustedShopProfit)], ["Tech salary", money.format(split.technicianSalaryDue)]];
+      els.archiveMetrics.innerHTML = items.map(([label,value]) => `<article class="metric"><span>${label}</span><strong>${value}</strong></article>`).join("");
+      if (!list.length) { els.archiveTable.innerHTML = `<div class="empty">No cleared balances match this filter.</div>`; return; }
+      els.archiveTable.innerHTML = `<table><thead><tr><th>Cleared</th><th>Type</th><th>Name / device</th><th>Detail</th><th class="amount">Income</th><th class="amount">Expense</th><th class="amount">Net effect</th></tr></thead><tbody>${list.map(record => {
+        const income = record.type === "repair" ? Number(record.amount || 0) : 0;
+        const expense = record.type === "expense" ? Number(record.amount || 0) : record.type === "repair" && record.inventoryPaid ? Number(record.partsCost || 0) : 0;
+        const name = record.type === "repair" ? `${esc(record.customer || "-")}<br><span class="muted">${esc(record.deviceType || "")} ${esc(record.serialNumber || "")}</span>` : record.type === "technician" ? esc(record.technician || "-") : esc(record.vendor || "-");
+        const detail = record.type === "repair" ? repairItemsText(record) : esc(record.reason || record.category || record.notes || "-");
+        return `<tr><td>${esc((record.settledAt || "").slice(0, 10))}</td><td>${esc(record.type)}</td><td>${name}</td><td>${detail}</td><td class="amount">${money.format(income)}</td><td class="amount">${money.format(expense)}</td><td class="amount">${money.format(income - expense)}</td></tr>`;
+      }).join("")}</tbody></table>`;
+    }
     function bindRowActions() {
       document.querySelectorAll("[data-edit]").forEach(b => b.addEventListener("click", () => { const record = records.find(r => r.id === b.dataset.edit); if (record) openDialog(record.type, record); }));
       document.querySelectorAll("[data-delete]").forEach(b => b.addEventListener("click", async () => { const record = records.find(r => r.id === b.dataset.delete); if (!record || !confirm("Delete this record?")) return; records = records.filter(r => r.id !== record.id); localStorage.setItem(STORAGE_KEY, JSON.stringify(records)); await deleteRemoteRecord(record.id); render(); }));
       document.querySelectorAll("[data-pay-supplier]").forEach(b => b.addEventListener("click", () => openDialog("expense", { type:"expense", category:"Supplier payment", linkedRepairId:b.dataset.paySupplier, paid:true })));
       document.querySelectorAll("[data-invoice]").forEach(b => b.addEventListener("click", () => printInvoice(b.dataset.invoice)));
+      document.querySelectorAll("[data-mark-ready]").forEach(b => b.addEventListener("click", () => updateRepairStatus(b.dataset.markReady, "ready")));
+      document.querySelectorAll("[data-mark-picked]").forEach(b => b.addEventListener("click", () => updateRepairStatus(b.dataset.markPicked, "picked_up", true)));
+      document.querySelectorAll("[data-clear-record]").forEach(b => b.addEventListener("click", () => clearRecord(b.dataset.clearRecord)));
+      document.querySelectorAll("[data-add-tech-balance]").forEach(b => b.addEventListener("click", () => openDialog("technician", { type:"technician", technicianId:b.dataset.addTechBalance, direction:"shop_owes_tech" })));
+      document.querySelectorAll("[data-add-tech-advance]").forEach(b => b.addEventListener("click", () => openDialog("technician", { type:"technician", technicianId:b.dataset.addTechAdvance, direction:"advance_salary", reason:"Advance salary payment" })));
+    }
+    async function clearRecord(id, label = "Manual clear") {
+      const record = records.find(r => r.id === id);
+      if (!record) return;
+      record.settledAt = today();
+      record.settlementLabel = label;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+      await syncRecord(record);
+      render();
+    }
+    async function clearCurrentBalances() {
+      const current = monthRecords();
+      if (!current.length || !confirm("Clear all current balances for this month and move them to All time?")) return;
+      const label = `Cleared ${els.month.value}`;
+      current.forEach(record => { record.settledAt = today(); record.settlementLabel = label; });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+      await syncAllRecords();
+      render();
+    }
+    async function updateRepairStatus(id, status, paid = false) {
+      const record = records.find(r => r.id === id);
+      if (!record) return;
+      record.status = status;
+      if (paid) record.customerPaid = true;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+      await syncRecord(record);
+      currentRepairStatus = status;
+      document.querySelectorAll("[data-repair-status]").forEach(button => button.classList.toggle("active", button.dataset.repairStatus === status));
+      render();
     }
     function openDialog(type, record = null) {
       record = record ? normalizeRecord(record) : null;
       els.recordType.value = type; els.recordId.value = record?.id || ""; els.modalTitle.textContent = `${record?.id ? "Edit" : "Add"} ${type}`;
-      els.repairFields.classList.toggle("hidden", type !== "repair"); els.expenseFields.classList.toggle("hidden", type !== "expense"); els.techFields.classList.toggle("hidden", type !== "technician");
-      if (type === "repair") fillRepair(record); else if (type === "expense") fillExpense(record); else fillTechnician(record);
-      els.recordDialog.hidden = false; saveDraft(); (type === "repair" ? els.customerName : type === "expense" ? els.expenseAmount : els.techName).focus();
+      els.repairFields.classList.toggle("hidden", type !== "repair"); els.expenseFields.classList.toggle("hidden", type !== "expense"); els.techFields.classList.toggle("hidden", type !== "technician"); els.techProfileFields.classList.toggle("hidden", type !== "technician_profile");
+      if (type === "repair") fillRepair(record); else if (type === "expense") fillExpense(record); else if (type === "technician") fillTechnician(record); else fillTechnicianProfile(record);
+      els.recordDialog.hidden = false; saveDraft(); (type === "repair" ? els.customerName : type === "expense" ? els.expenseAmount : type === "technician" ? els.techName : els.profileName).focus();
     }
     function fillRepair(record) {
-      els.repairDate.value = record?.date || today(); els.customerName.value = record?.customer || ""; els.deviceType.value = record?.deviceType || ""; els.serialNumber.value = record?.serialNumber || ""; els.repairTitle.value = record?.title || ""; els.invoiceAmount.value = record?.amount ?? ""; els.partSource.value = record?.partSource || "supplier"; els.partsCost.value = record?.partsCost ?? ""; els.inventoryPaid.value = record?.inventoryPaid ? "paid" : "pending"; els.customerPaid.value = record?.customerPaid ? "paid" : "pending"; els.repairNotes.value = record?.notes || "";
+      els.repairTechnician.innerHTML = technicianOptions(record?.technicianId || defaultTechnicianId());
+      els.repairDate.value = record?.date || today(); els.customerName.value = record?.customer || ""; els.deviceType.value = record?.deviceType || ""; els.serialNumber.value = record?.serialNumber || ""; els.repairStatus.value = record?.status || "waiting"; els.partSource.value = record?.partSource || "supplier"; els.inventoryPaid.value = record?.inventoryPaid ? "paid" : "pending"; els.customerPaid.value = record?.customerPaid ? "paid" : "pending"; els.repairNotes.value = record?.notes || "";
+      renderRepairItemRows(record?.repairItems?.length ? record.repairItems : [{ title:"", price:0, partCost:0 }]);
+    }
+    function renderRepairItemRows(items) { els.repairItems.innerHTML = ""; items.forEach(item => addRepairItemRow(item)); updateRepairItemTotals(); }
+    function addRepairItemRow(item = { title:"", price:"", partCost:"" }) {
+      const row = document.createElement("div");
+      row.className = "line-item";
+      row.innerHTML = `<div><label>Repair</label><input data-item-title type="text" placeholder="Battery replacement" value="${esc(item.title || "")}"></div><div><label>Customer price (€)</label><input data-item-price type="number" min="0" step="0.01" value="${Number(item.price || 0) || ""}"></div><div><label>Part cost (€)</label><input data-item-cost type="number" min="0" step="0.01" value="${Number(item.partCost || 0) || ""}"></div><button class="icon-button" type="button" data-remove-item title="Remove" aria-label="Remove">X</button>`;
+      row.querySelector("[data-remove-item]").addEventListener("click", () => { if (els.repairItems.children.length > 1) row.remove(); updateRepairItemTotals(); saveDraft(); });
+      row.querySelectorAll("input").forEach(input => input.addEventListener("input", () => { updateRepairItemTotals(); saveDraft(); }));
+      els.repairItems.appendChild(row);
+      updateRepairItemTotals();
+    }
+    function collectRepairItems() {
+      return [...els.repairItems.querySelectorAll(".line-item")].map(row => ({ title:row.querySelector("[data-item-title]").value.trim(), price:Number(row.querySelector("[data-item-price]").value || 0), partCost:Number(row.querySelector("[data-item-cost]").value || 0) })).filter(item => item.title || item.price || item.partCost);
+    }
+    function updateRepairItemTotals() {
+      const items = collectRepairItems();
+      els.repairTitle.value = items.map(item => item.title).filter(Boolean).join(", ");
+      els.invoiceAmount.value = sumRepairItems(items, "price");
+      els.partsCost.value = sumRepairItems(items, "partCost");
     }
     function fillExpense(record) {
       els.expenseCategory.innerHTML = expenseCategories.map(c => `<option value="${c}">${c}</option>`).join("");
@@ -438,16 +680,21 @@
       els.expenseDate.value = record?.date || today(); els.expenseCategory.value = record?.category || "Supplier payment"; els.vendorName.value = record?.vendor || ""; els.expenseAmount.value = record?.amount ?? ""; els.linkedRepair.value = record?.linkedRepairId || ""; els.expensePaid.value = record?.paid === false ? "pending" : "paid"; els.expenseNotes.value = record?.notes || "";
     }
     function fillTechnician(record) {
-      els.techDate.value = record?.date || today(); els.techName.value = record?.technician || ""; els.techDirection.value = record?.direction || "shop_owes_tech"; els.techAmount.value = record?.amount ?? ""; els.techPaidAmount.value = record?.paidAmount ?? ""; els.techReason.value = record?.reason || ""; els.techNotes.value = record?.notes || "";
+      els.techName.innerHTML = technicianOptions(record?.technicianId || findTechnicianIdByName(record?.technician));
+      els.techDate.value = record?.date || today(); els.techDirection.value = record?.direction || "shop_owes_tech"; els.techAmount.value = record?.amount ?? ""; els.techPaidAmount.value = record?.paidAmount ?? ""; els.techReason.value = record?.reason || ""; els.techNotes.value = record?.notes || "";
+    }
+    function fillTechnicianProfile(record) {
+      els.profileName.value = record?.name || ""; els.profileDefault.value = record?.isDefault ? "yes" : "no"; els.profileNotes.value = record?.notes || "";
     }
     function closeDialog() { els.recordDialog.hidden = true; localStorage.removeItem(DRAFT_KEY); }
     function formDraft() {
       const type = els.recordType.value;
       return {
         open: !els.recordDialog.hidden, id:els.recordId.value, type,
-        repair:{ date:els.repairDate.value, customer:els.customerName.value, deviceType:els.deviceType.value, serialNumber:els.serialNumber.value, title:els.repairTitle.value, amount:els.invoiceAmount.value, partSource:els.partSource.value, partsCost:els.partsCost.value, inventoryPaid:els.inventoryPaid.value, customerPaid:els.customerPaid.value, notes:els.repairNotes.value },
+        repair:{ date:els.repairDate.value, customer:els.customerName.value, deviceType:els.deviceType.value, serialNumber:els.serialNumber.value, technicianId:els.repairTechnician.value, status:els.repairStatus.value, repairItems:collectRepairItems(), title:els.repairTitle.value, amount:els.invoiceAmount.value, partSource:els.partSource.value, partsCost:els.partsCost.value, inventoryPaid:els.inventoryPaid.value, customerPaid:els.customerPaid.value, notes:els.repairNotes.value },
         expense:{ date:els.expenseDate.value, category:els.expenseCategory.value, vendor:els.vendorName.value, amount:els.expenseAmount.value, linkedRepairId:els.linkedRepair.value, paid:els.expensePaid.value, notes:els.expenseNotes.value },
-        technician:{ date:els.techDate.value, technician:els.techName.value, direction:els.techDirection.value, reason:els.techReason.value, amount:els.techAmount.value, paidAmount:els.techPaidAmount.value, notes:els.techNotes.value }
+        technician:{ date:els.techDate.value, technicianId:els.techName.value, direction:els.techDirection.value, reason:els.techReason.value, amount:els.techAmount.value, paidAmount:els.techPaidAmount.value, notes:els.techNotes.value },
+        technician_profile:{ name:els.profileName.value, isDefault:els.profileDefault.value, notes:els.profileNotes.value }
       };
     }
     function saveDraft() {
@@ -463,11 +710,14 @@
         openDialog(draft.type, draft.id ? records.find(r => r.id === draft.id) : null);
         els.recordId.value = draft.id || "";
         if (draft.type === "repair") {
-          els.repairDate.value = draft.repair.date || today(); els.customerName.value = draft.repair.customer || ""; els.deviceType.value = draft.repair.deviceType || ""; els.serialNumber.value = draft.repair.serialNumber || ""; els.repairTitle.value = draft.repair.title || ""; els.invoiceAmount.value = draft.repair.amount || ""; els.partSource.value = draft.repair.partSource || "supplier"; els.partsCost.value = draft.repair.partsCost || ""; els.inventoryPaid.value = draft.repair.inventoryPaid || "pending"; els.customerPaid.value = draft.repair.customerPaid || "pending"; els.repairNotes.value = draft.repair.notes || "";
+          els.repairTechnician.innerHTML = technicianOptions(draft.repair.technicianId || defaultTechnicianId()); els.repairDate.value = draft.repair.date || today(); els.customerName.value = draft.repair.customer || ""; els.deviceType.value = draft.repair.deviceType || ""; els.serialNumber.value = draft.repair.serialNumber || ""; els.repairStatus.value = draft.repair.status || "waiting"; els.partSource.value = draft.repair.partSource || "supplier"; els.inventoryPaid.value = draft.repair.inventoryPaid || "pending"; els.customerPaid.value = draft.repair.customerPaid || "pending"; els.repairNotes.value = draft.repair.notes || ""; renderRepairItemRows(draft.repair.repairItems?.length ? draft.repair.repairItems : [{ title:draft.repair.title || "", price:draft.repair.amount || 0, partCost:draft.repair.partsCost || 0 }]);
         } else if (draft.type === "expense") {
           els.expenseDate.value = draft.expense.date || today(); els.expenseCategory.value = draft.expense.category || "Supplier payment"; els.vendorName.value = draft.expense.vendor || ""; els.expenseAmount.value = draft.expense.amount || ""; els.linkedRepair.value = draft.expense.linkedRepairId || ""; els.expensePaid.value = draft.expense.paid || "paid"; els.expenseNotes.value = draft.expense.notes || "";
         } else {
-          els.techDate.value = draft.technician.date || today(); els.techName.value = draft.technician.technician || ""; els.techDirection.value = draft.technician.direction || "shop_owes_tech"; els.techReason.value = draft.technician.reason || ""; els.techAmount.value = draft.technician.amount || ""; els.techPaidAmount.value = draft.technician.paidAmount || ""; els.techNotes.value = draft.technician.notes || "";
+          els.techName.innerHTML = technicianOptions(draft.technician.technicianId || defaultTechnicianId()); els.techDate.value = draft.technician.date || today(); els.techDirection.value = draft.technician.direction || "shop_owes_tech"; els.techReason.value = draft.technician.reason || ""; els.techAmount.value = draft.technician.amount || ""; els.techPaidAmount.value = draft.technician.paidAmount || ""; els.techNotes.value = draft.technician.notes || "";
+        }
+        if (draft.type === "technician_profile") {
+          els.profileName.value = draft.technician_profile.name || ""; els.profileDefault.value = draft.technician_profile.isDefault || "no"; els.profileNotes.value = draft.technician_profile.notes || "";
         }
       } catch {
         localStorage.removeItem(DRAFT_KEY);
@@ -476,22 +726,28 @@
     async function saveRecord(event) {
       event.preventDefault();
       const type = els.recordType.value;
+      updateRepairItemTotals();
+      const repairItems = collectRepairItems();
       const record = type === "repair"
-        ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.repairDate.value || today(), customer:els.customerName.value.trim(), deviceType:els.deviceType.value.trim(), serialNumber:els.serialNumber.value.trim(), title:els.repairTitle.value.trim(), amount:Number(els.invoiceAmount.value || 0), partSource:els.partSource.value, partsCost:Number(els.partsCost.value || 0), inventoryPaid:els.inventoryPaid.value === "paid", customerPaid:els.customerPaid.value === "paid", notes:els.repairNotes.value.trim() }
+        ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.repairDate.value || today(), customer:els.customerName.value.trim(), deviceType:els.deviceType.value.trim(), serialNumber:els.serialNumber.value.trim(), technicianId:els.repairTechnician.value || defaultTechnicianId(), status:els.repairStatus.value, repairItems, title:repairItems.map(item => item.title).filter(Boolean).join(", "), amount:sumRepairItems(repairItems, "price"), partSource:els.partSource.value, partsCost:sumRepairItems(repairItems, "partCost"), inventoryPaid:els.inventoryPaid.value === "paid", customerPaid:els.customerPaid.value === "paid", notes:els.repairNotes.value.trim() }
         : type === "expense"
           ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.expenseDate.value || today(), category:els.expenseCategory.value, vendor:els.vendorName.value.trim(), amount:Number(els.expenseAmount.value || 0), paid:els.expensePaid.value === "paid", linkedRepairId:els.linkedRepair.value, notes:els.expenseNotes.value.trim() }
-          : { id:els.recordId.value || crypto.randomUUID(), type, date:els.techDate.value || today(), technician:els.techName.value.trim(), direction:els.techDirection.value, reason:els.techReason.value.trim(), amount:Number(els.techAmount.value || 0), paidAmount:Number(els.techPaidAmount.value || 0), notes:els.techNotes.value.trim() };
+          : type === "technician"
+            ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.techDate.value || today(), technicianId:els.techName.value || defaultTechnicianId(), technician:technicianName(els.techName.value), direction:els.techDirection.value, reason:els.techReason.value.trim(), amount:Number(els.techAmount.value || 0), paidAmount:Number(els.techPaidAmount.value || 0), notes:els.techNotes.value.trim() }
+            : { id:els.recordId.value || crypto.randomUUID(), type:"technician_profile", date:today(), name:els.profileName.value.trim() || "Technician", isDefault:els.profileDefault.value === "yes", notes:els.profileNotes.value.trim() };
+      if (record.type === "technician_profile" && record.isDefault) records = records.map(item => item.type === "technician_profile" ? { ...item, isDefault:false } : item);
       records = records.filter(r => r.id !== record.id).concat(record); localStorage.setItem(STORAGE_KEY, JSON.stringify(records)); await syncRecord(record); localStorage.removeItem(DRAFT_KEY); els.recordDialog.hidden = true; render();
     }
     function printInvoice(id) {
       const r = records.find(record => record.id === id); if (!r) return;
-      const html = `<!doctype html><html><head><title>Invoice ${esc(r.id.slice(0,8))}</title><style>body{font-family:Arial,sans-serif;color:#111;padding:32px}h1{margin:0 0 8px}.top{display:flex;justify-content:space-between;gap:24px}.box{border:1px solid #ddd;padding:14px;margin-top:18px}table{width:100%;border-collapse:collapse;margin-top:18px}td,th{border-bottom:1px solid #ddd;padding:10px;text-align:left}.amount{text-align:right}.total{font-size:20px;font-weight:700}@media print{button{display:none}}</style></head><body><button onclick="print()">Print invoice</button><div class="top"><div><h1>Repair Invoice</h1><p>Repair Ledger</p></div><div><strong>Date:</strong> ${esc(r.date)}<br><strong>Invoice:</strong> ${esc(r.id.slice(0,8))}<br><strong>Status:</strong> ${r.customerPaid ? "Paid" : "Payment pending"}</div></div><div class="box"><strong>Customer</strong><br>${esc(r.customer || "-")}</div><table><tr><th>Device</th><td>${esc(r.deviceType || "-")}</td></tr><tr><th>Serial / IMEI</th><td>${esc(r.serialNumber || "-")}</td></tr><tr><th>Repair</th><td>${esc(r.title || "Repair")}</td></tr><tr><th>Part source</th><td>${r.partSource === "inventory" ? "Shop inventory" : "Supplier"}</td></tr><tr><th>Notes</th><td>${esc(r.notes || "-")}</td></tr><tr><th class="total">Total</th><td class="amount total">${money.format(r.amount || 0)}</td></tr></table><script>setTimeout(() => print(), 250)<\/script></body></html>`;
+      const itemRows = (r.repairItems || []).map(item => `<tr><td>${esc(item.title || "Repair")}</td><td class="amount">${money.format(item.price || 0)}</td></tr>`).join("");
+      const html = `<!doctype html><html><head><title>Invoice ${esc(r.id.slice(0,8))}</title><style>body{font-family:Arial,sans-serif;color:#111;padding:32px}h1{margin:0 0 8px}.top{display:flex;justify-content:space-between;gap:24px}.box{border:1px solid #ddd;padding:14px;margin-top:18px}table{width:100%;border-collapse:collapse;margin-top:18px}td,th{border-bottom:1px solid #ddd;padding:10px;text-align:left}.amount{text-align:right}.total{font-size:20px;font-weight:700}@media print{button{display:none}}</style></head><body><button onclick="print()">Print invoice</button><div class="top"><div><h1>Repair Invoice</h1><p>Repair Ledger</p></div><div><strong>Date:</strong> ${esc(r.date)}<br><strong>Invoice:</strong> ${esc(r.id.slice(0,8))}<br><strong>Status:</strong> ${r.customerPaid ? "Paid" : "Payment pending"}</div></div><div class="box"><strong>Customer</strong><br>${esc(r.customer || "-")}<br><br><strong>Device:</strong> ${esc(r.deviceType || "-")}<br><strong>Serial / IMEI:</strong> ${esc(r.serialNumber || "-")}</div><table><thead><tr><th>Repair</th><th class="amount">Price</th></tr></thead><tbody>${itemRows}<tr><th class="total">Total</th><td class="amount total">${money.format(r.amount || 0)}</td></tr></tbody></table><p><strong>Notes:</strong> ${esc(r.notes || "-")}</p><script>setTimeout(() => print(), 250)<\/script></body></html>`;
       const win = window.open("", "_blank"); if (!win) { alert("Allow popups to print invoices."); return; }
       win.document.write(html); win.document.close();
     }
     function exportCsv() {
-      const headers = ["id","type","date","customer","deviceType","serialNumber","title","amount","partSource","partsCost","inventoryPaid","customerPaid","category","vendor","paid","linkedRepairId","technician","direction","reason","paidAmount","notes"];
-      const csv = [headers.join(",")].concat(records.map(r => headers.map(h => csvCell(r[h] ?? "")).join(","))).join("\n");
+      const headers = ["id","type","date","customer","deviceType","serialNumber","technicianId","name","isDefault","status","repairItems","title","amount","partSource","partsCost","inventoryPaid","customerPaid","category","vendor","paid","linkedRepairId","technician","direction","reason","paidAmount","settledAt","settlementLabel","notes"];
+      const csv = [headers.join(",")].concat(records.map(r => headers.map(h => csvCell(typeof r[h] === "object" && r[h] !== null ? JSON.stringify(r[h]) : r[h] ?? "")).join(","))).join("\n");
       const blob = new Blob([csv], { type:"text/csv;charset=utf-8" }); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = `repair-ledger-${today()}.csv`; a.click(); URL.revokeObjectURL(url);
     }
     function importCsv(event) {
