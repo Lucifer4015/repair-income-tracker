@@ -13,24 +13,25 @@
     }
     *{box-sizing:border-box} body{margin:0;min-height:100vh;background:var(--wash);color:var(--ink)}
     button,input,select,textarea{font:inherit} button{border:0;cursor:pointer}
-    .app-shell{min-height:100vh;display:grid;grid-template-columns:280px 1fr}
-    aside{background:var(--nav);color:#f9fafb;padding:24px 18px;display:flex;flex-direction:column;gap:24px}
+    .app-shell{min-height:100vh;display:grid;grid-template-columns:280px 1fr}.app-shell.sidebar-collapsed{grid-template-columns:64px 1fr}
+    aside{background:var(--nav);color:#f9fafb;padding:24px 18px;display:flex;flex-direction:column;gap:24px}.menu-toggle{width:42px;height:42px;border-radius:8px;background:rgba(255,255,255,.1);color:#f9fafb;font-size:24px;line-height:1;display:grid;place-items:center}.app-shell.sidebar-collapsed aside{padding:12px 11px;gap:0}.app-shell.sidebar-collapsed .brand,.app-shell.sidebar-collapsed .month-picker,.app-shell.sidebar-collapsed nav,.app-shell.sidebar-collapsed .side-actions{display:none}.app-shell.sidebar-collapsed .menu-toggle{margin:0 auto}
     .brand{display:flex;gap:12px;align-items:center;padding:0 8px}.brand-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:8px;background:#f59e0b;color:#17212b;font-weight:900;font-size:22px}.brand h1{margin:0;font-size:20px;line-height:1.1}.brand p{margin:4px 0 0;color:#b7c0ca;font-size:13px}
     .month-picker{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:14px}
     label{display:block;font-size:12px;font-weight:750;margin-bottom:7px;color:inherit}
     input,select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);padding:10px 11px;min-height:42px}
     nav{display:grid;gap:8px}.nav-button{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:10px 12px;border-radius:8px;background:transparent;color:#dbe2e8;text-align:left}.nav-button svg{width:19px;height:19px;flex:0 0 19px}.nav-button.active{background:#f9fafb;color:#17212b;font-weight:800}
-    .side-actions{margin-top:auto;display:grid;gap:10px}.ghost{min-height:42px;border:1px solid rgba(255,255,255,.22);border-radius:8px;background:transparent;color:#f9fafb;padding:10px 12px;text-align:center}
-    main{padding:26px;display:grid;gap:22px;align-content:start}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.topbar h2{margin:0;font-size:28px;line-height:1.15}.topbar p{margin:6px 0 0;color:var(--muted)}.global-search{display:grid;grid-template-columns:1fr 190px;gap:10px}
+    .side-actions{margin-top:auto;display:grid;gap:10px}.watermark{color:#b7c0ca;font-size:12px;line-height:1.35;text-align:center;padding:4px 2px}.ghost{min-height:42px;border:1px solid rgba(255,255,255,.22);border-radius:8px;background:transparent;color:#f9fafb;padding:10px 12px;text-align:center}
+    main{padding:26px;display:grid;gap:22px;align-content:start}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.topbar h2{margin:0;font-size:28px;line-height:1.15}.topbar p{margin:6px 0 0;color:var(--muted)}.global-search{display:grid;grid-template-columns:1fr 190px;gap:10px}.tool-toggle-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.tool-toggle{width:42px;height:42px;border-radius:8px;background:#eef3f7;color:var(--ink);display:inline-grid;place-items:center}.tool-toggle svg{width:19px;height:19px}.tool-toggle.active{background:var(--accent);color:#fff}.global-search:not(.search-open):not(.filter-open),.filters:not(.search-open):not(.filter-open){display:none}.global-search:not(.search-open) input[type="search"],.filters:not(.search-open) input[type="search"]{display:none}.global-search:not(.filter-open) select,.filters:not(.filter-open) select,.filters:not(.filter-open) input[type="date"]{display:none}
     .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.primary,.secondary,.small-action{min-height:42px;border-radius:8px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 13px;white-space:nowrap}.primary{background:var(--accent);color:#fff}.primary:hover{background:var(--accent-dark)}.secondary,.small-action{background:#eef3f7;color:var(--ink)}
     .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px}.metric,.panel,.modal{background:var(--paper);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}.metric{padding:16px;min-height:112px;display:grid;align-content:space-between;gap:12px}.metric span{color:var(--muted);font-size:13px;font-weight:750}.metric strong{font-size:25px;line-height:1}.net-positive strong{color:var(--green)}.net-negative strong{color:var(--red)}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{overflow:hidden}.panel-header{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.panel-header h3{margin:0;font-size:17px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:840px}th,td{text-align:left;padding:12px 14px;border-bottom:1px solid #edf1f4;font-size:14px;vertical-align:middle}th{color:var(--muted);font-size:12px;text-transform:uppercase;background:#fbfcfd}tr:last-child td{border-bottom:0}.amount{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.muted{color:var(--muted)}.nowrap{white-space:nowrap}
     .tag{display:inline-flex;align-items:center;min-height:26px;padding:4px 8px;border-radius:999px;background:#e8f3f1;color:#0b5d57;font-size:12px;font-weight:800;white-space:nowrap}.tag.warn{background:#fff7db;color:var(--amber)}.tag.danger{background:#fee4e2;color:var(--red)}.tag.blue{background:#dbeafe;color:#1d4ed8}
     .row-actions{display:flex;justify-content:flex-end;gap:7px}.icon-button{width:34px;height:34px;border-radius:8px;background:#eef3f7;color:var(--ink);display:inline-grid;place-items:center}.icon-button svg{width:17px;height:17px}.empty{padding:28px 18px;color:var(--muted);text-align:center}.chart{padding:18px;display:grid;gap:14px}.bar-row{display:grid;grid-template-columns:126px 1fr 96px;gap:12px;align-items:center;font-size:13px}.bar-track{height:14px;background:#eef3f7;border-radius:999px;overflow:hidden}.bar{height:100%;width:0;background:var(--blue)}.bar.expense{background:#f59e0b}.bar.net{background:var(--accent)}
     .subnav,.filters{display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfcfd}.subnav button{min-height:38px;border-radius:8px;background:#eef3f7;color:var(--ink);font-weight:800;padding:8px 12px}.subnav button.active{background:var(--accent);color:#fff}.filters>*{flex:1;min-width:150px}.line-items{display:grid;gap:10px}.line-item{display:grid;grid-template-columns:1fr 130px 130px 34px;gap:10px;align-items:end}.line-item button{margin-bottom:0}
+    .bulk-actions{display:grid;grid-template-columns:auto minmax(180px,280px) auto 1fr;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--line);background:#fff}.bulk-actions label{display:inline-flex;align-items:center;gap:8px;margin:0;font-size:13px;font-weight:800;color:var(--muted)}.bulk-actions input[type="checkbox"]{width:18px;height:18px;min-height:18px}.bulk-actions span{font-size:13px;color:var(--muted)}
     .modal-backdrop{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:14px;background:rgba(15,23,42,.55)}.modal-backdrop[hidden]{display:none}.modal{width:min(820px,calc(100vw - 28px));max-height:calc(100vh - 28px);overflow:auto}.modal-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}.modal-head h3{margin:0;font-size:19px}.form{padding:18px 20px 20px;display:grid;gap:14px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.modal-actions{display:flex;justify-content:flex-end;gap:10px;padding-top:4px}.file-input{display:none}.hidden{display:none!important}
     .auth-screen{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:20px;background:var(--wash)}.auth-screen[hidden]{display:none}.auth-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:grid;gap:14px}.auth-card h2{margin:0}.auth-card p{margin:0;color:var(--muted);line-height:1.45}.status-line{font-size:13px;color:var(--muted);min-height:20px}.db-badge{font-size:12px;color:#b7c0ca;padding:0 8px}
-    @media(max-width:1120px){.grid{grid-template-columns:1fr}} @media(max-width:780px){.app-shell{grid-template-columns:1fr}aside{position:sticky;top:0;z-index:5;padding:14px;gap:14px}.brand{padding:0}.brand h1{font-size:18px}.month-picker{padding:10px}nav{grid-template-columns:repeat(4,1fr)}.nav-button{justify-content:center;min-height:42px;padding:9px}.nav-button span{display:none}.side-actions{grid-template-columns:1fr 1fr;margin-top:0}main{padding:18px 14px 28px}.topbar{align-items:stretch;flex-direction:column}.global-search{grid-template-columns:1fr}.actions{justify-content:stretch}.actions button{flex:1}.topbar h2{font-size:24px}.form-grid,.line-item{grid-template-columns:1fr}.line-item .icon-button{width:100%}} @media(max-width:520px){.bar-row{grid-template-columns:86px 1fr}.bar-row strong{grid-column:2}}
+    @media(max-width:1120px){.grid{grid-template-columns:1fr}} @media(max-width:780px){.app-shell,.app-shell.sidebar-collapsed{grid-template-columns:1fr}aside{position:sticky;top:0;z-index:5;padding:14px;gap:14px}.app-shell.sidebar-collapsed aside{padding:10px;min-height:62px}.brand{padding:0}.brand h1{font-size:18px}.month-picker{padding:10px}nav{grid-template-columns:repeat(4,1fr)}.nav-button{justify-content:center;min-height:42px;padding:9px}.nav-button span{display:none}.side-actions{grid-template-columns:1fr 1fr;margin-top:0}main{padding:18px 14px 28px}.topbar{align-items:stretch;flex-direction:column}.global-search{grid-template-columns:1fr}.bulk-actions{grid-template-columns:1fr}.actions{justify-content:stretch}.actions button{flex:1}.topbar h2{font-size:24px}.form-grid,.line-item{grid-template-columns:1fr}.line-item .icon-button{width:100%}} @media(max-width:520px){.bar-row{grid-template-columns:86px 1fr}.bar-row strong{grid-column:2}}
   </style>
 </head>
 <body>
@@ -46,6 +47,7 @@
   </div>
   <div class="app-shell">
     <aside>
+      <button id="menuToggle" class="menu-toggle" type="button" title="Minimize menu" aria-label="Minimize menu">...</button>
       <div class="brand"><div class="brand-mark">R</div><div><h1>Repair Ledger</h1><p>Monthly shop tracker</p></div></div>
       <div class="month-picker"><label for="month">Month</label><input id="month" type="month"></div>
       <nav aria-label="Main views">
@@ -57,14 +59,15 @@
         <button class="nav-button" data-view="profit" title="Shop Profit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"/></svg><span>Profit</span></button>
         <button class="nav-button" data-view="archive" title="Cleared Data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 2 5-7"/></svg><span>Cleared</span></button>
       </nav>
-      <div class="side-actions"><div id="dbStatus" class="db-badge">Local mode</div><button id="exportBtn" class="ghost">Export CSV</button><button id="importBtn" class="ghost">Import CSV</button><button id="signOutBtn" class="ghost" hidden>Sign out</button><input id="importFile" class="file-input" type="file" accept=".csv,text/csv"></div>
+      <div class="side-actions"><div id="dbStatus" class="db-badge">Local mode</div><button id="exportBtn" class="ghost">Export CSV</button><button id="importBtn" class="ghost">Import CSV</button><button id="signOutBtn" class="ghost" hidden>Sign out</button><div class="watermark">Made by Sayed Roman Sayedi</div><input id="importFile" class="file-input" type="file" accept=".csv,text/csv"></div>
     </aside>
     <main>
       <section class="topbar">
         <div><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Track repairs, customer payments, parts balances, technician balances, and net cash by month.</p></div>
         <div class="actions"><button id="addRepairBtn" class="primary">Add repair</button><button id="addExpenseBtn" class="secondary">Add expense</button><button id="addTechBtn" class="secondary">Add balance</button><button id="addTechProfileBtn" class="secondary">Add technician profile</button><button id="clearBalancesBtn" class="secondary">Clear current balances</button></div>
       </section>
-      <section class="global-search"><input id="globalSearch" type="search" placeholder="Search anywhere: customer, serial, supplier, technician, notes"><select id="globalFilter"><option value="all">All data</option><option value="repair">Repairs</option><option value="paid">Paid</option><option value="pending">Pending</option><option value="supplier">Supplier</option><option value="inventory">Inventory</option><option value="technician">Technician</option><option value="shop">Shop</option></select></section>
+      <section class="tool-toggle-row"><button class="tool-toggle" type="button" data-toggle-search="globalTools" title="Search" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="globalTools" title="Filter" aria-label="Filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></section>
+      <section id="globalTools" class="global-search"><input id="globalSearch" type="search" placeholder="Search anywhere: customer, serial, supplier, technician, notes"><select id="globalFilter"><option value="all">All data</option><option value="repair">Repairs</option><option value="paid">Paid</option><option value="pending">Pending</option><option value="supplier">Supplier</option><option value="inventory">Inventory</option><option value="technician">Technician</option><option value="shop">Shop</option></select></section>
       <section id="dashboardView">
         <div class="metrics" id="metrics"></div>
         <div class="grid" style="margin-top:18px">
@@ -74,14 +77,15 @@
           <section class="panel"><div class="panel-header"><h3>Technician balances</h3><button class="small-action" data-quick="technician">Add balance</button></div><div class="table-wrap" id="techSummary"></div></section>
         </div>
       </section>
-      <section id="repairsView" class="panel" hidden><div class="panel-header"><h3>Repairs</h3><button class="small-action" data-quick="repair">Add repair</button></div><div class="subnav"><button class="active" data-repair-status="waiting">Waiting repair</button><button data-repair-status="ready">Ready pickup</button><button data-repair-status="picked_up">Picked up / paid</button></div><div class="filters"><input id="repairSearch" type="search" placeholder="Customer, serial, device"><select id="repairPaymentFilter"><option value="all">All customer payments</option><option value="paid">Customer paid</option><option value="pending">Customer pending</option></select><select id="repairPartSourceFilter"><option value="all">Supplier or inventory</option><option value="supplier">Supplier parts</option><option value="inventory">Inventory parts</option></select><select id="repairPartBalanceFilter"><option value="all">All part balances</option><option value="paid">Parts paid</option><option value="pending">Parts pending</option></select><input id="repairStart" type="date"><input id="repairEnd" type="date"></div><div class="table-wrap" id="repairsTable"></div></section>
-      <section id="supplierView" class="panel" hidden><div class="panel-header"><h3>Supplier payments and balances</h3><button class="small-action" data-quick="expense">Pay supplier</button></div><div class="filters"><input id="supplierSearch" type="search" placeholder="Supplier, customer, serial, item"><input id="supplierStart" type="date"><input id="supplierEnd" type="date"></div><div class="metrics" id="supplierMetrics" style="padding:14px 18px"></div><div class="table-wrap" id="supplierTable"></div></section>
-      <section id="expensesView" class="panel" hidden><div class="panel-header"><h3>Expenses and supplier payments</h3><button class="small-action" data-quick="expense">Add expense</button></div><div class="filters"><input id="expenseSearch" type="search" placeholder="Supplier, vendor, notes"><select id="expenseFilterCategory"><option value="all">All categories</option><option value="Supplier payment">Supplier payments</option><option value="Inventory">Inventory</option><option value="Tools">Tools</option><option value="Other">Other</option></select><input id="expenseStart" type="date"><input id="expenseEnd" type="date"></div><div class="table-wrap" id="expensesTable"></div></section>
-      <section id="techniciansView" class="panel" hidden><div class="panel-header"><h3>Technician profiles</h3><div class="actions"><button class="small-action" data-quick="technician_profile">Add profile</button><button class="small-action" data-quick="technician">Add balance / advance</button></div></div><div class="filters"><input id="techSearch" type="search" placeholder="Technician, reason, notes"><input id="techStart" type="date"><input id="techEnd" type="date"></div><div class="table-wrap" id="techniciansTable"></div></section>
+      <section id="repairsView" class="panel" hidden><div class="panel-header"><h3>Repairs</h3><button class="small-action" data-quick="repair">Add repair</button></div><div class="subnav"><button class="active" data-repair-status="waiting">Waiting repair</button><button data-repair-status="ready">Ready pickup</button><button data-repair-status="picked_up">Picked up / paid</button></div><div class="tool-toggle-row" style="padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfcfd"><button class="tool-toggle" type="button" data-toggle-search="repairFilters" title="Search repairs" aria-label="Search repairs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="repairFilters" title="Filter repairs" aria-label="Filter repairs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></div><div id="repairFilters" class="filters"><input id="repairSearch" type="search" placeholder="Customer, serial, device"><select id="repairPaymentFilter"><option value="all">All customer payments</option><option value="paid">Customer paid</option><option value="pending">Customer pending</option></select><select id="repairPartSourceFilter"><option value="all">Supplier or inventory</option><option value="supplier">Supplier parts</option><option value="inventory">Inventory parts</option></select><select id="repairPartBalanceFilter"><option value="all">All part balances</option><option value="paid">Parts paid</option><option value="pending">Parts pending</option></select><input id="repairStart" type="date"><input id="repairEnd" type="date"></div><div class="bulk-actions"><label><input id="repairSelectAll" type="checkbox"> Select visible</label><select id="bulkRepairTechnician"></select><button id="bulkAssignTechnician" class="small-action" type="button">Assign technician</button><span id="bulkSelectedCount">0 repairs selected</span></div><div class="table-wrap" id="repairsTable"></div></section>
+      <section id="supplierView" class="panel" hidden><div class="panel-header"><h3>Supplier payments and balances</h3><button class="small-action" data-quick="expense">Pay supplier</button></div><div class="tool-toggle-row" style="padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfcfd"><button class="tool-toggle" type="button" data-toggle-search="supplierFilters" title="Search supplier" aria-label="Search supplier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="supplierFilters" title="Filter supplier" aria-label="Filter supplier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></div><div id="supplierFilters" class="filters"><input id="supplierSearch" type="search" placeholder="Supplier, customer, serial, item"><input id="supplierStart" type="date"><input id="supplierEnd" type="date"></div><div class="metrics" id="supplierMetrics" style="padding:14px 18px"></div><div class="table-wrap" id="supplierTable"></div></section>
+      <section id="expensesView" class="panel" hidden><div class="panel-header"><h3>Expenses and supplier payments</h3><button class="small-action" data-quick="expense">Add expense</button></div><div class="tool-toggle-row" style="padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfcfd"><button class="tool-toggle" type="button" data-toggle-search="expenseFilters" title="Search expenses" aria-label="Search expenses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="expenseFilters" title="Filter expenses" aria-label="Filter expenses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></div><div id="expenseFilters" class="filters"><input id="expenseSearch" type="search" placeholder="Supplier, vendor, notes"><select id="expenseFilterCategory"><option value="all">All categories</option><option value="Supplier payment">Supplier payments</option><option value="Inventory">Inventory</option><option value="Tools">Tools</option><option value="Other">Other</option></select><input id="expenseStart" type="date"><input id="expenseEnd" type="date"></div><div class="table-wrap" id="expensesTable"></div></section>
+      <section id="techniciansView" class="panel" hidden><div class="panel-header"><h3>Technician profiles</h3><div class="actions"><button class="small-action" data-quick="technician_profile">Add profile</button><button class="small-action" data-quick="technician">Add balance / advance</button></div></div><div class="tool-toggle-row" style="padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfcfd"><button class="tool-toggle" type="button" data-toggle-search="techFilters" title="Search technicians" aria-label="Search technicians"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="techFilters" title="Filter technicians" aria-label="Filter technicians"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></div><div id="techFilters" class="filters"><input id="techSearch" type="search" placeholder="Technician, reason, notes"><input id="techStart" type="date"><input id="techEnd" type="date"></div><div class="table-wrap" id="techniciansTable"></div></section>
       <section id="profitView" class="panel" hidden><div class="panel-header"><h3>Shop profit split</h3></div><div class="table-wrap" id="profitTable"></div></section>
       <section id="archiveView" class="panel" hidden>
         <div class="panel-header"><h3>Cleared data</h3></div>
-        <div class="filters">
+        <div class="tool-toggle-row" style="padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfcfd"><button class="tool-toggle" type="button" data-toggle-search="archiveFilters" title="Search cleared data" aria-label="Search cleared data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="archiveFilters" title="Filter cleared data" aria-label="Filter cleared data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></div>
+        <div id="archiveFilters" class="filters">
           <select id="archivePeriod"><option value="all">All time</option><option value="day">Single day</option><option value="week">Week / range</option><option value="month">Month</option></select>
           <select id="archiveType"><option value="all">All data</option><option value="shop">Shop data</option><option value="supplier">Supplier data</option><option value="inventory">Inventory data</option><option value="technician">Technician data</option><option value="repair">Repair data</option></select>
           <input id="archiveStart" type="date">
@@ -159,20 +163,25 @@
     const SUPABASE_ANON_KEY = "sb_publishable_RGgFMFZCV3ne7D-l25c3Xg_c1svn3hn";
     const STORAGE_KEY = "repair-ledger-v4";
     const DRAFT_KEY = "repair-ledger-open-draft-v1";
+    const MENU_KEY = "repair-ledger-menu-collapsed-v1";
     const OLD_KEYS = ["repair-ledger-v3", "repair-ledger-v2", "repair-ledger-v1"];
     const money = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
     const expenseCategories = ["Supplier payment", "Inventory", "Tools", "Rent", "Utilities", "Marketing", "Shipping", "Other"];
     const els = {};
-    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","month","pageTitle","pageSubtitle","globalSearch","globalFilter","metrics","chart","supplierSummary","inventorySummary","techSummary","repairsTable","supplierMetrics","supplierTable","expensesTable","techniciansTable","profitTable","archiveMetrics","archiveTable","archivePeriod","archiveType","archiveStart","archiveEnd","archiveSearch","repairSearch","repairPaymentFilter","repairPartSourceFilter","repairPartBalanceFilter","repairStart","repairEnd","supplierSearch","supplierStart","supplierEnd","expenseSearch","expenseFilterCategory","expenseStart","expenseEnd","techSearch","techStart","techEnd","dashboardView","repairsView","supplierView","expensesView","techniciansView","profitView","archiveView","addRepairBtn","addExpenseBtn","addTechBtn","addTechProfileBtn","clearBalancesBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","techProfileFields","repairDate","customerName","deviceType","serialNumber","repairTechnician","repairStatus","repairItems","addRepairItem","repairTitle","invoiceAmount","partSource","partsCost","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes","profileName","profileDefault","profileNotes"].forEach(id => els[id] = document.getElementById(id));
+    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","menuToggle","month","pageTitle","pageSubtitle","globalSearch","globalFilter","metrics","chart","supplierSummary","inventorySummary","techSummary","repairsTable","repairSelectAll","bulkRepairTechnician","bulkAssignTechnician","bulkSelectedCount","supplierMetrics","supplierTable","expensesTable","techniciansTable","profitTable","archiveMetrics","archiveTable","archivePeriod","archiveType","archiveStart","archiveEnd","archiveSearch","repairSearch","repairPaymentFilter","repairPartSourceFilter","repairPartBalanceFilter","repairStart","repairEnd","supplierSearch","supplierStart","supplierEnd","expenseSearch","expenseFilterCategory","expenseStart","expenseEnd","techSearch","techStart","techEnd","dashboardView","repairsView","supplierView","expensesView","techniciansView","profitView","archiveView","addRepairBtn","addExpenseBtn","addTechBtn","addTechProfileBtn","clearBalancesBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","techProfileFields","repairDate","customerName","deviceType","serialNumber","repairTechnician","repairStatus","repairItems","addRepairItem","repairTitle","invoiceAmount","partSource","partsCost","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes","profileName","profileDefault","profileNotes"].forEach(id => els[id] = document.getElementById(id));
     let records = [];
     records = loadRecords();
     let currentView = "dashboard";
     let currentRepairStatus = "waiting";
+    let selectedRepairIds = new Set();
     let db = null;
     let currentUser = null;
     let dbReady = false;
     els.month.value = new Date().toISOString().slice(0, 7);
+    setMenuCollapsed(localStorage.getItem(MENU_KEY) === "yes");
     document.querySelectorAll(".nav-button").forEach(button => button.addEventListener("click", () => setView(button.dataset.view)));
+    document.querySelectorAll("[data-toggle-search]").forEach(button => button.addEventListener("click", () => toggleToolPanel(button.dataset.toggleSearch, "search-open", button)));
+    document.querySelectorAll("[data-toggle-filter]").forEach(button => button.addEventListener("click", () => toggleToolPanel(button.dataset.toggleFilter, "filter-open", button)));
     document.querySelectorAll("[data-quick]").forEach(button => button.addEventListener("click", () => openDialog(button.dataset.quick)));
     document.querySelectorAll("[data-repair-status]").forEach(button => button.addEventListener("click", () => setRepairStatus(button.dataset.repairStatus)));
     document.querySelectorAll("[data-close-modal]").forEach(button => button.addEventListener("click", closeDialog));
@@ -184,6 +193,7 @@
     els.recordForm.addEventListener("input", saveDraft);
     els.recordForm.addEventListener("change", saveDraft);
     els.month.addEventListener("change", render);
+    els.menuToggle.addEventListener("click", toggleMenu);
     els.addRepairBtn.addEventListener("click", () => openDialog("repair"));
     els.addExpenseBtn.addEventListener("click", () => openDialog("expense"));
     els.addTechBtn.addEventListener("click", () => openDialog("technician"));
@@ -191,6 +201,8 @@
     els.clearBalancesBtn.addEventListener("click", clearCurrentBalances);
     [els.archivePeriod, els.archiveType, els.archiveStart, els.archiveEnd, els.archiveSearch].forEach(el => el.addEventListener("input", renderArchive));
     [els.globalSearch, els.globalFilter, els.repairSearch, els.repairPaymentFilter, els.repairPartSourceFilter, els.repairPartBalanceFilter, els.repairStart, els.repairEnd, els.supplierSearch, els.supplierStart, els.supplierEnd, els.expenseSearch, els.expenseFilterCategory, els.expenseStart, els.expenseEnd, els.techSearch, els.techStart, els.techEnd].forEach(el => el.addEventListener("input", renderTables));
+    els.repairSelectAll.addEventListener("change", toggleVisibleRepairSelection);
+    els.bulkAssignTechnician.addEventListener("click", assignSelectedRepairs);
     els.addRepairItem.addEventListener("click", () => { addRepairItemRow(); saveDraft(); });
     els.recordForm.addEventListener("submit", saveRecord);
     els.exportBtn.addEventListener("click", exportCsv);
@@ -358,6 +370,25 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       syncAllRecords();
     }
+    function setMenuCollapsed(collapsed) {
+      document.querySelector(".app-shell").classList.toggle("sidebar-collapsed", collapsed);
+      els.menuToggle.textContent = collapsed ? "..." : "‹";
+      els.menuToggle.title = collapsed ? "Open menu" : "Minimize menu";
+      els.menuToggle.setAttribute("aria-label", collapsed ? "Open menu" : "Minimize menu");
+    }
+    function toggleMenu() {
+      const collapsed = !document.querySelector(".app-shell").classList.contains("sidebar-collapsed");
+      localStorage.setItem(MENU_KEY, collapsed ? "yes" : "no");
+      setMenuCollapsed(collapsed);
+    }
+    function toggleToolPanel(id, className, button) {
+      const panel = document.getElementById(id);
+      if (!panel) return;
+      panel.classList.toggle(className);
+      button.classList.toggle("active", panel.classList.contains(className));
+      const focusTarget = className === "search-open" ? panel.querySelector('input[type="search"]') : panel.querySelector("select,input[type='date']");
+      if (panel.classList.contains(className) && focusTarget) focusTarget.focus();
+    }
     function setView(view) { currentView = view; document.querySelectorAll(".nav-button").forEach(button => button.classList.toggle("active", button.dataset.view === view)); render(); }
     function setRepairStatus(status) { currentRepairStatus = status; document.querySelectorAll("[data-repair-status]").forEach(button => button.classList.toggle("active", button.dataset.repairStatus === status)); renderTables(); }
     function isSettled(record) { return Boolean(record.settledAt); }
@@ -467,7 +498,10 @@
       const expenses = list.filter(r => r.type === "expense");
       const technicians = list.filter(r => r.type === "technician");
       const profiles = technicianProfiles();
-      els.repairsTable.innerHTML = repairsTable(filterRepairs(repairs.filter(r => r.status === currentRepairStatus)));
+      const visibleRepairs = filterRepairs(repairs.filter(r => r.status === currentRepairStatus));
+      selectedRepairIds = new Set([...selectedRepairIds].filter(id => visibleRepairs.some(repair => repair.id === id)));
+      renderRepairBulkActions(visibleRepairs);
+      els.repairsTable.innerHTML = repairsTable(visibleRepairs);
       renderSupplierPage(filterSupplierRecords(list));
       els.expensesTable.innerHTML = expensesTable(filterExpenses(expenses));
       els.techniciansTable.innerHTML = techniciansTable(profiles, filterTechnicianRecords(list));
@@ -489,12 +523,40 @@
     }
     function repairsTable(repairs) {
       if (!repairs.length) return `<div class="empty">No ${currentRepairStatus === "waiting" ? "waiting repairs" : currentRepairStatus === "ready" ? "repairs ready for pickup" : "picked up repairs"} for this month.</div>`;
-      return `<table><thead><tr><th>Date</th><th>Customer</th><th>Device / serial</th><th>Repairs</th><th class="amount">Customer total</th><th class="amount">Parts total</th><th>Customer</th><th>Part source</th><th class="amount">Parts left</th><th></th></tr></thead><tbody>${repairs.map(r => {
+      return `<table><thead><tr><th></th><th>Date</th><th>Customer</th><th>Device / serial</th><th>Repairs</th><th class="amount">Customer total</th><th class="amount">Parts total</th><th>Customer</th><th>Part source</th><th class="amount">Parts left</th><th></th></tr></thead><tbody>${repairs.map(r => {
         const balance = partBalanceFor(r);
         const payButton = r.partSource === "inventory" ? "" : `<button class="icon-button" data-pay-supplier="${r.id}" title="Pay supplier" aria-label="Pay supplier">$</button>`;
         const statusButton = r.status === "waiting" ? `<button class="small-action" data-mark-ready="${r.id}">Ready</button>` : r.status === "ready" ? `<button class="small-action" data-mark-picked="${r.id}">Picked up</button>` : "";
-        return `<tr><td>${esc(r.date)}</td><td>${esc(r.customer || "-")}<br><span class="muted">${esc(technicianName(r.technicianId))}</span></td><td><strong>${esc(r.deviceType || "-")}</strong><br><span class="muted">${esc(r.serialNumber || "No serial")}</span></td><td>${repairItemsText(r)}<br><span class="muted">${esc(r.notes || "")}</span></td><td class="amount">${money.format(r.amount || 0)}</td><td class="amount">${money.format(r.partsCost || 0)}</td><td>${paymentTag(r.customerPaid,"Paid","Payment pending")}</td><td>${supplierStatus(r)}</td><td class="amount">${money.format(balance.remaining)}</td><td><div class="row-actions">${statusButton}<button class="small-action" data-clear-record="${r.id}">Clear</button><button class="icon-button" data-invoice="${r.id}" title="Print invoice" aria-label="Print invoice">#</button>${payButton}<button class="icon-button" data-edit="${r.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${r.id}" title="Delete" aria-label="Delete">X</button></div></td></tr>`;
+        return `<tr><td><input type="checkbox" data-select-repair="${r.id}" ${selectedRepairIds.has(r.id) ? "checked" : ""} aria-label="Select repair"></td><td>${esc(r.date)}</td><td>${esc(r.customer || "-")}<br><span class="muted">${esc(technicianName(r.technicianId))}</span></td><td><strong>${esc(r.deviceType || "-")}</strong><br><span class="muted">${esc(r.serialNumber || "No serial")}</span></td><td>${repairItemsText(r)}<br><span class="muted">${esc(r.notes || "")}</span></td><td class="amount">${money.format(r.amount || 0)}</td><td class="amount">${money.format(r.partsCost || 0)}</td><td>${paymentTag(r.customerPaid,"Paid","Payment pending")}</td><td>${supplierStatus(r)}</td><td class="amount">${money.format(balance.remaining)}</td><td><div class="row-actions">${statusButton}<button class="small-action" data-clear-record="${r.id}">Clear</button><button class="icon-button" data-invoice="${r.id}" title="Print invoice" aria-label="Print invoice">#</button>${payButton}<button class="icon-button" data-edit="${r.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${r.id}" title="Delete" aria-label="Delete">X</button></div></td></tr>`;
       }).join("")}</tbody></table>`;
+    }
+    function renderRepairBulkActions(visibleRepairs) {
+      els.bulkRepairTechnician.innerHTML = technicianOptions(els.bulkRepairTechnician.value || defaultTechnicianId());
+      const visibleIds = visibleRepairs.map(repair => repair.id);
+      const selectedVisible = visibleIds.filter(id => selectedRepairIds.has(id)).length;
+      els.repairSelectAll.checked = Boolean(visibleIds.length && selectedVisible === visibleIds.length);
+      els.repairSelectAll.indeterminate = Boolean(selectedVisible && selectedVisible < visibleIds.length);
+      els.bulkAssignTechnician.disabled = selectedRepairIds.size === 0;
+      els.bulkSelectedCount.textContent = `${selectedRepairIds.size} repair${selectedRepairIds.size === 1 ? "" : "s"} selected`;
+    }
+    function toggleVisibleRepairSelection() {
+      const visible = filterRepairs(monthRecords().filter(record => record.type === "repair" && record.status === currentRepairStatus));
+      visible.forEach(repair => els.repairSelectAll.checked ? selectedRepairIds.add(repair.id) : selectedRepairIds.delete(repair.id));
+      renderTables();
+    }
+    function toggleRepairSelection(id, checked) {
+      checked ? selectedRepairIds.add(id) : selectedRepairIds.delete(id);
+      renderTables();
+    }
+    async function assignSelectedRepairs() {
+      const technicianId = els.bulkRepairTechnician.value || defaultTechnicianId();
+      const selected = records.filter(record => selectedRepairIds.has(record.id) && record.type === "repair");
+      if (!selected.length) return;
+      selected.forEach(repair => { repair.technicianId = technicianId; });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+      await Promise.all(selected.map(syncRecord));
+      selectedRepairIds.clear();
+      render();
     }
     function expensesTable(expenses) {
       if (!expenses.length) return `<div class="empty">No expenses recorded for this month.</div>`;
@@ -604,6 +666,7 @@
       }).join("")}</tbody></table>`;
     }
     function bindRowActions() {
+      document.querySelectorAll("[data-select-repair]").forEach(b => b.addEventListener("change", () => toggleRepairSelection(b.dataset.selectRepair, b.checked)));
       document.querySelectorAll("[data-edit]").forEach(b => b.addEventListener("click", () => { const record = records.find(r => r.id === b.dataset.edit); if (record) openDialog(record.type, record); }));
       document.querySelectorAll("[data-delete]").forEach(b => b.addEventListener("click", async () => { const record = records.find(r => r.id === b.dataset.delete); if (!record || !confirm("Delete this record?")) return; records = records.filter(r => r.id !== record.id); localStorage.setItem(STORAGE_KEY, JSON.stringify(records)); await deleteRemoteRecord(record.id); render(); }));
       document.querySelectorAll("[data-pay-supplier]").forEach(b => b.addEventListener("click", () => openDialog("expense", { type:"expense", category:"Supplier payment", linkedRepairId:b.dataset.paySupplier, paid:true })));

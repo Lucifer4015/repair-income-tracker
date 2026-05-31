@@ -16,11 +16,17 @@ The **Repairs** page has three sub-pages:
 - **Ready pickup** for repairs finished and waiting for the customer.
 - **Picked up / paid** for completed repairs collected by the customer.
 
+On the **Repairs** page, select multiple visible repair rows, choose a technician, and press **Assign technician** to assign all selected repairs to that technician at once.
+
 When adding one device, you can add multiple repair lines for the same serial number. Each line has its own customer price and part cost, and the app totals them on the repair.
 
 For each repair, choose whether parts came from a supplier or from shop inventory. Supplier parts appear in the supplier balance. Inventory parts appear in a separate inventory balance and can be marked paid or pending.
 
 The top search bar works across the app. Type manually to find a customer, serial/IMEI, supplier, technician, device, repair item, or note, or use the filter beside it to focus the app on repairs, paid/pending items, supplier, inventory, technician, or shop data.
+
+Search and filter controls are minimized into icon buttons. Press the search icon to open the search field, and press the filter icon to open the filter fields for that page.
+
+Use the three-dot menu button in the left menu to minimize the menu and give the selected page more screen space. Press it again to open the full menu.
 
 The dashboard shows current, uncleared balances. Use **Clear** on individual rows or **Clear current balances** to move the current month into the **Cleared Data** page. Clearing does not delete records; it marks them as settled so the dashboard starts fresh.
 
