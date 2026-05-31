@@ -16,7 +16,7 @@ The **Repairs** page has three sub-pages:
 - **Ready pickup** for repairs finished and waiting for the customer.
 - **Picked up / paid** for completed repairs collected by the customer.
 
-On the **Repairs** page, select multiple visible repair rows, choose a technician, and press **Assign technician** to assign all selected repairs to that technician at once.
+If there is only one technician profile, repairs are assigned to that technician automatically and the repair selection controls stay hidden. If there is more than one technician profile, the **Repairs** page shows row checkboxes so you can select multiple visible repairs, choose a technician, and press **Assign technician**.
 
 When adding one device, you can add multiple repair lines for the same serial number. Each line has its own customer price and part cost, and the app totals them on the repair.
 
