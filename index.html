@@ -31,7 +31,7 @@
     .bulk-actions{display:grid;grid-template-columns:auto minmax(180px,280px) auto 1fr;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--line);background:#fff}.bulk-actions[hidden]{display:none}.bulk-actions label{display:inline-flex;align-items:center;gap:8px;margin:0;font-size:13px;font-weight:800;color:var(--muted)}.bulk-actions input[type="checkbox"]{width:18px;height:18px;min-height:18px}.bulk-actions span{font-size:13px;color:var(--muted)}
     .modal-backdrop{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:14px;background:rgba(15,23,42,.55)}.modal-backdrop[hidden]{display:none}.modal{width:min(820px,calc(100vw - 28px));max-height:calc(100vh - 28px);overflow:auto}.modal-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}.modal-head h3{margin:0;font-size:19px}.form{padding:18px 20px 20px;display:grid;gap:14px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.modal-actions{display:flex;justify-content:flex-end;gap:10px;padding-top:4px}.file-input{display:none}.hidden{display:none!important}
     .auth-screen{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:20px;background:var(--wash)}.auth-screen[hidden]{display:none}.auth-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:grid;gap:14px}.auth-card h2{margin:0}.auth-card p{margin:0;color:var(--muted);line-height:1.45}.status-line{font-size:13px;color:var(--muted);min-height:20px}.db-badge{font-size:12px;color:#b7c0ca;padding:0 8px}
-    @media(max-width:1120px){.grid{grid-template-columns:1fr}} @media(max-width:780px){.app-shell,.app-shell.sidebar-collapsed{grid-template-columns:1fr}aside{position:sticky;top:0;z-index:5;padding:14px;gap:14px}.app-shell.sidebar-collapsed aside{padding:10px;min-height:62px}.brand{padding:0}.brand h1{font-size:18px}.month-picker{padding:10px}nav{grid-template-columns:repeat(4,1fr)}.nav-button{justify-content:center;min-height:42px;padding:9px}.nav-button span{display:none}.side-actions{grid-template-columns:1fr 1fr;margin-top:0}main{padding:18px 14px 28px}.topbar{align-items:stretch;flex-direction:column}.global-search{grid-template-columns:1fr}.bulk-actions{grid-template-columns:1fr}.actions{justify-content:stretch}.actions button{flex:1}.topbar h2{font-size:24px}.form-grid,.line-item{grid-template-columns:1fr}.line-item .icon-button{width:100%}} @media(max-width:520px){.bar-row{grid-template-columns:86px 1fr}.bar-row strong{grid-column:2}}
+    @media(max-width:1120px){.grid{grid-template-columns:1fr}} @media(max-width:780px){.app-shell,.app-shell.sidebar-collapsed{grid-template-columns:1fr}aside{position:sticky;top:0;z-index:5;padding:14px;gap:14px}.app-shell.sidebar-collapsed aside{padding:10px;min-height:62px}.brand{padding:0}.brand h1{font-size:18px}.month-picker{padding:10px}nav{grid-template-columns:repeat(4,1fr)}.nav-button{justify-content:center;min-height:42px;padding:9px}.nav-button span{display:none}.side-actions{grid-template-columns:1fr 1fr;margin-top:0}main{padding:18px 14px 28px}.topbar{align-items:stretch;flex-direction:column}.global-search{grid-template-columns:1fr}.bulk-actions{grid-template-columns:1fr}.actions{justify-content:stretch}.actions button{flex:1 1 140px}.topbar h2{font-size:24px}.panel-header{align-items:stretch;flex-direction:column}.panel-header .actions{justify-content:stretch}.subnav{display:grid;grid-template-columns:1fr;gap:8px}.subnav button{width:100%}.metrics{grid-template-columns:1fr}.metric{min-height:86px}.form-grid,.line-item{grid-template-columns:1fr}.line-item .icon-button{width:100%}.table-wrap{overflow:visible}table{display:block;min-width:0;border-collapse:separate}thead{display:none}tbody{display:grid;gap:12px;padding:12px}tr{display:block;border:1px solid var(--line);border-radius:8px;background:#fff;box-shadow:0 8px 22px rgba(31,41,55,.08);overflow:hidden}td{display:grid;grid-template-columns:minmax(92px,38%) 1fr;gap:10px;align-items:start;padding:10px 12px;border-bottom:1px solid #edf1f4;word-break:break-word}td:last-child{border-bottom:0}td::before{content:attr(data-label);color:var(--muted);font-size:12px;font-weight:850;text-transform:uppercase;line-height:1.35}td[data-label=""]{grid-template-columns:1fr}td[data-label=""]::before{display:none}.amount{text-align:left;white-space:normal}.row-actions{justify-content:flex-start;flex-wrap:wrap}.row-actions .small-action{flex:1 1 92px}.row-actions .icon-button{width:38px;height:38px}.bar-row{grid-template-columns:1fr}.bar-row strong{text-align:left}.modal-actions{display:grid;grid-template-columns:1fr}} @media(max-width:520px){.bar-row{grid-template-columns:1fr}.bar-row strong{grid-column:auto}td{grid-template-columns:1fr;gap:5px}.tool-toggle-row{justify-content:flex-start}.primary,.secondary,.small-action{white-space:normal}.watermark{grid-column:1/-1}}
   </style>
 </head>
 <body>
@@ -63,7 +63,7 @@
     </aside>
     <main>
       <section class="topbar">
-        <div><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Track repairs, customer payments, parts balances, technician balances, and net cash by month.</p></div>
+        <div><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Track all uncleared repairs, customer payments, parts balances, technician balances, and net cash.</p></div>
         <div class="actions"><button id="addRepairBtn" class="primary">Add repair</button><button id="addExpenseBtn" class="secondary">Add expense</button><button id="addTechBtn" class="secondary">Add balance</button><button id="addTechProfileBtn" class="secondary">Add technician profile</button><button id="clearBalancesBtn" class="secondary">Clear current balances</button></div>
       </section>
       <section class="tool-toggle-row"><button class="tool-toggle" type="button" data-toggle-search="globalTools" title="Search" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="globalTools" title="Filter" aria-label="Filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></section>
@@ -71,7 +71,7 @@
       <section id="dashboardView">
         <div class="metrics" id="metrics"></div>
         <div class="grid" style="margin-top:18px">
-          <section class="panel"><div class="panel-header"><h3>Month breakdown</h3></div><div class="chart" id="chart"></div></section>
+          <section class="panel"><div class="panel-header"><h3>Current balance breakdown</h3></div><div class="chart" id="chart"></div></section>
           <section class="panel"><div class="panel-header"><h3>Supplier balances</h3><button class="small-action" data-quick="expense">Pay supplier</button></div><div class="table-wrap" id="supplierSummary"></div></section>
           <section class="panel"><div class="panel-header"><h3>Inventory parts balances</h3></div><div class="table-wrap" id="inventorySummary"></div></section>
           <section class="panel"><div class="panel-header"><h3>Technician balances</h3><button class="small-action" data-quick="technician">Add balance</button></div><div class="table-wrap" id="techSummary"></div></section>
@@ -395,7 +395,7 @@
     function setView(view) { currentView = view; document.querySelectorAll(".nav-button").forEach(button => button.classList.toggle("active", button.dataset.view === view)); render(); }
     function setRepairStatus(status) { currentRepairStatus = status; document.querySelectorAll("[data-repair-status]").forEach(button => button.classList.toggle("active", button.dataset.repairStatus === status)); renderTables(); }
     function isSettled(record) { return Boolean(record.settledAt); }
-    function monthRecords() { return records.filter(record => !isSettled(record) && record.date && record.date.slice(0, 7) === els.month.value); }
+    function monthRecords() { return records.filter(record => !isSettled(record)); }
     function archiveRecords() { return records.filter(isSettled); }
     function inDateRange(record, start, end) {
       const date = record.date || "";
@@ -480,7 +480,7 @@
       return { repairs, expenses, count:repairs.length, invoiced, collected, customerPending, paidExpenses, supplierRemaining, inventoryRemaining, inventoryPaid, techOwesShop:techs.techOwesShop, shopOwesTech:techs.shopOwesTech, netCash:collected - paidExpenses - inventoryPaid };
     }
     function render() {
-      const titles = { dashboard:["Dashboard","Track repairs, customer payments, parts balances, technician balances, and net cash by month."], repairs:["Repairs","Customer devices, serial numbers, invoices, and payment status."], supplier:["Supplier","See supplier balances, payments, dates, items, and totals."], expenses:["Expenses","Supplier payments, tools, inventory, and general costs."], technicians:["Technicians","Track what technicians owe the shop and what the shop owes technicians."], profit:["Shop Profit","Split positive net income between shop profit and technician salary."], archive:["Cleared Data","Search cleared days, weeks, months, customers, serials, income, expenses, and profit."] };
+      const titles = { dashboard:["Dashboard","Track all uncleared repairs, customer payments, parts balances, technician balances, and net cash."], repairs:["Repairs","Customer devices, serial numbers, invoices, and payment status."], supplier:["Supplier","See supplier balances, payments, dates, items, and totals."], expenses:["Expenses","Supplier payments, tools, inventory, and general costs."], technicians:["Technicians","Track what technicians owe the shop and what the shop owes technicians."], profit:["Shop Profit","Split positive net income between shop profit and technician salary."], archive:["All Time Income","Search cleared days, weeks, months, customers, serials, income, expenses, and profit."] };
       els.pageTitle.textContent = titles[currentView][0]; els.pageSubtitle.textContent = titles[currentView][1];
       els.dashboardView.hidden = currentView !== "dashboard"; els.repairsView.hidden = currentView !== "repairs"; els.supplierView.hidden = currentView !== "supplier"; els.expensesView.hidden = currentView !== "expenses"; els.techniciansView.hidden = currentView !== "technicians"; els.profitView.hidden = currentView !== "profit"; els.archiveView.hidden = currentView !== "archive";
       renderMetrics(); renderChart(); renderTables();
@@ -514,6 +514,7 @@
       els.techSummary.innerHTML = techSummary(technicians);
       renderArchive();
       bindRowActions();
+      labelTableCells();
     }
     function paymentTag(ok, paidText = "Paid", pendingText = "Pending") { return ok ? `<span class="tag">${paidText}</span>` : `<span class="tag warn">${pendingText}</span>`; }
     function supplierStatus(repair) {
@@ -525,7 +526,7 @@
       return `<span class="tag danger">Supplier pending</span>`;
     }
     function repairsTable(repairs, allowSelection) {
-      if (!repairs.length) return `<div class="empty">No ${currentRepairStatus === "waiting" ? "waiting repairs" : currentRepairStatus === "ready" ? "repairs ready for pickup" : "picked up repairs"} for this month.</div>`;
+      if (!repairs.length) return `<div class="empty">No ${currentRepairStatus === "waiting" ? "waiting repairs" : currentRepairStatus === "ready" ? "repairs ready for pickup" : "picked up repairs"} in current uncleared balances.</div>`;
       const selectHead = allowSelection ? "<th></th>" : "";
       return `<table><thead><tr>${selectHead}<th>Date</th><th>Customer</th><th>Device / serial</th><th>Repairs</th><th class="amount">Customer total</th><th class="amount">Parts total</th><th>Customer</th><th>Part source</th><th class="amount">Parts left</th><th></th></tr></thead><tbody>${repairs.map(r => {
         const balance = partBalanceFor(r);
@@ -570,7 +571,7 @@
       render();
     }
     function expensesTable(expenses) {
-      if (!expenses.length) return `<div class="empty">No expenses recorded for this month.</div>`;
+      if (!expenses.length) return `<div class="empty">No expenses in current uncleared balances.</div>`;
       return `<table><thead><tr><th>Date</th><th>Category</th><th>Supplier / vendor</th><th>Related repair</th><th>Status</th><th>Notes</th><th class="amount">Amount</th><th></th></tr></thead><tbody>${expenses.map(e => {
         const repair = records.find(r => r.id === e.linkedRepairId);
         return `<tr><td>${esc(e.date)}</td><td><span class="tag ${e.category === "Supplier payment" ? "" : "blue"}">${esc(e.category)}</span></td><td>${esc(e.vendor || "-")}</td><td>${repair ? esc(repairLabel(repair)) : "<span class='muted'>General expense</span>"}</td><td>${paymentTag(e.paid,"Paid","Pending")}</td><td>${esc(e.notes || "-")}</td><td class="amount">${money.format(e.amount || 0)}</td><td><div class="row-actions"><button class="small-action" data-clear-record="${e.id}">Clear</button><button class="icon-button" data-edit="${e.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${e.id}" title="Delete" aria-label="Delete">X</button></div></td></tr>`;
@@ -578,7 +579,7 @@
     }
     function supplierSummary(repairs) {
       const withParts = repairs.filter(r => r.partSource !== "inventory" && Number(r.partsCost || 0) > 0);
-      if (!withParts.length) return `<div class="empty">No repair parts costs recorded for this month.</div>`;
+      if (!withParts.length) return `<div class="empty">No supplier parts in current uncleared balances.</div>`;
       return `<table><thead><tr><th>Repair</th><th class="amount">Parts cost</th><th class="amount">Paid</th><th class="amount">Remaining</th><th></th></tr></thead><tbody>${withParts.map(r => {
         const paid = supplierPaidFor(r.id); const remaining = Math.max(0, Number(r.partsCost || 0) - paid);
         return `<tr><td>${esc(repairLabel(r))}</td><td class="amount">${money.format(r.partsCost || 0)}</td><td class="amount">${money.format(paid)}</td><td class="amount">${money.format(remaining)}</td><td><button class="small-action" data-pay-supplier="${r.id}">Pay</button></td></tr>`;
@@ -600,7 +601,7 @@
     }
     function inventorySummary(repairs) {
       const inventory = repairs.filter(r => r.partSource === "inventory" && Number(r.partsCost || 0) > 0);
-      if (!inventory.length) return `<div class="empty">No repairs used parts from inventory this month.</div>`;
+      if (!inventory.length) return `<div class="empty">No inventory parts in current uncleared balances.</div>`;
       return `<table><thead><tr><th>Repair</th><th>Status</th><th class="amount">Inventory cost</th><th class="amount">Inventory left</th></tr></thead><tbody>${inventory.map(r => {
         const balance = partBalanceFor(r);
         return `<tr><td>${esc(repairLabel(r))}</td><td>${paymentTag(r.inventoryPaid,"Inventory paid","Inventory pending")}</td><td class="amount">${money.format(balance.cost)}</td><td class="amount">${money.format(balance.remaining)}</td></tr>`;
@@ -675,6 +676,17 @@
         const detail = record.type === "repair" ? repairItemsText(record) : esc(record.reason || record.category || record.notes || "-");
         return `<tr><td>${esc((record.settledAt || "").slice(0, 10))}</td><td>${esc(record.type)}</td><td>${name}</td><td>${detail}</td><td class="amount">${money.format(income)}</td><td class="amount">${money.format(expense)}</td><td class="amount">${money.format(income - expense)}</td></tr>`;
       }).join("")}</tbody></table>`;
+      labelTableCells();
+    }
+    function labelTableCells() {
+      document.querySelectorAll("table").forEach(table => {
+        const labels = [...table.querySelectorAll("thead th")].map(th => th.textContent.trim());
+        table.querySelectorAll("tbody tr").forEach(row => {
+          [...row.children].forEach((cell, index) => {
+            cell.dataset.label = labels[index] || "";
+          });
+        });
+      });
     }
     function bindRowActions() {
       document.querySelectorAll("[data-select-repair]").forEach(b => b.addEventListener("change", () => toggleRepairSelection(b.dataset.selectRepair, b.checked)));
@@ -699,8 +711,8 @@
     }
     async function clearCurrentBalances() {
       const current = monthRecords();
-      if (!current.length || !confirm("Clear all current balances for this month and move them to All time?")) return;
-      const label = `Cleared ${els.month.value}`;
+      if (!current.length || !confirm("Clear all current uncleared balances and move them to All Time Income?")) return;
+      const label = `Cleared ${today()}`;
       current.forEach(record => { record.settledAt = today(); record.settlementLabel = label; });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       await syncAllRecords();
