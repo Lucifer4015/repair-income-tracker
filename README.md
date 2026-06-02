@@ -22,21 +22,25 @@ When adding one device, you can add multiple repair lines for the same serial nu
 
 For each repair, choose whether parts came from a supplier or from shop inventory. Supplier parts appear in the supplier balance. Inventory parts appear in a separate inventory balance and can be marked paid or pending.
 
+Waiting repairs do not count toward invoiced money or customer pending balances until they are moved to **Ready pickup** or **Picked up / paid**. Waiting repair part costs only affect supplier or inventory balances when **Parts acquired / cost active** is checked. Moving a repair to ready or picked up treats its parts as acquired automatically.
+
 The top search bar works across the app. Type manually to find a customer, serial/IMEI, supplier, technician, device, repair item, or note, or use the filter beside it to focus the app on repairs, paid/pending items, supplier, inventory, technician, or shop data.
 
 Search and filter controls are minimized into icon buttons. Press the search icon to open the search field, and press the filter icon to open the filter fields for that page.
 
 Use the three-dot menu button in the left menu to minimize the menu and give the selected page more screen space. Press it again to open the full menu.
 
-The dashboard shows current, uncleared balances. Use **Clear** on individual rows or **Clear current balances** to move the current month into the **Cleared Data** page. Clearing does not delete records; it marks them as settled so the dashboard starts fresh.
+The dashboard shows all current, uncleared balances no matter which month the records came from. Use **Clear** on individual rows or **Clear current balances** to move those balances into the **All Time Income** page. Clearing does not delete records; it marks them as settled so the dashboard starts fresh.
 
-The **Cleared Data** page has its own dedicated view for cleared balances and can filter by all time, single day, week/range, month, date range, customer name, technician name, serial number, or device text. It calculates gross, collected, expenses, net, shop profit, and technician salary automatically for the filtered records.
+The **All Time Income** page has its own dedicated view for cleared balances and can filter by all time, single day, week/range, month, date range, customer name, technician name, serial number, or device text. It calculates gross, collected, expenses, net, shop profit, and technician salary automatically for the filtered records.
 
 The **Supplier** page has its own dedicated view for supplier parts and payments. It shows supplier parts used in repairs, payments made to suppliers, totals paid, remaining supplier balance, payment dates, repair items, customer/device details, and date/search filters.
 
-Repair, supplier, expense, technician, and cleared-data pages include search and date filters. Repairs can also be filtered by customer payment status, supplier/inventory source, and paid/pending part balances. Expenses can be filtered to supplier payments or inventory. Cleared Data can focus on shop, supplier, inventory, technician, or repair data.
+Repair, supplier, expense, technician, and all-time income pages include search and date filters. Repairs can also be filtered by customer payment status, supplier/inventory source, and paid/pending part balances. Expenses can be filtered to supplier payments or inventory. All Time Income can focus on shop, supplier, inventory, technician, or repair data.
 
 Expense records can be general business expenses or linked to a specific repair. Use **Supplier payment** with a related supplier repair to reduce the remaining supplier balance for the parts used in that repair.
+
+Use **Supplier expense** for independent supplier costs that should increase the supplier balance when pending. Use **Inventory** for independent inventory costs that should increase the inventory balance when pending. Other pending expenses appear as **Expense remaining** on the dashboard. Paid expenses deduct from net cash; pending expenses stay visible as balances until paid or cleared.
 
 The **Technicians** tab tracks what the shop owes each technician and what each technician owes the shop. Enter the reason, total amount, paid amount, and the app calculates the remaining balance.
 
@@ -51,6 +55,36 @@ Use the invoice button on a repair row to print a customer invoice.
 ## Put it on the internet
 
 This is a static web app, so it can be hosted by services like GitHub Pages, Netlify, Vercel, Cloudflare Pages, or any normal web hosting account. Upload `index.html` and open the hosted URL from your phone or computer.
+
+## Android APK
+
+The app can also be built as an Android APK with Capacitor. The Android app uses the same `index.html` and the same Supabase database, so web and Android records stay connected to the same stored data.
+
+Portable build tools were installed under:
+
+```text
+C:\Users\Sayed\Downloads\repair-apk-tools
+```
+
+After changing `index.html`, rebuild the APK with:
+
+```cmd
+build-apk.cmd
+```
+
+Or with PowerShell if scripts are enabled:
+
+```powershell
+.\build-apk.ps1
+```
+
+The debug APK is created at:
+
+```text
+android\app\build\outputs\apk\debug\app-debug.apk
+```
+
+Install that APK on an Android phone to use the mobile app. For store release later, build a signed release APK or AAB instead of the debug APK.
 
 ## Supabase database and login
 
