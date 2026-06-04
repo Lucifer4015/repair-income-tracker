@@ -74,6 +74,7 @@
         <div class="metrics" id="metrics"></div>
         <div class="grid" style="margin-top:18px">
           <section class="panel"><div class="panel-header"><h3>Current balance breakdown</h3></div><div class="chart" id="chart"></div></section>
+          <section class="panel"><div class="panel-header"><h3>Today updates</h3></div><div class="table-wrap" id="dailyActivity"></div></section>
           <section class="panel"><div class="panel-header"><h3>Supplier balances</h3><button class="small-action" data-quick="expense">Pay supplier</button></div><div class="table-wrap" id="supplierSummary"></div></section>
           <section class="panel"><div class="panel-header"><h3>Inventory parts balances</h3></div><div class="table-wrap" id="inventorySummary"></div></section>
           <section class="panel"><div class="panel-header"><h3>Expense balances</h3><button class="small-action" data-quick="expense">Add expense</button></div><div class="table-wrap" id="expenseSummary"></div></section>
@@ -173,7 +174,7 @@
     const money = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
     const expenseCategories = ["Supplier expense", "Supplier payment", "Inventory", "Tools", "Rent", "Utilities", "Marketing", "Shipping", "Other"];
     const els = {};
-    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","menuToggle","month","pageTitle","pageSubtitle","globalSearch","globalFilter","metrics","chart","supplierSummary","inventorySummary","expenseSummary","techSummary","repairsTable","repairBulkActions","repairSelectAll","bulkRepairTechnician","bulkAssignTechnician","bulkSelectedCount","supplierBulkActions","supplierSelectAll","supplierPaySelected","supplierPayAll","supplierSelectedCount","supplierMetrics","supplierTable","inventoryMetrics","inventoryTable","expensesTable","techniciansTable","profitTable","archiveMergeSelected","archiveExportAll","archiveMetrics","archiveTable","archivePeriod","archiveType","archiveStart","archiveEnd","archiveSearch","repairSearch","repairPaymentFilter","repairPartSourceFilter","repairPartBalanceFilter","repairStart","repairEnd","supplierSearch","supplierStart","supplierEnd","inventorySearch","inventoryTypeFilter","inventoryStart","inventoryEnd","expenseSearch","expenseFilterCategory","expensePaymentFilter","expenseStart","expenseEnd","techSearch","techStart","techEnd","dashboardView","repairsView","supplierView","inventoryView","expensesView","techniciansView","profitView","archiveView","addRepairBtn","addExpenseBtn","addTechBtn","addTechProfileBtn","clearBalancesBtn","undoBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","techProfileFields","repairDate","customerName","deviceType","serialNumber","repairTechnician","repairStatus","repairItems","addRepairItem","repairTitle","invoiceAmount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes","profileName","profileDefault","profileNotes"].forEach(id => els[id] = document.getElementById(id));
+    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","menuToggle","month","pageTitle","pageSubtitle","globalSearch","globalFilter","metrics","chart","dailyActivity","supplierSummary","inventorySummary","expenseSummary","techSummary","repairsTable","repairBulkActions","repairSelectAll","bulkRepairTechnician","bulkAssignTechnician","bulkSelectedCount","supplierBulkActions","supplierSelectAll","supplierPaySelected","supplierPayAll","supplierSelectedCount","supplierMetrics","supplierTable","inventoryMetrics","inventoryTable","expensesTable","techniciansTable","profitTable","archiveMergeSelected","archiveExportAll","archiveMetrics","archiveTable","archivePeriod","archiveType","archiveStart","archiveEnd","archiveSearch","repairSearch","repairPaymentFilter","repairPartSourceFilter","repairPartBalanceFilter","repairStart","repairEnd","supplierSearch","supplierStart","supplierEnd","inventorySearch","inventoryTypeFilter","inventoryStart","inventoryEnd","expenseSearch","expenseFilterCategory","expensePaymentFilter","expenseStart","expenseEnd","techSearch","techStart","techEnd","dashboardView","repairsView","supplierView","inventoryView","expensesView","techniciansView","profitView","archiveView","addRepairBtn","addExpenseBtn","addTechBtn","addTechProfileBtn","clearBalancesBtn","undoBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","techProfileFields","repairDate","customerName","deviceType","serialNumber","repairTechnician","repairStatus","repairItems","addRepairItem","repairTitle","invoiceAmount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes","profileName","profileDefault","profileNotes"].forEach(id => els[id] = document.getElementById(id));
     let records = [];
     records = loadRecords();
     let currentView = "dashboard";
@@ -182,6 +183,7 @@
     let selectedSupplierPayIds = new Set();
     let expandedArchiveFolders = new Set();
     let selectedArchiveFolderKeys = new Set();
+    let expandedArchiveCategoryKeys = new Set();
     let currentArchiveFolders = [];
     let undoStack = [];
     let db = null;
@@ -328,6 +330,7 @@
       ];
     }
     function normalizeRecord(record) {
+      if (record.type === "activity") return { id:record.id || crypto.randomUUID(), type:"activity", date:record.date || today(), time:record.time || new Date().toISOString(), action:record.action || "Update", summary:record.summary || "", effect:record.effect || "", relatedId:record.relatedId || "", notes:record.notes || "" };
       if (record.type === "expense") return { id:record.id || crypto.randomUUID(), type:"expense", date:record.date || today(), category:record.category || "Other", vendor:record.vendor || record.customer || "", amount:Number(record.amount || 0), paid:record.paid !== false && record.paid !== "pending", linkedRepairId:record.linkedRepairId || "", settledAt:record.settledAt || "", settlementLabel:record.settlementLabel || "", settlementStartDate:record.settlementStartDate || "", settlementEndDate:record.settlementEndDate || "", notes:record.notes || "" };
       if (record.type === "technician_profile") return { id:record.id || crypto.randomUUID(), type:"technician_profile", date:record.date || today(), name:record.name || record.technician || "Technician", isDefault:record.isDefault === true || record.isDefault === "yes", notes:record.notes || "" };
       if (record.type === "technician") return { id:record.id || crypto.randomUUID(), type:"technician", date:record.date || today(), technicianId:record.technicianId || findTechnicianIdByName(record.technician || record.techName), technician:record.technician || record.techName || technicianName(record.technicianId), direction:record.direction || "shop_owes_tech", reason:record.reason || "", amount:Number(record.amount || 0), paidAmount:Number(record.paidAmount || 0), settledAt:record.settledAt || "", settlementLabel:record.settlementLabel || "", settlementStartDate:record.settlementStartDate || "", settlementEndDate:record.settlementEndDate || "", notes:record.notes || "" };
@@ -335,7 +338,9 @@
       const status = record.status || "picked_up";
       const hasSavedPartAcquired = record.partAcquired === true || record.partAcquired === false || record.partAcquired === "yes" || record.partAcquired === "no";
       const partAcquired = hasSavedPartAcquired ? record.partAcquired === true || record.partAcquired === "yes" : status !== "waiting";
-      return { id:record.id || crypto.randomUUID(), type:"repair", date:record.date || today(), customer:record.customer || "", deviceType:record.deviceType || record.category || "", serialNumber:record.serialNumber || "", technicianId:record.technicianId || defaultTechnicianId(), status, repairItems, title:repairItems.map(item => item.title).filter(Boolean).join(", ") || record.title || record.category || "Repair", amount:sumRepairItems(repairItems, "price"), partSource:record.partSource || "supplier", partsCost:sumRepairItems(repairItems, "partCost"), partAcquired, inventoryPaid:record.inventoryPaid === true || record.inventoryPaid === "paid", customerPaid:record.customerPaid === true || record.customerPaid === "paid", settledAt:record.settledAt || "", settlementLabel:record.settlementLabel || "", settlementStartDate:record.settlementStartDate || "", settlementEndDate:record.settlementEndDate || "", notes:record.notes || "" };
+      const partSource = record.partSource || "supplier";
+      const partsCost = sumRepairItems(repairItems, "partCost");
+      return { id:record.id || crypto.randomUUID(), type:"repair", date:record.date || today(), customer:record.customer || "", deviceType:record.deviceType || record.category || "", serialNumber:record.serialNumber || "", technicianId:record.technicianId || defaultTechnicianId(), status, repairItems, title:repairItems.map(item => item.title).filter(Boolean).join(", ") || record.title || record.category || "Repair", amount:sumRepairItems(repairItems, "price"), partSource, partsCost, partAcquired, inventoryPaid:partSource === "inventory" ? partsCost <= 0 : record.inventoryPaid === true || record.inventoryPaid === "paid", customerPaid:record.customerPaid === true || record.customerPaid === "paid", settledAt:record.settledAt || "", settlementLabel:record.settlementLabel || "", settlementStartDate:record.settlementStartDate || "", settlementEndDate:record.settlementEndDate || "", notes:record.notes || "" };
     }
     function normalizeRepairItems(record) {
       let savedItems = record.repairItems;
@@ -407,6 +412,46 @@
       undoStack.push({ action, records:cloneRecords() });
       if (undoStack.length > 20) undoStack.shift();
       renderUndoButton();
+    }
+    function dashboardEffect(before, after) {
+      const fields = [
+        ["Waiting", "waitingCount"],
+        ["Ready", "readyCount"],
+        ["Picked up", "pickedCount"],
+        ["Collected", "collected", true],
+        ["Customer pending", "customerPending", true],
+        ["Supplier remaining", "supplierRemaining", true],
+        ["Inventory remaining", "inventoryRemaining", true],
+        ["Expense remaining", "generalExpenseRemaining", true],
+        ["Net cash", "netCash", true]
+      ];
+      const changes = fields.map(([label, key, isMoney]) => {
+        const delta = Number(after[key] || 0) - Number(before[key] || 0);
+        if (Math.abs(delta) < 0.005) return "";
+        const sign = delta > 0 ? "+" : "";
+        return `${label} ${sign}${isMoney ? money.format(delta) : delta}`;
+      }).filter(Boolean);
+      return changes.join(", ") || "No dashboard total changed";
+    }
+    async function logActivity(action, summary, beforeTotals = null, relatedId = "") {
+      const effect = beforeTotals ? dashboardEffect(beforeTotals, totals()) : "";
+      const activity = { id:crypto.randomUUID(), type:"activity", date:today(), time:new Date().toISOString(), action, summary, effect, relatedId, notes:"" };
+      records = records.concat(activity);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+      await syncRecord(activity);
+    }
+    function recordActivitySummary(record) {
+      if (record.type === "repair") return `${record.customer || "Customer"} - ${record.deviceType || "Device"} ${record.serialNumber || ""} - ${record.title || "Repair"}`;
+      if (record.type === "expense") return `${record.category || "Expense"} - ${record.vendor || "Vendor"} - ${money.format(record.amount || 0)}`;
+      if (record.type === "technician") return `${technicianName(record.technicianId)} - ${record.reason || record.direction || "Technician balance"} - ${money.format(record.amount || 0)}`;
+      if (record.type === "technician_profile") return record.name || "Technician profile";
+      return record.summary || record.notes || "Update";
+    }
+    function renderDailyActivity() {
+      if (!els.dailyActivity) return;
+      const rows = records.filter(record => record.type === "activity" && record.date === today()).sort((a,b) => (b.time || "").localeCompare(a.time || "")).slice(0, 12);
+      if (!rows.length) { els.dailyActivity.innerHTML = `<div class="empty">No updates recorded today yet.</div>`; return; }
+      els.dailyActivity.innerHTML = `<table><thead><tr><th>Time</th><th>Update</th><th>Dashboard effect</th></tr></thead><tbody>${rows.map(row => `<tr><td>${esc((row.time || "").slice(11,16))}</td><td><strong>${esc(row.action)}</strong><br><span class="muted">${esc(row.summary)}</span></td><td>${esc(row.effect || "-")}</td></tr>`).join("")}</tbody></table>`;
     }
     function renderUndoButton() {
       if (!els.undoBtn) return;
@@ -554,14 +599,14 @@
       });
     }
     function isSettled(record) { return Boolean(settledDate(record)); }
-    function monthRecords() { return records.filter(record => !isSettled(record)); }
-    function archiveRecords() { return records.filter(isSettled); }
+    function monthRecords() { return records.filter(record => record.type !== "activity" && !isSettled(record)); }
+    function archiveRecords() { return records.filter(record => record.type !== "activity" && isSettled(record)); }
     function inDateRange(record, start, end) {
       const date = record.date || "";
       return (!start || date >= start) && (!end || date <= end);
     }
     function textMatch(record, query) {
-      const text = [record.customer, record.serialNumber, record.deviceType, record.title, record.vendor, record.technician, technicianName(record.technicianId), record.reason, record.notes, repairItemsText(record).replaceAll("<br>", " ")].join(" ").toLowerCase();
+      const text = [record.customer, record.serialNumber, record.deviceType, record.title, record.vendor, record.technician, technicianName(record.technicianId), record.reason, record.action, record.summary, record.effect, record.notes, repairItemsText(record).replaceAll("<br>", " ")].join(" ").toLowerCase();
       return !query || text.includes(query.toLowerCase());
     }
     function globalMatch(record) {
@@ -626,7 +671,7 @@
     }
     function partBalanceFor(repair) {
       const cost = effectivePartsCost(repair);
-      if (repair.partSource === "inventory") return { source:"inventory", cost, paid:repair.inventoryPaid ? cost : 0, remaining:repair.inventoryPaid ? 0 : cost };
+      if (repair.partSource === "inventory") return { source:"inventory", cost, paid:0, remaining:cost > 0 ? cost : 0 };
       const paid = supplierPaidFor(repair.id);
       return { source:"supplier", cost, paid, remaining:Math.max(0, cost - paid) };
     }
@@ -710,6 +755,7 @@
       els.inventorySummary.innerHTML = inventorySummary(list);
       els.expenseSummary.innerHTML = expenseSummary(list);
       els.techSummary.innerHTML = techSummary(technicians);
+      renderDailyActivity();
       renderArchive();
       bindRowActions();
       labelTableCells();
@@ -717,7 +763,7 @@
     function paymentTag(ok, paidText = "Paid", pendingText = "Pending") { return ok ? `<span class="tag">${paidText}</span>` : `<span class="tag warn">${pendingText}</span>`; }
     function supplierStatus(repair) {
       if (!partsAcquired(repair) && Number(repair.partsCost || 0) > 0) return `<span class="tag blue">Parts not acquired</span>`;
-      if (repair.partSource === "inventory") return repair.inventoryPaid ? `<span class="tag blue">Inventory paid</span>` : `<span class="tag warn">Inventory pending</span>`;
+      if (repair.partSource === "inventory") return effectivePartsCost(repair) > 0 ? `<span class="tag warn">Inventory pending</span>` : `<span class="tag blue">Inventory already paid</span>`;
       const paid = supplierPaidFor(repair.id); const remaining = partBalanceFor(repair).remaining;
       if (!repair.partsCost) return `<span class="tag blue">No parts cost</span>`;
       if (remaining <= 0) return `<span class="tag">Supplier paid</span>`;
@@ -764,10 +810,12 @@
       const technicianId = els.bulkRepairTechnician.value || defaultTechnicianId();
       const selected = records.filter(record => selectedRepairIds.has(record.id) && record.type === "repair");
       if (!selected.length) return;
+      const beforeTotals = totals();
       rememberUndo("assign technician");
       selected.forEach(repair => { repair.technicianId = technicianId; });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       await Promise.all(selected.map(syncRecord));
+      await logActivity("Technician assigned", `${selected.length} repairs assigned to ${technicianName(technicianId)}`, beforeTotals);
       selectedRepairIds.clear();
       render();
     }
@@ -778,11 +826,13 @@
       const amount = Math.round(Number(balance.totalOwed || 0) * 100) / 100;
       if (amount <= 0) return;
       if (!confirm(`Pay ${money.format(amount)} to ${profile.name} and clear this technician salary due?`)) return;
+      const beforeTotals = totals();
       rememberUndo("pay salary");
       const record = { id:crypto.randomUUID(), type:"technician", date:today(), technicianId:profile.id, technician:profile.name, direction:"salary_paid", reason:"Technician got paid", amount, paidAmount:amount, settledAt:today(), settlementLabel:`Technician got paid ${today()}`, settlementStartDate:today(), settlementEndDate:today(), notes:"Salary payment recorded from technician page" };
       records = records.concat(record);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       await syncRecord(record);
+      await logActivity("Technician paid", `${profile.name} paid ${money.format(amount)}`, beforeTotals, record.id);
       render();
     }
     function toggleVisibleSupplierPaySelection() {
@@ -808,6 +858,7 @@
       const total = items.reduce((sum, item) => sum + Number(item.remaining || 0), 0);
       const itemWord = items.length === 1 ? "item" : "items";
       if (!confirm(`Pay ${money.format(total)} for ${items.length} ${itemWord} (${label})?`)) return;
+      const beforeTotals = totals();
       rememberUndo("supplier pay");
       const payments = [];
       const updated = [];
@@ -829,6 +880,7 @@
       records = records.concat(payments);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       await Promise.all([...payments, ...updated].map(syncRecord));
+      await logActivity("Supplier paid", `${items.length} ${itemWord} paid - ${money.format(total)}`, beforeTotals);
       selectedSupplierPayIds.clear();
       render();
     }
@@ -951,11 +1003,12 @@
     function inventorySummary(list) {
       const repairs = list.filter(record => record.type === "repair");
       const inventoryExpenses = list.filter(isInventoryExpense);
-      const inventory = repairs.filter(r => r.partSource === "inventory" && effectivePartsCost(r) > 0);
+      const inventory = repairs.filter(r => r.partSource === "inventory");
       if (!inventory.length && !inventoryExpenses.length) return `<div class="empty">No inventory parts or inventory expenses in current uncleared balances.</div>`;
       const repairRows = inventory.map(r => {
         const balance = partBalanceFor(r);
-        return `<tr><td>${esc(repairLabel(r))}</td><td>Repair part</td><td>${paymentTag(r.inventoryPaid,"Inventory paid","Inventory pending")}</td><td class="amount">${money.format(balance.cost)}</td><td class="amount">${money.format(balance.remaining)}</td></tr>`;
+        const status = balance.cost > 0 ? `<span class="tag warn">Used part unpaid</span>` : `<span class="tag blue">Already paid stock</span>`;
+        return `<tr><td>${esc(repairLabel(r))}</td><td>Repair part</td><td>${status}</td><td class="amount">${money.format(balance.cost)}</td><td class="amount">${money.format(balance.remaining)}</td></tr>`;
       }).join("");
       const expenseRows = inventoryExpenses.map(e => {
         const balance = expenseBalanceFor(e);
@@ -964,12 +1017,13 @@
       return `<table><thead><tr><th>Item</th><th>Type</th><th>Status</th><th class="amount">Cost</th><th class="amount">Remaining</th></tr></thead><tbody>${repairRows}${expenseRows}</tbody></table>`;
     }
     function inventoryItems(list) {
-      const repairs = list.filter(record => record.type === "repair" && record.partSource === "inventory" && effectivePartsCost(record) > 0);
+      const repairs = list.filter(record => record.type === "repair" && record.partSource === "inventory");
       const inventoryExpenses = list.filter(isInventoryExpense);
       return [
         ...repairs.map(repair => {
           const balance = partBalanceFor(repair);
-          return { recordId:repair.id, sourceType:"repair", date:repair.date, kind:"Inventory part used", name:repairLabel(repair), detail:repairItemsText(repair), amount:balance.cost, paid:balance.paid, remaining:balance.remaining };
+          const status = balance.cost > 0 ? "Unpaid used inventory part" : "Already paid stock used";
+          return { recordId:repair.id, sourceType:"repair", date:repair.date, kind:"Inventory part used", name:repairLabel(repair), detail:`${repairItemsText(repair)}<br><span class="muted">${status}</span>`, amount:balance.cost, paid:balance.paid, remaining:balance.remaining };
         }),
         ...inventoryExpenses.map(expense => {
           const balance = expenseBalanceFor(expense);
@@ -1118,7 +1172,7 @@
       return folder.records.reduce((totals, record) => {
         if (record.type === "repair") {
           totals.repairs += isBillableRepair(record) ? Number(record.amount || 0) : 0;
-          if (record.partSource === "inventory" && record.inventoryPaid) totals.inventoryUsed += effectivePartsCost(record);
+          if (record.partSource === "inventory") totals.inventoryUsed += effectivePartsCost(record);
         } else if (record.type === "expense") {
           if (record.category === "Supplier payment" || record.category === "Supplier expense") totals.supplier += Number(record.amount || 0);
           else if (record.category === "Inventory") totals.inventory += Number(record.amount || 0);
@@ -1129,10 +1183,36 @@
         return totals;
       }, { repairs:0, supplier:0, inventory:0, inventoryUsed:0, general:0, technicianPaid:0 });
     }
-    function archiveFolderCategorySummary(folder) {
+    function archiveCategoryGroups(folder) {
+      return folder.records.reduce((map, record) => {
+        if (record.type === "repair") map.repairs.push(record);
+        if (record.type === "repair" && record.partSource === "inventory") map.inventory.push(record);
+        else if (record.type === "expense" && (record.category === "Supplier payment" || record.category === "Supplier expense")) map.supplier.push(record);
+        else if (record.type === "expense" && record.category === "Inventory") map.inventory.push(record);
+        else if (record.type === "expense") map.expenses.push(record);
+        else if (record.type === "technician") map.technician.push(record);
+        else if (record.type !== "repair") map.other.push(record);
+        return map;
+      }, { repairs:[], supplier:[], inventory:[], expenses:[], technician:[], other:[] });
+    }
+    function archiveCategoryRows(folder) {
       const totals = archiveFolderCategoryTotals(folder);
-      const rows = [["Repairs income", totals.repairs, "repairs:customer_paid"], ["Supplier paid", totals.supplier, "supplier"], ["Inventory expenses", totals.inventory, "inventory"], ["Inventory parts used", totals.inventoryUsed, "inventory"], ["General expenses", totals.general, "expenses:paid"], ["Technician got paid", totals.technicianPaid, "technicians"]];
-      return `<div class="table-wrap"><table><thead><tr><th>Folder category</th><th class="amount">Amount</th><th></th></tr></thead><tbody>${rows.map(([label, amount, target]) => `<tr><td>${esc(label)}</td><td class="amount">${money.format(amount)}</td><td><button class="small-action" data-metric-go="${target}" type="button">Open</button></td></tr>`).join("")}</tbody></table></div>`;
+      const groups = archiveCategoryGroups(folder);
+      return [
+        { key:"repairs", label:"Repairs", amount:totals.repairs, target:"repairs:customer_paid", records:groups.repairs },
+        { key:"supplier", label:"Supplier", amount:totals.supplier, target:"supplier", records:groups.supplier },
+        { key:"inventory", label:"Inventory", amount:totals.inventory + totals.inventoryUsed, target:"inventory", records:groups.inventory },
+        { key:"expenses", label:"Expenses", amount:totals.general, target:"expenses:paid", records:groups.expenses },
+        { key:"technician", label:"Technician", amount:totals.technicianPaid, target:"technicians", records:groups.technician },
+        { key:"other", label:"Other", amount:0, target:"archive", records:groups.other }
+      ];
+    }
+    function archiveFolderCategorySummary(folder, folderIndex) {
+      return `<div class="archive-folders" style="padding:12px 14px">${archiveCategoryRows(folder).map(category => {
+        const key = `${folder.key}|${category.key}`;
+        const open = expandedArchiveCategoryKeys.has(key);
+        return `<section class="archive-folder"><button class="folder-button" type="button" data-toggle-archive-category-index="${folderIndex}" data-archive-category="${category.key}"><div><strong>${esc(category.label)}</strong><span>${category.records.length} records</span></div><div class="folder-summary"><span class="tag">${money.format(category.amount)}</span></div></button>${open ? `<div class="folder-body">${category.records.length ? `<div class="table-wrap"><table><thead><tr><th>Cleared</th><th>Type</th><th>Name / device</th><th>Detail</th><th class="amount">Income</th><th class="amount">Expense</th><th class="amount">Net effect</th><th></th></tr></thead><tbody>${category.records.map(archiveRow).join("")}</tbody></table></div>` : `<div class="empty">No ${esc(category.label.toLowerCase())} records in this folder.</div>`}</div>` : ""}</section>`;
+      }).join("")}</div>`;
     }
     function archiveFolderReportHtml(folder) {
       const categoryTotals = archiveFolderCategoryTotals(folder);
@@ -1182,11 +1262,10 @@
       const split = profitSplit(metricRecords);
       const items = [["Showing", selectedArchiveFolderKeys.size ? `${selectedArchiveFolderKeys.size} folder${selectedArchiveFolderKeys.size === 1 ? "" : "s"}` : "All filtered"], ["Gross", money.format(t.invoiced)], ["Collected", money.format(t.collected)], ["Expenses", money.format(t.paidExpenses + t.inventoryPaid)], ["Net", money.format(t.netCash)], ["Shop profit", money.format(split.adjustedShopProfit)], ["Tech salary", money.format(split.technicianSalaryDue)]];
       els.archiveMetrics.innerHTML = items.map(([label,value]) => `<article class="metric"><span>${label}</span><strong>${value}</strong></article>`).join("");
-      if (!expandedArchiveFolders.size && folders.length) expandedArchiveFolders.add(folders[0].key);
       els.archiveTable.innerHTML = `<div class="archive-folders">${folders.map((folder, index) => {
         const open = expandedArchiveFolders.has(folder.key);
         const selected = selectedArchiveFolderKeys.has(folder.key);
-        return `<section class="archive-folder"><button class="folder-button" type="button" data-toggle-archive-folder-index="${index}"><div><strong>${esc(folder.name)}</strong><span>Start ${esc(folder.start)} - End ${esc(folder.end)} - ${folder.records.length} records</span></div><div class="folder-summary"><span class="tag">Gross ${money.format(folder.totals.income)}</span><span class="tag warn">Expense ${money.format(folder.totals.expense)}</span><span class="tag ${folder.totals.net < 0 ? "danger" : ""}">Net ${money.format(folder.totals.net)}</span></div></button><div class="subnav"><label class="check-row"><input type="checkbox" data-select-archive-folder-index="${index}" ${selected ? "checked" : ""}> Show in dashboard</label><button class="small-action" type="button" data-edit-archive-folder-index="${index}">Edit dates</button><button class="small-action" type="button" data-export-archive-folder-index="${index}">Export report</button></div>${open ? `<div class="folder-body"><div class="filters" style="border-bottom:1px solid var(--line)"><div><label>Start date</label><input type="date" data-folder-start-index="${index}" value="${esc(folder.start)}"></div><div><label>End date</label><input type="date" data-folder-end-index="${index}" value="${esc(folder.end)}"></div><button class="small-action" type="button" data-folder-end-today-index="${index}">Today</button><button class="small-action" type="button" data-save-archive-folder-index="${index}">Save dates</button></div>${archiveFolderCategorySummary(folder)}${archiveFolderCategoryDetails(folder)}</div>` : ""}</section>`;
+        return `<section class="archive-folder"><button class="folder-button" type="button" data-toggle-archive-folder-index="${index}"><div><strong>${esc(folder.name)}</strong><span>Start ${esc(folder.start)} - End ${esc(folder.end)}</span></div><div class="folder-summary"><span class="tag">${folder.records.length} records</span></div></button><div class="subnav"><label class="check-row"><input type="checkbox" data-select-archive-folder-index="${index}" ${selected ? "checked" : ""}> Show in dashboard</label><button class="small-action" type="button" data-edit-archive-folder-index="${index}">Edit dates</button><button class="small-action" type="button" data-export-archive-folder-index="${index}">Export report</button></div>${open ? `<div class="folder-body"><div class="filters" style="border-bottom:1px solid var(--line)"><div><label>Start date</label><input type="date" data-folder-start-index="${index}" value="${esc(folder.start)}"></div><div><label>End date</label><input type="date" data-folder-end-index="${index}" value="${esc(folder.end)}"></div><button class="small-action" type="button" data-folder-end-today-index="${index}">Today</button><button class="small-action" type="button" data-save-archive-folder-index="${index}">Save dates</button></div>${archiveFolderCategorySummary(folder, index)}</div>` : ""}</section>`;
       }).join("")}</div>`;
       labelTableCells();
     }
@@ -1250,6 +1329,13 @@
         exportArchiveFolderReport(Number(exportButton.dataset.exportArchiveFolderIndex));
         return;
       }
+      const categoryButton = event.target.closest("[data-toggle-archive-category-index]");
+      if (categoryButton) {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleArchiveCategory(Number(categoryButton.dataset.toggleArchiveCategoryIndex), categoryButton.dataset.archiveCategory);
+        return;
+      }
       const editButton = event.target.closest("[data-edit-archive-folder-index]");
       if (editButton) {
         event.preventDefault();
@@ -1280,6 +1366,15 @@
       bindRowActions();
       labelTableCells();
     }
+    function toggleArchiveCategory(index, category) {
+      const folder = currentArchiveFolders[index];
+      if (!folder || !category) return;
+      const key = `${folder.key}|${category}`;
+      expandedArchiveCategoryKeys.has(key) ? expandedArchiveCategoryKeys.delete(key) : expandedArchiveCategoryKeys.add(key);
+      renderArchive();
+      bindRowActions();
+      labelTableCells();
+    }
     async function mergeSelectedArchiveFolders() {
       const selectedFolders = currentArchiveFolders.filter(folder => selectedArchiveFolderKeys.has(folder.key));
       if (selectedFolders.length < 2) {
@@ -1295,6 +1390,7 @@
       const endDate = askForDate(`End date for the merged folder\nToday: ${today()}\nYesterday: ${today(-1)}`, ends[ends.length - 1] || today());
       if (!endDate) return;
       if (!confirm(`Merge ${selectedFolders.length} folders into one folder from ${startDate} to ${endDate}?`)) return;
+      const beforeTotals = totals();
       rememberUndo("merge folders");
       const label = `Cleared ${startDate} to ${endDate}`;
       uniqueRecords.forEach(record => {
@@ -1305,6 +1401,7 @@
       });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       await Promise.all(uniqueRecords.map(syncRecord));
+      await logActivity("Folders merged", `${selectedFolders.length} All Time folders merged into ${startDate} to ${endDate}`, beforeTotals);
       selectedArchiveFolderKeys.clear();
       expandedArchiveFolders.clear();
       selectedArchiveFolderKeys.add(`${startDate}|${endDate}`);
@@ -1371,10 +1468,12 @@
     async function deleteRecord(id) {
       const record = records.find(r => r.id === id);
       if (!record || !confirm("Delete this record? You can press Undo after deleting if this was a mistake.")) return;
+      const beforeTotals = totals();
       rememberUndo("delete");
       records = records.filter(r => r.id !== record.id);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       await deleteRemoteRecord(record.id);
+      await logActivity("Record deleted", recordActivitySummary(record), beforeTotals, record.id);
       render();
     }
     async function clearRecord(id, label = "Manual clear") {
@@ -1386,15 +1485,18 @@
       if (!startDate) return;
       const endDate = askForDate(`End date for this cleared folder\nToday: ${today()}\nYesterday: ${today(-1)}`, defaults.end);
       if (!endDate) return;
+      const beforeTotals = totals();
       rememberUndo("clear");
       applySettlementPeriod(targets, label === "Manual clear" ? `Cleared ${startDate} to ${endDate}` : label, startDate, endDate);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       await Promise.all(targets.map(syncRecord));
+      await logActivity("Balance cleared", `${targets.length} records moved to All Time Income`, beforeTotals, id);
       render();
     }
     async function restoreClearedRecord(id) {
       const record = records.find(r => r.id === id);
       if (!record) return;
+      const beforeTotals = totals();
       rememberUndo("restore");
       const targets = record.type === "repair" ? records.filter(item => item.id === record.id || item.linkedRepairId === record.id) : [record];
       targets.forEach(item => {
@@ -1405,6 +1507,7 @@
       });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       await Promise.all(targets.map(syncRecord));
+      await logActivity("Cleared balance restored", `${targets.length} records restored to current balances`, beforeTotals, id);
       render();
     }
     async function clearCurrentBalances() {
@@ -1415,22 +1518,26 @@
       if (!startDate) return;
       const endDate = askForDate(`End date for this cleared folder\nToday: ${today()}\nYesterday: ${today(-1)}`, defaults.end);
       if (!endDate) return;
+      const beforeTotals = totals();
       rememberUndo("clear all");
       const label = `Cleared ${startDate} to ${endDate}`;
       applySettlementPeriod(current, label, startDate, endDate);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       await syncAllRecords();
+      await logActivity("Current balances cleared", `${current.length} records moved to All Time Income`, beforeTotals);
       render();
     }
     async function updateRepairStatus(id, status, paid = false) {
       const record = records.find(r => r.id === id);
       if (!record) return;
+      const beforeTotals = totals();
       rememberUndo(status === "ready" ? "ready" : "picked up");
       record.status = status;
       if (status !== "waiting") record.partAcquired = true;
       if (paid) record.customerPaid = true;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       await syncRecord(record);
+      await logActivity(status === "ready" ? "Repair ready for pickup" : "Repair picked up and paid", recordActivitySummary(record), beforeTotals, record.id);
       currentRepairStatus = status;
       document.querySelectorAll("[data-repair-status]").forEach(button => button.classList.toggle("active", button.dataset.repairStatus === status));
       render();
@@ -1519,10 +1626,11 @@
       event.preventDefault();
       const type = els.recordType.value;
       const existing = els.recordId.value ? records.find(r => r.id === els.recordId.value) : null;
+      const beforeTotals = totals();
       updateRepairItemTotals();
       const repairItems = collectRepairItems();
       const record = type === "repair"
-        ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.repairDate.value || today(), customer:els.customerName.value.trim(), deviceType:els.deviceType.value.trim(), serialNumber:els.serialNumber.value.trim(), technicianId:els.repairTechnician.value || defaultTechnicianId(), status:els.repairStatus.value, repairItems, title:repairItems.map(item => item.title).filter(Boolean).join(", "), amount:sumRepairItems(repairItems, "price"), partSource:els.partSource.value, partsCost:sumRepairItems(repairItems, "partCost"), partAcquired:els.repairStatus.value !== "waiting" || els.partAcquired.checked, inventoryPaid:els.inventoryPaid.value === "paid", customerPaid:els.customerPaid.value === "paid", notes:els.repairNotes.value.trim() }
+        ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.repairDate.value || today(), customer:els.customerName.value.trim(), deviceType:els.deviceType.value.trim(), serialNumber:els.serialNumber.value.trim(), technicianId:els.repairTechnician.value || defaultTechnicianId(), status:els.repairStatus.value, repairItems, title:repairItems.map(item => item.title).filter(Boolean).join(", "), amount:sumRepairItems(repairItems, "price"), partSource:els.partSource.value, partsCost:sumRepairItems(repairItems, "partCost"), partAcquired:els.repairStatus.value !== "waiting" || els.partAcquired.checked, inventoryPaid:els.partSource.value === "inventory" ? sumRepairItems(repairItems, "partCost") <= 0 : els.inventoryPaid.value === "paid", customerPaid:els.customerPaid.value === "paid", notes:els.repairNotes.value.trim() }
         : type === "expense"
           ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.expenseDate.value || today(), category:els.expenseCategory.value, vendor:els.vendorName.value.trim(), amount:Number(els.expenseAmount.value || 0), paid:els.expensePaid.value === "paid", linkedRepairId:els.linkedRepair.value, notes:els.expenseNotes.value.trim() }
           : type === "technician"
@@ -1531,7 +1639,13 @@
       if (existing?.settledAt) { record.settledAt = existing.settledAt; record.settlementLabel = existing.settlementLabel || ""; record.settlementStartDate = existing.settlementStartDate || ""; record.settlementEndDate = existing.settlementEndDate || ""; }
       if (record.type === "technician_profile" && record.isDefault) records = records.map(item => item.type === "technician_profile" ? { ...item, isDefault:false } : item);
       rememberUndo(existing ? "edit" : "add");
-      records = records.filter(r => r.id !== record.id).concat(record); localStorage.setItem(STORAGE_KEY, JSON.stringify(records)); await syncRecord(record); localStorage.removeItem(DRAFT_KEY); els.recordDialog.hidden = true; render();
+      records = records.filter(r => r.id !== record.id).concat(record);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+      await syncRecord(record);
+      await logActivity(existing ? "Record edited" : "Record added", recordActivitySummary(record), beforeTotals, record.id);
+      localStorage.removeItem(DRAFT_KEY);
+      els.recordDialog.hidden = true;
+      render();
     }
     function printInvoice(id) {
       const r = records.find(record => record.id === id); if (!r) return;
@@ -1541,7 +1655,7 @@
       win.document.write(html); win.document.close();
     }
     function exportCsv() {
-      const headers = ["id","type","date","customer","deviceType","serialNumber","technicianId","name","isDefault","status","repairItems","title","amount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","category","vendor","paid","linkedRepairId","technician","direction","reason","paidAmount","settledAt","settlementLabel","settlementStartDate","settlementEndDate","notes"];
+      const headers = ["id","type","date","time","action","summary","effect","relatedId","customer","deviceType","serialNumber","technicianId","name","isDefault","status","repairItems","title","amount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","category","vendor","paid","linkedRepairId","technician","direction","reason","paidAmount","settledAt","settlementLabel","settlementStartDate","settlementEndDate","notes"];
       const csv = [headers.join(",")].concat(records.map(r => headers.map(h => csvCell(typeof r[h] === "object" && r[h] !== null ? JSON.stringify(r[h]) : r[h] ?? "")).join(","))).join("\n");
       const blob = new Blob([csv], { type:"text/csv;charset=utf-8" }); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = `repair-ledger-${today()}.csv`; a.click(); URL.revokeObjectURL(url);
     }
