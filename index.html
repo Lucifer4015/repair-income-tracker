@@ -87,7 +87,7 @@
       <section id="techniciansView" class="panel" hidden><div class="panel-header"><h3>Technician profiles</h3><div class="actions"><button class="small-action" data-quick="technician_profile">Add profile</button><button class="small-action" data-quick="technician">Add balance / advance</button></div></div><div class="tool-toggle-row" style="padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfcfd"><button class="tool-toggle" type="button" data-toggle-search="techFilters" title="Search technicians" aria-label="Search technicians"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="techFilters" title="Filter technicians" aria-label="Filter technicians"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></div><div id="techFilters" class="filters"><input id="techSearch" type="search" placeholder="Technician, reason, notes"><input id="techStart" type="date"><input id="techEnd" type="date"></div><div class="table-wrap" id="techniciansTable"></div></section>
       <section id="profitView" class="panel" hidden><div class="panel-header"><h3>Shop profit split</h3></div><div class="table-wrap" id="profitTable"></div></section>
       <section id="archiveView" class="panel" hidden>
-        <div class="panel-header"><h3>Cleared data</h3><button id="archiveExportAll" class="small-action" type="button">Export all time report</button></div>
+        <div class="panel-header"><h3>Cleared data</h3><div class="actions"><button id="archiveMergeSelected" class="small-action" type="button" disabled>Merge selected folders</button><button id="archiveExportAll" class="small-action" type="button">Export all time report</button></div></div>
         <div class="tool-toggle-row" style="padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfcfd"><button class="tool-toggle" type="button" data-toggle-search="archiveFilters" title="Search cleared data" aria-label="Search cleared data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="archiveFilters" title="Filter cleared data" aria-label="Filter cleared data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></div>
         <div id="archiveFilters" class="filters">
           <select id="archivePeriod"><option value="all">All time</option><option value="day">Single day</option><option value="week">Week / range</option><option value="month">Month</option></select>
@@ -173,7 +173,7 @@
     const money = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
     const expenseCategories = ["Supplier expense", "Supplier payment", "Inventory", "Tools", "Rent", "Utilities", "Marketing", "Shipping", "Other"];
     const els = {};
-    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","menuToggle","month","pageTitle","pageSubtitle","globalSearch","globalFilter","metrics","chart","supplierSummary","inventorySummary","expenseSummary","techSummary","repairsTable","repairBulkActions","repairSelectAll","bulkRepairTechnician","bulkAssignTechnician","bulkSelectedCount","supplierBulkActions","supplierSelectAll","supplierPaySelected","supplierPayAll","supplierSelectedCount","supplierMetrics","supplierTable","inventoryMetrics","inventoryTable","expensesTable","techniciansTable","profitTable","archiveExportAll","archiveMetrics","archiveTable","archivePeriod","archiveType","archiveStart","archiveEnd","archiveSearch","repairSearch","repairPaymentFilter","repairPartSourceFilter","repairPartBalanceFilter","repairStart","repairEnd","supplierSearch","supplierStart","supplierEnd","inventorySearch","inventoryTypeFilter","inventoryStart","inventoryEnd","expenseSearch","expenseFilterCategory","expensePaymentFilter","expenseStart","expenseEnd","techSearch","techStart","techEnd","dashboardView","repairsView","supplierView","inventoryView","expensesView","techniciansView","profitView","archiveView","addRepairBtn","addExpenseBtn","addTechBtn","addTechProfileBtn","clearBalancesBtn","undoBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","techProfileFields","repairDate","customerName","deviceType","serialNumber","repairTechnician","repairStatus","repairItems","addRepairItem","repairTitle","invoiceAmount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes","profileName","profileDefault","profileNotes"].forEach(id => els[id] = document.getElementById(id));
+    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","menuToggle","month","pageTitle","pageSubtitle","globalSearch","globalFilter","metrics","chart","supplierSummary","inventorySummary","expenseSummary","techSummary","repairsTable","repairBulkActions","repairSelectAll","bulkRepairTechnician","bulkAssignTechnician","bulkSelectedCount","supplierBulkActions","supplierSelectAll","supplierPaySelected","supplierPayAll","supplierSelectedCount","supplierMetrics","supplierTable","inventoryMetrics","inventoryTable","expensesTable","techniciansTable","profitTable","archiveMergeSelected","archiveExportAll","archiveMetrics","archiveTable","archivePeriod","archiveType","archiveStart","archiveEnd","archiveSearch","repairSearch","repairPaymentFilter","repairPartSourceFilter","repairPartBalanceFilter","repairStart","repairEnd","supplierSearch","supplierStart","supplierEnd","inventorySearch","inventoryTypeFilter","inventoryStart","inventoryEnd","expenseSearch","expenseFilterCategory","expensePaymentFilter","expenseStart","expenseEnd","techSearch","techStart","techEnd","dashboardView","repairsView","supplierView","inventoryView","expensesView","techniciansView","profitView","archiveView","addRepairBtn","addExpenseBtn","addTechBtn","addTechProfileBtn","clearBalancesBtn","undoBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","techProfileFields","repairDate","customerName","deviceType","serialNumber","repairTechnician","repairStatus","repairItems","addRepairItem","repairTitle","invoiceAmount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes","profileName","profileDefault","profileNotes"].forEach(id => els[id] = document.getElementById(id));
     let records = [];
     records = loadRecords();
     let currentView = "dashboard";
@@ -218,6 +218,7 @@
     els.supplierSelectAll.addEventListener("change", toggleVisibleSupplierPaySelection);
     els.supplierPaySelected.addEventListener("click", paySelectedSupplierBalances);
     els.supplierPayAll.addEventListener("click", payAllSupplierBalances);
+    els.archiveMergeSelected.addEventListener("click", mergeSelectedArchiveFolders);
     els.archiveExportAll.addEventListener("click", exportAllTimeReport);
     els.addRepairItem.addEventListener("click", () => { addRepairItemRow(); saveDraft(); });
     els.recordForm.addEventListener("submit", saveRecord);
@@ -1055,14 +1056,16 @@
       return { income, expense, net:income - expense };
     }
     function archiveFolderKey(record) {
-      return [record.settlementLabel || linkedRepair(record)?.settlementLabel || `Cleared ${settledDate(record).slice(0, 10)}`, settlementStartDate(record), settlementEndDate(record)].join("|");
+      return [settlementStartDate(record), settlementEndDate(record)].join("|");
     }
     function archiveFolders(list) {
       const groups = new Map();
       list.forEach(record => {
         const key = archiveFolderKey(record);
         if (!groups.has(key)) {
-          groups.set(key, { key, name:record.settlementLabel || linkedRepair(record)?.settlementLabel || `Cleared ${settledDate(record).slice(0, 10)}`, start:settlementStartDate(record), end:settlementEndDate(record), records:[] });
+          const start = settlementStartDate(record);
+          const end = settlementEndDate(record);
+          groups.set(key, { key, name:`Cleared ${start} to ${end}`, start, end, records:[] });
         }
         groups.get(key).records.push(record);
       });
@@ -1168,11 +1171,12 @@
     function renderArchive() {
       if (!els.archiveTable) return;
       const list = filteredArchiveRecords();
-      if (!list.length) { currentArchiveFolders = []; selectedArchiveFolderKeys.clear(); els.archiveMetrics.innerHTML = ""; els.archiveTable.innerHTML = `<div class="empty">No cleared balances match this filter.</div>`; return; }
+      if (!list.length) { currentArchiveFolders = []; selectedArchiveFolderKeys.clear(); els.archiveMergeSelected.disabled = true; els.archiveMetrics.innerHTML = ""; els.archiveTable.innerHTML = `<div class="empty">No cleared balances match this filter.</div>`; return; }
       const folders = archiveFolders(list);
       currentArchiveFolders = folders;
       const visibleKeys = new Set(folders.map(folder => folder.key));
       selectedArchiveFolderKeys = new Set([...selectedArchiveFolderKeys].filter(key => visibleKeys.has(key)));
+      els.archiveMergeSelected.disabled = selectedArchiveFolderKeys.size < 2;
       const metricRecords = selectedArchiveFolderKeys.size ? folders.filter(folder => selectedArchiveFolderKeys.has(folder.key)).flatMap(folder => folder.records) : list;
       const t = totals(metricRecords);
       const split = profitSplit(metricRecords);
@@ -1275,6 +1279,37 @@
       renderArchive();
       bindRowActions();
       labelTableCells();
+    }
+    async function mergeSelectedArchiveFolders() {
+      const selectedFolders = currentArchiveFolders.filter(folder => selectedArchiveFolderKeys.has(folder.key));
+      if (selectedFolders.length < 2) {
+        alert("Select at least two folders first.");
+        return;
+      }
+      const selectedRecords = selectedFolders.flatMap(folder => folder.records);
+      const uniqueRecords = [...new Map(selectedRecords.map(record => [record.id, record])).values()];
+      const starts = selectedFolders.map(folder => folder.start).filter(Boolean).sort();
+      const ends = selectedFolders.map(folder => folder.end).filter(Boolean).sort();
+      const startDate = askForDate("Start date for the merged folder", starts[0] || today());
+      if (!startDate) return;
+      const endDate = askForDate(`End date for the merged folder\nToday: ${today()}\nYesterday: ${today(-1)}`, ends[ends.length - 1] || today());
+      if (!endDate) return;
+      if (!confirm(`Merge ${selectedFolders.length} folders into one folder from ${startDate} to ${endDate}?`)) return;
+      rememberUndo("merge folders");
+      const label = `Cleared ${startDate} to ${endDate}`;
+      uniqueRecords.forEach(record => {
+        record.settlementLabel = label;
+        record.settlementStartDate = startDate;
+        record.settlementEndDate = endDate;
+        if (record.settledAt) record.settledAt = endDate;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+      await Promise.all(uniqueRecords.map(syncRecord));
+      selectedArchiveFolderKeys.clear();
+      expandedArchiveFolders.clear();
+      selectedArchiveFolderKeys.add(`${startDate}|${endDate}`);
+      expandedArchiveFolders.add(`${startDate}|${endDate}`);
+      render();
     }
     function setArchiveFolderEndToday(index) {
       const input = document.querySelector(`[data-folder-end-index="${index}"]`);
