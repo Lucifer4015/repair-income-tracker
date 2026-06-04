@@ -30,11 +30,13 @@ Search and filter controls are minimized into icon buttons. Press the search ico
 
 Use the three-dot menu button in the left menu to minimize the menu and give the selected page more screen space. Press it again to open the full menu.
 
-The dashboard shows all current, uncleared balances no matter which month the records came from. Use **Clear** on individual rows or **Clear current balances** to move those balances into the **All Time Income** page. Clearing does not delete records; it marks them as settled so the dashboard starts fresh.
+The dashboard shows all current, uncleared balances no matter which month the records came from. Use **Clear** on individual rows or **Clear current balances** to move those balances into the **All Time Income** page. Clearing asks for a folder start date and end date; the start date defaults from the paid/picked records being cleared, and the end date can be today, yesterday, or a custom date. Clearing does not delete records; it marks them as settled so the dashboard starts fresh. Clearing a repair also clears its linked supplier payments and linked expenses so old repair income and old repair costs stay together.
 
-The **All Time Income** page has its own dedicated view for cleared balances and can filter by all time, single day, week/range, month, date range, customer name, technician name, serial number, or device text. It calculates gross, collected, expenses, net, shop profit, and technician salary automatically for the filtered records.
+Dashboard metric cards are clickable. For example, **Paid expenses** opens the paid expense records, **Customer pending** opens unpaid customer repairs, and **Supplier remaining** opens the supplier balance page.
 
-The **Supplier** page has its own dedicated view for supplier parts and payments. It shows supplier parts used in repairs, payments made to suppliers, totals paid, remaining supplier balance, payment dates, repair items, customer/device details, and date/search filters.
+The **All Time Income** page has its own dedicated view for cleared balances and can filter by all time, single day, week/range, month, date range, customer name, technician name, serial number, or device text. It groups cleared balances into expandable folders with start date, end date, gross, expense, and net totals. Cleared rows can be restored, edited, or deleted, and folder dates can be edited.
+
+The **Supplier** page has its own dedicated view for supplier parts and payments. It shows supplier parts used in repairs, payments made to suppliers, totals paid, remaining supplier balance, payment dates, repair items, customer/device details, and date/search filters. Use **Pay selected** for one or more supplier items, or **Pay all acquired** to automatically pay every acquired supplier part and pending supplier expense at once. Supplier rows can be edited or deleted after payment if a mistake is found, and **Edit paid** lets you correct the total paid amount for a supplier part.
 
 Repair, supplier, expense, technician, and all-time income pages include search and date filters. Repairs can also be filtered by customer payment status, supplier/inventory source, and paid/pending part balances. Expenses can be filtered to supplier payments or inventory. All Time Income can focus on shop, supplier, inventory, technician, or repair data.
 
