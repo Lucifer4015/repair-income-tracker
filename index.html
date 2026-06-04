@@ -1084,6 +1084,33 @@
       const detail = record.type === "repair" ? repairItemsText(record) : record.type === "technician" && record.direction === "salary_paid" ? "Technician got paid" : esc(record.reason || record.category || record.notes || "-");
       return `<tr><td>${esc((settledDate(record) || "").slice(0, 10))}</td><td>${esc(record.type)}</td><td>${name}</td><td>${detail}</td><td class="amount">${money.format(values.income)}</td><td class="amount">${money.format(values.expense)}</td><td class="amount">${money.format(values.net)}</td><td><div class="row-actions"><button class="small-action" data-restore-record="${record.id}">Restore</button><button class="icon-button" data-edit="${record.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${record.id}" title="Delete" aria-label="Delete">X</button></div></td></tr>`;
     }
+    function archiveRecordCategory(record) {
+      if (record.type === "repair") return "repairs";
+      if (record.type === "expense" && (record.category === "Supplier payment" || record.category === "Supplier expense")) return "supplier";
+      if (record.type === "expense" && record.category === "Inventory") return "inventory";
+      if (record.type === "expense") return "expenses";
+      if (record.type === "technician") return "technician";
+      return "other";
+    }
+    function archiveCategoryDetailTable(title, rows) {
+      if (!rows.length) return "";
+      return `<section class="archive-folder" style="margin:12px 14px"><div class="panel-header"><h3>${esc(title)}</h3></div><div class="table-wrap"><table><thead><tr><th>Cleared</th><th>Type</th><th>Name / device</th><th>Detail</th><th class="amount">Income</th><th class="amount">Expense</th><th class="amount">Net effect</th><th></th></tr></thead><tbody>${rows.map(archiveRow).join("")}</tbody></table></div></section>`;
+    }
+    function archiveFolderCategoryDetails(folder) {
+      const groups = folder.records.reduce((map, record) => {
+        const key = archiveRecordCategory(record);
+        map[key].push(record);
+        return map;
+      }, { repairs:[], supplier:[], inventory:[], expenses:[], technician:[], other:[] });
+      return [
+        archiveCategoryDetailTable("Repairs", groups.repairs),
+        archiveCategoryDetailTable("Supplier", groups.supplier),
+        archiveCategoryDetailTable("Inventory", groups.inventory),
+        archiveCategoryDetailTable("Expenses", groups.expenses),
+        archiveCategoryDetailTable("Technician", groups.technician),
+        archiveCategoryDetailTable("Other", groups.other)
+      ].join("");
+    }
     function archiveFolderCategoryTotals(folder) {
       return folder.records.reduce((totals, record) => {
         if (record.type === "repair") {
@@ -1155,7 +1182,7 @@
       els.archiveTable.innerHTML = `<div class="archive-folders">${folders.map((folder, index) => {
         const open = expandedArchiveFolders.has(folder.key);
         const selected = selectedArchiveFolderKeys.has(folder.key);
-        return `<section class="archive-folder"><button class="folder-button" type="button" data-toggle-archive-folder-index="${index}"><div><strong>${esc(folder.name)}</strong><span>Start ${esc(folder.start)} - End ${esc(folder.end)} - ${folder.records.length} records</span></div><div class="folder-summary"><span class="tag">Gross ${money.format(folder.totals.income)}</span><span class="tag warn">Expense ${money.format(folder.totals.expense)}</span><span class="tag ${folder.totals.net < 0 ? "danger" : ""}">Net ${money.format(folder.totals.net)}</span></div></button><div class="subnav"><label class="check-row"><input type="checkbox" data-select-archive-folder-index="${index}" ${selected ? "checked" : ""}> Show in dashboard</label><button class="small-action" type="button" data-edit-archive-folder-index="${index}">Edit dates</button><button class="small-action" type="button" data-export-archive-folder-index="${index}">Export report</button></div>${open ? `<div class="folder-body"><div class="filters" style="border-bottom:1px solid var(--line)"><div><label>Start date</label><input type="date" data-folder-start-index="${index}" value="${esc(folder.start)}"></div><div><label>End date</label><input type="date" data-folder-end-index="${index}" value="${esc(folder.end)}"></div><button class="small-action" type="button" data-folder-end-today-index="${index}">Today</button><button class="small-action" type="button" data-save-archive-folder-index="${index}">Save dates</button></div>${archiveFolderCategorySummary(folder)}<div class="table-wrap"><table><thead><tr><th>Cleared</th><th>Type</th><th>Name / device</th><th>Detail</th><th class="amount">Income</th><th class="amount">Expense</th><th class="amount">Net effect</th><th></th></tr></thead><tbody>${folder.records.map(archiveRow).join("")}</tbody></table></div></div>` : ""}</section>`;
+        return `<section class="archive-folder"><button class="folder-button" type="button" data-toggle-archive-folder-index="${index}"><div><strong>${esc(folder.name)}</strong><span>Start ${esc(folder.start)} - End ${esc(folder.end)} - ${folder.records.length} records</span></div><div class="folder-summary"><span class="tag">Gross ${money.format(folder.totals.income)}</span><span class="tag warn">Expense ${money.format(folder.totals.expense)}</span><span class="tag ${folder.totals.net < 0 ? "danger" : ""}">Net ${money.format(folder.totals.net)}</span></div></button><div class="subnav"><label class="check-row"><input type="checkbox" data-select-archive-folder-index="${index}" ${selected ? "checked" : ""}> Show in dashboard</label><button class="small-action" type="button" data-edit-archive-folder-index="${index}">Edit dates</button><button class="small-action" type="button" data-export-archive-folder-index="${index}">Export report</button></div>${open ? `<div class="folder-body"><div class="filters" style="border-bottom:1px solid var(--line)"><div><label>Start date</label><input type="date" data-folder-start-index="${index}" value="${esc(folder.start)}"></div><div><label>End date</label><input type="date" data-folder-end-index="${index}" value="${esc(folder.end)}"></div><button class="small-action" type="button" data-folder-end-today-index="${index}">Today</button><button class="small-action" type="button" data-save-archive-folder-index="${index}">Save dates</button></div>${archiveFolderCategorySummary(folder)}${archiveFolderCategoryDetails(folder)}</div>` : ""}</section>`;
       }).join("")}</div>`;
       labelTableCells();
     }
@@ -1287,10 +1314,23 @@
       if (!visibleFolder) return;
       const folder = archiveFolders(archiveRecords()).find(item => item.key === visibleFolder.key);
       if (!folder) return;
-      const startDate = askForDate("Start date for this cleared folder", folder.start);
-      if (!startDate) return;
-      const endDate = askForDate(`End date for this cleared folder\nToday: ${today()}\nYesterday: ${today(-1)}`, folder.end || today());
-      if (!endDate) return;
+      const choice = prompt("Which date do you want to edit?\nType start, end, or both.", "both");
+      if (choice === null) return;
+      const mode = choice.trim().toLowerCase();
+      if (!["start","end","both"].includes(mode)) {
+        alert("Type start, end, or both.");
+        return editArchiveFolderDates(index);
+      }
+      let startDate = folder.start;
+      let endDate = folder.end || today();
+      if (mode === "start" || mode === "both") {
+        startDate = askForDate("Start date for this cleared folder", folder.start);
+        if (!startDate) return;
+      }
+      if (mode === "end" || mode === "both") {
+        endDate = askForDate(`End date for this cleared folder\nToday: ${today()}\nYesterday: ${today(-1)}`, folder.end || today());
+        if (!endDate) return;
+      }
       await updateArchiveFolderDates(folder.key, startDate, endDate);
     }
     async function deleteRecord(id) {
