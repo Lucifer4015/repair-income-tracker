@@ -6,7 +6,7 @@ A responsive repair-shop tracker for monthly repairs, customer payment status, s
 
 Open `index.html` in a browser. The app works on phone and desktop screens.
 
-Your records are saved in the browser on the same device using local storage. Use **Export CSV** to back up or move the data, and **Import CSV** to restore it.
+When signed in, records are saved to Supabase and recent records are also cached in the browser. Supabase remains the permanent source of truth, so the smaller browser cache cannot stop long-term database saves. Use **Export CSV** for an additional backup and **Import CSV** to restore it.
 
 Repair records include customer name, device type, exact serial/IMEI, repair description, invoice amount, customer payment status, part source, and part cost.
 
@@ -22,6 +22,12 @@ When adding one device, you can add multiple repair lines for the same serial nu
 
 For each repair, choose whether parts came from a supplier or from shop inventory. Supplier parts appear in the supplier balance. Inventory parts appear in a separate inventory balance and can be marked paid or pending.
 
+The **Inventory** page has **Payments & balances** and **Stock** sub-pages. Stock records include brand, model, part name, quantity, purchase cost, supplier/source, and paid or pending status. Search finds stock by brand, model, or part, and filters show available or out-of-stock items.
+
+Complete donor phones use an editable common-parts checklist. Select all usable parts or add custom parts. When a repair uses a donor-phone part, only that selected part is removed from availability.
+
+When a repair uses normal stock, one item is deducted automatically. A paid stock purchase gives the repair a €0 part cost. A pending stock purchase shows the unit-cost reference on the repair, while the actual outstanding debt stays only on the stock purchase to avoid counting the same cost twice.
+
 Waiting repairs do not count toward invoiced money or customer pending balances until they are moved to **Ready pickup** or **Picked up / paid**. Waiting repair part costs only affect supplier or inventory balances when **Parts acquired / cost active** is checked. Moving a repair to ready or picked up treats its parts as acquired automatically.
 
 The top search bar works across the app. Type manually to find a customer, serial/IMEI, supplier, technician, device, repair item, or note, or use the filter beside it to focus the app on repairs, paid/pending items, supplier, inventory, technician, or shop data.
@@ -33,6 +39,8 @@ Use the three-dot menu button in the left menu to minimize the menu and give the
 The dashboard shows all current, uncleared balances no matter which month the records came from. Use **Clear** on individual rows or **Clear current balances** to move those balances into the **All Time Income** page. Clearing asks for a folder start date and end date; the start date defaults from the paid/picked records being cleared, and the end date can be today, yesterday, or a custom date. Clearing does not delete records; it marks them as settled so the dashboard starts fresh. Clearing a repair also clears its linked supplier payments and linked expenses so old repair income and old repair costs stay together.
 
 Dashboard metric cards are clickable. For example, **Paid expenses** opens the paid expense records, **Customer pending** opens unpaid customer repairs, and **Supplier remaining** opens the supplier balance page.
+
+The dashboard's **Today updates** panel stores each data-changing action in Supabase, remains available after closing and reopening the app, and refreshes changes made by other signed-in devices.
 
 The **All Time Income** page has its own dedicated view for cleared balances and can filter by all time, single day, week/range, month, date range, customer name, technician name, serial number, or device text. It groups cleared balances into expandable folders with start date, end date, gross, expense, and net totals. Cleared rows can be restored, edited, or deleted, and folder dates can be edited.
 
