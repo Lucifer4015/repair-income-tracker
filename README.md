@@ -100,6 +100,23 @@ Install that APK on an Android phone to use the mobile app. For store release la
 
 The app is ready for Supabase Auth and database storage.
 
+The strict-authentication build does not persist Supabase sessions. Every page
+refresh, browser reopen, or app restart requires email and password again.
+Signing out clears all local app state.
+
+Before deploying the strict-authentication build, follow
+`supabase-auth-migration-plan.md`, export the required backups, review existing
+user roles, and then run `supabase-auth-admin-migration.sql`. Run the migration
+before uploading the updated `index.html`; otherwise existing accounts cannot
+load their required profile.
+
+The migration adds an admin portal and `admin`, `employee`, and `decoy` profile
+roles. Admins can manage employee/decoy access and force logout open sessions.
+Decoy and inactive users are blocked from `repair_records` by Supabase RLS.
+Admin accounts are protected from client-side role removal or disablement.
+
+No Supabase service-role key is used in the frontend.
+
 1. Create a Supabase project.
 2. In Supabase, open **SQL Editor** and run `supabase-schema.sql`.
 3. In Supabase **Authentication**, enable email/password sign-in.

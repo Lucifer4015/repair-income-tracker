@@ -11,7 +11,7 @@
       --red:#b42318; --green:#12805c; --amber:#a16207; --shadow:0 10px 30px rgba(31,41,55,.1);
       font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     }
-    *{box-sizing:border-box} body{margin:0;min-height:100vh;background:var(--wash);color:var(--ink)}
+    *{box-sizing:border-box} [hidden]{display:none!important} body{margin:0;min-height:100vh;background:var(--wash);color:var(--ink)}
     button,input,select,textarea{font:inherit} button{border:0;cursor:pointer}
     .app-shell{min-height:100vh;display:grid;grid-template-columns:280px 1fr}.app-shell.sidebar-collapsed{grid-template-columns:64px 1fr}
     aside{background:var(--nav);color:#f9fafb;padding:24px 18px;display:flex;flex-direction:column;gap:24px}.menu-toggle{width:42px;height:42px;border-radius:8px;background:rgba(255,255,255,.1);color:#f9fafb;font-size:24px;line-height:1;display:grid;place-items:center}.app-shell.sidebar-collapsed aside{padding:12px 11px;gap:0}.app-shell.sidebar-collapsed .brand,.app-shell.sidebar-collapsed .month-picker,.app-shell.sidebar-collapsed nav,.app-shell.sidebar-collapsed .side-actions{display:none}.app-shell.sidebar-collapsed .menu-toggle{margin:0 auto}
@@ -31,12 +31,12 @@
     .bulk-actions{display:grid;grid-template-columns:auto minmax(180px,280px) auto 1fr;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--line);background:#fff}.bulk-actions[hidden]{display:none}.bulk-actions label{display:inline-flex;align-items:center;gap:8px;margin:0;font-size:13px;font-weight:800;color:var(--muted)}.bulk-actions input[type="checkbox"]{width:18px;height:18px;min-height:18px}.bulk-actions span{font-size:13px;color:var(--muted)}
     .archive-folders{display:grid;gap:12px;padding:14px;background:#fbfcfd}.archive-folder{border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}.folder-button{width:100%;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 16px;background:#fff;color:var(--ink);text-align:left}.folder-button strong{display:block;font-size:15px}.folder-button span{color:var(--muted);font-size:12px;font-weight:750}.folder-summary{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap}.folder-body{border-top:1px solid var(--line)}.folder-body .row-actions{justify-content:flex-end}
     .modal-backdrop{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:14px;background:rgba(15,23,42,.55)}.modal-backdrop[hidden]{display:none}.modal{width:min(820px,calc(100vw - 28px));max-height:calc(100vh - 28px);overflow:auto}.modal-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}.modal-head h3{margin:0;font-size:19px}.form{padding:18px 20px 20px;display:grid;gap:14px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.modal-actions{display:flex;justify-content:flex-end;gap:10px;padding-top:4px}.file-input{display:none}.hidden{display:none!important}
-    .auth-screen{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:20px;background:var(--wash)}.auth-screen[hidden]{display:none}.auth-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:grid;gap:14px}.auth-card h2{margin:0}.auth-card p{margin:0;color:var(--muted);line-height:1.45}.status-line{font-size:13px;color:var(--muted);min-height:20px}.db-badge{font-size:12px;color:#b7c0ca;padding:0 8px}
+    .auth-screen{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:20px;background:var(--wash)}.auth-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:24px;display:grid;gap:15px}.auth-card h2{margin:0}.auth-card p{margin:0;color:var(--muted);line-height:1.45}.status-line{font-size:13px;color:var(--muted);min-height:20px}.db-badge{font-size:12px;color:#b7c0ca;padding:0 8px}.admin-status{font-size:13px;color:var(--muted);padding:0 18px 14px}.decoy-blank{min-height:55vh}
     @media(max-width:1120px){.grid{grid-template-columns:1fr}} @media(max-width:780px){.app-shell,.app-shell.sidebar-collapsed{grid-template-columns:1fr}aside{position:sticky;top:0;z-index:5;padding:14px;gap:14px}.app-shell.sidebar-collapsed aside{padding:10px;min-height:62px}.brand{padding:0}.brand h1{font-size:18px}.month-picker{padding:10px}nav{grid-template-columns:repeat(4,1fr)}.nav-button{justify-content:center;min-height:42px;padding:9px}.nav-button span{display:none}.side-actions{grid-template-columns:1fr 1fr;margin-top:0}main{padding:18px 14px 28px}.topbar{align-items:stretch;flex-direction:column}.global-search{grid-template-columns:1fr}.bulk-actions{grid-template-columns:1fr}.actions{justify-content:stretch}.actions button{flex:1 1 140px}.topbar h2{font-size:24px}.panel-header{align-items:stretch;flex-direction:column}.panel-header .actions{justify-content:stretch}.subnav{display:grid;grid-template-columns:1fr;gap:8px}.subnav button{width:100%}.metrics{grid-template-columns:1fr}.metric{min-height:86px}.form-grid,.line-item,.stock-use{grid-template-columns:1fr}.line-item .icon-button{width:100%}.table-wrap{overflow:visible}table{display:block;min-width:0;border-collapse:separate}thead{display:none}tbody{display:grid;gap:12px;padding:12px}tr{display:block;border:1px solid var(--line);border-radius:8px;background:#fff;box-shadow:0 8px 22px rgba(31,41,55,.08);overflow:hidden}td{display:grid;grid-template-columns:minmax(92px,38%) 1fr;gap:10px;align-items:start;padding:10px 12px;border-bottom:1px solid #edf1f4;word-break:break-word}td:last-child{border-bottom:0}td::before{content:attr(data-label);color:var(--muted);font-size:12px;font-weight:850;text-transform:uppercase;line-height:1.35}td[data-label=""]{grid-template-columns:1fr}td[data-label=""]::before{display:none}.amount{text-align:left;white-space:normal}.row-actions{justify-content:flex-start;flex-wrap:wrap}.row-actions .small-action{flex:1 1 92px}.row-actions .icon-button{width:38px;height:38px}.bar-row{grid-template-columns:1fr}.bar-row strong{text-align:left}.modal-actions{display:grid;grid-template-columns:1fr}} @media(max-width:520px){.bar-row{grid-template-columns:1fr}.bar-row strong{grid-column:auto}td{grid-template-columns:1fr;gap:5px}.tool-toggle-row{justify-content:flex-start}.primary,.secondary,.small-action{white-space:normal}.watermark{grid-column:1/-1}}
   </style>
 </head>
 <body>
-  <div id="authScreen" class="auth-screen" hidden>
+  <div id="authScreen" class="auth-screen">
     <form id="authForm" class="auth-card">
       <h2>Repair Ledger Login</h2>
       <p id="authHelp">Sign in with an approved account. Only users added in Supabase can read or write shop records.</p>
@@ -50,8 +50,8 @@
     <aside>
       <button id="menuToggle" class="menu-toggle" type="button" title="Minimize menu" aria-label="Minimize menu">...</button>
       <div class="brand"><div class="brand-mark">R</div><div><h1>Repair Ledger</h1><p>Monthly shop tracker</p></div></div>
-      <div class="month-picker"><label for="month">Month</label><input id="month" type="month"></div>
-      <nav aria-label="Main views">
+      <div id="monthPicker" class="month-picker"><label for="month">Month</label><input id="month" type="month"></div>
+      <nav id="businessNav" aria-label="Main views">
         <button class="nav-button active" data-view="dashboard" title="Dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h8V3H3v10Zm10 8h8V3h-8v18ZM3 21h8v-6H3v6Z"/></svg><span>Dashboard</span></button>
         <button class="nav-button" data-view="repairs" title="Repairs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m14.7 6.3 3 3M5 19l4.6-1.2L20 7.4 16.6 4 6.2 14.4 5 19Z"/></svg><span>Repairs</span></button>
         <button class="nav-button" data-view="supplier" title="Supplier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15v6M21 18h-6"/></svg><span>Supplier</span></button>
@@ -60,15 +60,16 @@
         <button class="nav-button" data-view="technicians" title="Technicians"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2"/><circle cx="12" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg><span>Technicians</span></button>
         <button class="nav-button" data-view="profit" title="Shop Profit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"/></svg><span>Profit</span></button>
         <button class="nav-button" data-view="archive" title="Cleared Data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 2 5-7"/></svg><span>Cleared</span></button>
+        <button id="adminNav" class="nav-button" data-view="admin" title="Admin portal" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 7v5c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V7l-8-4Z"/><path d="M9 12h6M12 9v6"/></svg><span>Admin</span></button>
       </nav>
       <div class="side-actions"><div id="dbStatus" class="db-badge">Local mode</div><button id="exportBtn" class="ghost">Export CSV</button><button id="importBtn" class="ghost">Import CSV</button><button id="signOutBtn" class="ghost" hidden>Sign out</button><div class="watermark">Made by Sayed Roman Sayedi</div><input id="importFile" class="file-input" type="file" accept=".csv,text/csv"></div>
     </aside>
     <main>
       <section class="topbar">
         <div><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Track all uncleared repairs, customer payments, parts balances, technician balances, and net cash.</p></div>
-        <div class="actions"><button id="addRepairBtn" class="primary">Add repair</button><button id="addExpenseBtn" class="secondary">Add expense</button><button id="addTechBtn" class="secondary">Add balance</button><button id="addTechProfileBtn" class="secondary">Add technician profile</button><button id="clearBalancesBtn" class="secondary">Clear current balances</button><button id="undoBtn" class="secondary" type="button" disabled>Undo</button></div>
+        <div id="topActions" class="actions"><button id="addRepairBtn" class="primary">Add repair</button><button id="addExpenseBtn" class="secondary">Add expense</button><button id="addTechBtn" class="secondary">Add balance</button><button id="addTechProfileBtn" class="secondary">Add technician profile</button><button id="clearBalancesBtn" class="secondary">Clear current balances</button><button id="undoBtn" class="secondary" type="button" disabled>Undo</button></div>
       </section>
-      <section class="tool-toggle-row"><button class="tool-toggle" type="button" data-toggle-search="globalTools" title="Search" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="globalTools" title="Filter" aria-label="Filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></section>
+      <section id="globalToolToggle" class="tool-toggle-row"><button class="tool-toggle" type="button" data-toggle-search="globalTools" title="Search" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button><button class="tool-toggle" type="button" data-toggle-filter="globalTools" title="Filter" aria-label="Filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></section>
       <section id="globalTools" class="global-search"><input id="globalSearch" type="search" placeholder="Search anywhere: customer, serial, supplier, technician, notes"><select id="globalFilter"><option value="all">All data</option><option value="repair">Repairs</option><option value="paid">Paid</option><option value="pending">Pending</option><option value="supplier">Supplier</option><option value="inventory">Inventory</option><option value="technician">Technician</option><option value="shop">Shop</option></select></section>
       <section id="dashboardView">
         <div class="metrics" id="metrics"></div>
@@ -100,6 +101,8 @@
         <div class="metrics" id="archiveMetrics" style="padding:14px 18px"></div>
         <div class="table-wrap" id="archiveTable"></div>
       </section>
+      <section id="adminView" class="panel" hidden><div class="panel-header"><h3>Admin portal</h3><button id="adminRefresh" class="small-action" type="button">Refresh users</button></div><div id="adminStatus" class="admin-status"></div><div class="table-wrap" id="adminTable"></div></section>
+      <section id="decoyView" class="decoy-blank" hidden></section>
     </main>
   </div>
 
@@ -195,9 +198,8 @@
     const expenseCategories = ["Supplier expense", "Supplier payment", "Inventory", "Tools", "Rent", "Utilities", "Marketing", "Shipping", "Other"];
     const commonPhoneParts = ["Display", "Battery", "Back glass", "Charging port", "Rear camera", "Front camera", "Camera lens", "Earpiece speaker", "Loudspeaker", "Microphone", "Vibration motor", "Power button", "Volume buttons", "SIM tray", "Mainboard", "Housing / frame", "Face ID / fingerprint sensor", "Antenna", "Wireless charging coil", "Flex cables"];
     const els = {};
-    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","menuToggle","month","pageTitle","pageSubtitle","globalSearch","globalFilter","metrics","chart","dailyActivity","supplierSummary","inventorySummary","expenseSummary","techSummary","repairsTable","repairBulkActions","repairSelectAll","bulkRepairTechnician","bulkAssignTechnician","bulkSelectedCount","supplierBulkActions","supplierSelectAll","supplierPaySelected","supplierPayAll","supplierSelectedCount","supplierMetrics","supplierTable","inventoryMetrics","inventoryTable","expensesTable","techniciansTable","profitTable","archiveMergeSelected","archiveExportAll","archiveMetrics","archiveTable","archivePeriod","archiveType","archiveStart","archiveEnd","archiveSearch","repairSearch","repairPaymentFilter","repairPartSourceFilter","repairPartBalanceFilter","repairStart","repairEnd","supplierSearch","supplierStart","supplierEnd","inventorySearch","inventoryTypeFilter","inventoryStart","inventoryEnd","expenseSearch","expenseFilterCategory","expensePaymentFilter","expenseStart","expenseEnd","techSearch","techStart","techEnd","dashboardView","repairsView","supplierView","inventoryView","expensesView","techniciansView","profitView","archiveView","addRepairBtn","addExpenseBtn","addTechBtn","addTechProfileBtn","clearBalancesBtn","undoBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","techProfileFields","stockFields","repairDate","customerName","deviceType","serialNumber","repairTechnician","repairStatus","repairItems","addRepairItem","repairTitle","invoiceAmount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes","profileName","profileDefault","profileNotes","stockDate","stockKind","stockBrand","stockModel","stockPartNameWrap","stockPartName","stockQuantity","stockTotalCost","stockPaid","stockVendor","donorPartsSection","donorPartsGrid","selectAllDonorParts","customDonorPart","addCustomDonorPart","stockNotes"].forEach(id => els[id] = document.getElementById(id));
+    ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","menuToggle","monthPicker","month","businessNav","adminNav","pageTitle","pageSubtitle","topActions","globalToolToggle","globalSearch","globalFilter","metrics","chart","dailyActivity","supplierSummary","inventorySummary","expenseSummary","techSummary","repairsTable","repairBulkActions","repairSelectAll","bulkRepairTechnician","bulkAssignTechnician","bulkSelectedCount","supplierBulkActions","supplierSelectAll","supplierPaySelected","supplierPayAll","supplierSelectedCount","supplierMetrics","supplierTable","inventoryMetrics","inventoryTable","expensesTable","techniciansTable","profitTable","archiveMergeSelected","archiveExportAll","archiveMetrics","archiveTable","archivePeriod","archiveType","archiveStart","archiveEnd","archiveSearch","repairSearch","repairPaymentFilter","repairPartSourceFilter","repairPartBalanceFilter","repairStart","repairEnd","supplierSearch","supplierStart","supplierEnd","inventorySearch","inventoryTypeFilter","inventoryStart","inventoryEnd","expenseSearch","expenseFilterCategory","expensePaymentFilter","expenseStart","expenseEnd","techSearch","techStart","techEnd","dashboardView","repairsView","supplierView","inventoryView","expensesView","techniciansView","profitView","archiveView","adminView","adminRefresh","adminStatus","adminTable","decoyView","addRepairBtn","addExpenseBtn","addTechBtn","addTechProfileBtn","clearBalancesBtn","undoBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","techProfileFields","stockFields","repairDate","customerName","deviceType","serialNumber","repairTechnician","repairStatus","repairItems","addRepairItem","repairTitle","invoiceAmount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes","profileName","profileDefault","profileNotes","stockDate","stockKind","stockBrand","stockModel","stockPartNameWrap","stockPartName","stockQuantity","stockTotalCost","stockPaid","stockVendor","donorPartsSection","donorPartsGrid","selectAllDonorParts","customDonorPart","addCustomDonorPart","stockNotes"].forEach(id => els[id] = document.getElementById(id));
     let records = [];
-    records = loadRecords();
     reconcileStockUsage();
     let currentView = "dashboard";
     let currentRepairStatus = "waiting";
@@ -211,7 +213,14 @@
     let undoStack = [];
     let db = null;
     let currentUser = null;
+    let currentProfile = null;
     let dbReady = false;
+    let adminProfiles = [];
+    let observedForceLogoutAt = null;
+    let profilePollTimer = null;
+    let profileRealtimeChannel = null;
+    let profileCheckInFlight = false;
+    let silentSignOutInProgress = false;
     let realtimeChannel = null;
     let remoteRefreshTimer = null;
     let remotePollTimer = null;
@@ -261,8 +270,11 @@
     els.authForm.addEventListener("submit", signIn);
     els.signUpBtn.addEventListener("click", signUp);
     els.signOutBtn.addEventListener("click", signOut);
+    els.adminRefresh.addEventListener("click", loadAdminProfiles);
+    els.adminTable.addEventListener("click", handleAdminTableClick);
+    els.adminTable.addEventListener("change", handleAdminTableChange);
+    window.addEventListener("pageshow", event => { if (event.persisted && currentUser) forceLogoutSilently(); });
     render();
-    restoreDraft();
     initDatabase();
 
     function today(offsetDays = 0) { const date = new Date(); date.setDate(date.getDate() + offsetDays); return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`; }
@@ -270,59 +282,190 @@
       return SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY.length > 20 && window.supabase;
     }
     async function initDatabase() {
+      clearLocalAppState();
       if (!isSupabaseConfigured()) {
-        els.dbStatus.textContent = "Local mode - add Supabase keys";
+        showLogin("Sign in is unavailable.");
         return;
       }
-      db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      const { data } = await db.auth.getSession();
-      currentUser = data.session?.user || null;
-      db.auth.onAuthStateChange((_event, session) => {
-        currentUser = session?.user || null;
-        if (currentUser) { loadRemoteRecords(); setupRealtimeSync(); }
-        else showLogin("Please sign in.");
+      db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth:{ persistSession:false, autoRefreshToken:true, detectSessionInUrl:false }
       });
-      if (currentUser) { await loadRemoteRecords(); setupRealtimeSync(); }
-      else showLogin("Please sign in.");
+      db.auth.onAuthStateChange((event, session) => {
+        currentUser = session?.user || null;
+        if (event === "SIGNED_OUT" && !silentSignOutInProgress) showLogin("Please sign in.");
+      });
+      showLogin("Please sign in.");
     }
     function setupRealtimeSync() {
-      if (!db || realtimeChannel) return;
+      if (!db || realtimeChannel || !["admin","employee"].includes(currentProfile?.role)) return;
       realtimeChannel = db.channel("repair-records-live").on("postgres_changes", { event:"*", schema:"public", table:"repair_records" }, () => {
         clearTimeout(remoteRefreshTimer);
         remoteRefreshTimer = setTimeout(loadRemoteRecords, 500);
       }).subscribe();
       remotePollTimer = remotePollTimer || setInterval(() => { if (currentUser && document.visibilityState === "visible") loadRemoteRecords(); }, 30000);
     }
+    function startProfileMonitor() {
+      stopProfileMonitor();
+      if (!db || !currentUser) return;
+      profilePollTimer = setInterval(checkCurrentProfile, 5000);
+      profileRealtimeChannel = db.channel(`profile-session-${currentUser.id}`).on("postgres_changes", { event:"UPDATE", schema:"public", table:"profiles", filter:`id=eq.${currentUser.id}` }, checkCurrentProfile).subscribe();
+    }
+    function stopProfileMonitor() {
+      clearInterval(profilePollTimer);
+      profilePollTimer = null;
+      if (profileRealtimeChannel && db) db.removeChannel(profileRealtimeChannel);
+      profileRealtimeChannel = null;
+    }
+    async function stopDataSync() {
+      clearTimeout(remoteRefreshTimer);
+      clearInterval(remotePollTimer);
+      remotePollTimer = null;
+      if (realtimeChannel && db) await db.removeChannel(realtimeChannel);
+      realtimeChannel = null;
+    }
+    async function fetchOwnProfile() {
+      if (!db || !currentUser) return null;
+      const { data, error } = await db.from("profiles").select("id,email,role,is_active,force_logout_at").eq("id", currentUser.id).limit(1);
+      if (error) return undefined;
+      return data?.[0] || null;
+    }
+    async function checkCurrentProfile() {
+      if (!currentUser || silentSignOutInProgress || profileCheckInFlight) return;
+      profileCheckInFlight = true;
+      try {
+        const profile = await fetchOwnProfile();
+        if (profile === undefined) return;
+        if (!profile || !profile.is_active || profile.force_logout_at !== observedForceLogoutAt) {
+          await forceLogoutSilently();
+          return;
+        }
+        const previousRole = currentProfile?.role;
+        currentProfile = profile;
+        if (previousRole !== profile.role) {
+          await stopDataSync();
+          records = [];
+          dbReady = false;
+          if (profile.role === "decoy") {
+            showApp();
+            render();
+          } else if (["admin","employee"].includes(profile.role)) {
+            currentView = "dashboard";
+            await loadRemoteRecords();
+            setupRealtimeSync();
+          } else {
+            await forceLogoutSilently();
+          }
+        }
+      } finally {
+        profileCheckInFlight = false;
+      }
+    }
     function showLogin(message = "") {
       dbReady = false;
+      currentProfile = null;
       els.authStatus.textContent = message;
       els.authScreen.hidden = false;
       els.signOutBtn.hidden = true;
       els.dbStatus.textContent = "Supabase - signed out";
+      els.authPassword.value = "";
+      applyRoleUi();
     }
     function showApp() {
       els.authScreen.hidden = true;
       els.signOutBtn.hidden = false;
-      els.dbStatus.textContent = `Supabase - ${currentUser?.email || "signed in"}`;
+      els.dbStatus.textContent = currentProfile?.role === "decoy" ? `Supabase - ${currentUser?.email || "signed in"}` : `${currentProfile?.role || "user"} - ${currentUser?.email || "signed in"}`;
+      applyRoleUi();
     }
     async function signIn(event) {
       event.preventDefault();
       if (!db) return;
       els.authStatus.textContent = "Signing in...";
-      const { error } = await db.auth.signInWithPassword({ email:els.authEmail.value.trim(), password:els.authPassword.value });
-      els.authStatus.textContent = error ? error.message : "Signed in.";
+      clearLocalAppState();
+      const { data, error } = await db.auth.signInWithPassword({ email:els.authEmail.value.trim(), password:els.authPassword.value });
+      if (error || !data.user) {
+        els.authStatus.textContent = /invalid|credentials/i.test(error?.message || "") ? "Invalid email or password." : "Unable to sign in right now.";
+        return;
+      }
+      currentUser = data.user;
+      const profile = await fetchOwnProfile();
+      if (profile === undefined) {
+        await signOutToLogin("Unable to sign in right now.");
+        return;
+      }
+      if (!profile || !profile.is_active || !["admin","employee","decoy"].includes(profile.role)) {
+        await signOutToLogin("Your account is not active or approved.");
+        return;
+      }
+      currentProfile = profile;
+      observedForceLogoutAt = profile.force_logout_at;
+      startProfileMonitor();
+      if (profile.role === "decoy") {
+        records = [];
+        dbReady = false;
+        showApp();
+        render();
+      } else {
+        await loadRemoteRecords();
+        setupRealtimeSync();
+      }
     }
     async function signUp() {
       if (!db) return;
       els.authStatus.textContent = "Creating account...";
       const { error } = await db.auth.signUp({ email:els.authEmail.value.trim(), password:els.authPassword.value });
-      els.authStatus.textContent = error ? error.message : "Account created. Ask the owner to add this user in app_members, then sign in.";
+      if (error) {
+        els.authStatus.textContent = /registered|exists/i.test(error.message || "") ? "An account already exists for this email." : "Unable to create the account right now.";
+        return;
+      }
+      await db.auth.signOut();
+      els.authStatus.textContent = "Account created. An admin must enable it before you can sign in.";
     }
     async function signOut() {
-      if (!db) return;
-      if (realtimeChannel) { await db.removeChannel(realtimeChannel); realtimeChannel = null; }
-      clearInterval(remotePollTimer); remotePollTimer = null;
-      await db.auth.signOut();
+      await signOutToLogin("Please sign in.");
+    }
+    async function signOutToLogin(message = "") {
+      silentSignOutInProgress = true;
+      stopProfileMonitor();
+      await stopDataSync();
+      clearLocalAppState();
+      try {
+        if (db) await db.auth.signOut();
+      } catch {
+      } finally {
+        currentUser = null;
+        currentProfile = null;
+        observedForceLogoutAt = null;
+        silentSignOutInProgress = false;
+        showLogin(message);
+      }
+    }
+    async function forceLogoutSilently() {
+      await signOutToLogin("");
+    }
+    function clearLocalAppState() {
+      records = [];
+      adminProfiles = [];
+      selectedRepairIds.clear();
+      selectedSupplierPayIds.clear();
+      selectedArchiveFolderKeys.clear();
+      expandedArchiveFolders.clear();
+      expandedArchiveCategoryKeys.clear();
+      undoStack = [];
+      currentView = "dashboard";
+      currentRepairStatus = "waiting";
+      dbReady = false;
+      for (let index = localStorage.length - 1; index >= 0; index--) {
+        const key = localStorage.key(index);
+        if (key?.startsWith("repair-ledger-")) localStorage.removeItem(key);
+      }
+      document.querySelectorAll(".app-shell input:not([type='file']), .app-shell textarea").forEach(input => { input.value = ""; if (input.type === "checkbox") input.checked = false; });
+      document.querySelectorAll(".app-shell select").forEach(select => { select.selectedIndex = 0; });
+      els.month.value = new Date().toISOString().slice(0, 7);
+      els.adminStatus.textContent = "";
+      els.adminTable.innerHTML = "";
+      setMenuCollapsed(false);
+      if (els.recordDialog) els.recordDialog.hidden = true;
+      render();
     }
     function toDbRow(record) {
       const compatibleType = record.type === "repair" ? "repair" : (record.type === "technician" || record.type === "technician_profile") ? "technician" : "expense";
@@ -332,11 +475,11 @@
       return normalizeRecord({ ...row.data, id:row.id, type:row.data?.type || row.record_type, date:row.record_date });
     }
     async function loadRemoteRecords() {
-      if (!db || !currentUser) return;
+      if (!db || !currentUser || !["admin","employee"].includes(currentProfile?.role)) return;
       els.dbStatus.textContent = "Supabase - loading...";
       const { data, error } = await db.from("repair_records").select("*").order("record_date", { ascending:false });
       if (error) {
-        showLogin(error.message.includes("row-level security") ? "You are signed in but not approved for this app yet." : error.message);
+        await signOutToLogin("Unable to open this account right now.");
         return;
       }
       records = (data || []).map(fromDbRow);
@@ -348,29 +491,20 @@
     async function syncRecord(record) {
       if (!dbReady) return;
       const { error } = await db.from("repair_records").upsert(toDbRow(record));
-      if (error) alert(`Database save failed: ${error.message}`);
+      if (error) alert("The change could not be saved. Please try again.");
     }
     async function deleteRemoteRecord(id) {
       if (!dbReady) return;
       const { error } = await db.from("repair_records").delete().eq("id", id);
-      if (error) alert(`Database delete failed: ${error.message}`);
+      if (error) alert("The change could not be deleted. Please try again.");
     }
     async function syncAllRecords() {
       if (!dbReady || !records.length) return;
       const { error } = await db.from("repair_records").upsert(records.map(toDbRow));
-      if (error) alert(`Database sync failed: ${error.message}`);
+      if (error) alert("The changes could not be synchronized. Please try again.");
     }
     function loadRecords() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) { try { return JSON.parse(saved).map(normalizeRecord).filter(notQaRecord); } catch {} }
-      for (const key of OLD_KEYS) {
-        const old = localStorage.getItem(key);
-        if (old) { try { return JSON.parse(old).map(normalizeRecord).filter(notQaRecord); } catch {} }
-      }
-      return [
-        { id: crypto.randomUUID(), type:"repair", date:today(-20), customer:"Walk-in", deviceType:"iPhone", serialNumber:"IMEI sample", title:"Screen replacement", amount:129, partSource:"supplier", partsCost:58, customerPaid:true, notes:"Black screen installed" },
-        { id: crypto.randomUUID(), type:"repair", date:today(-12), customer:"Business client", deviceType:"Laptop", serialNumber:"SN sample", title:"SSD upgrade and setup", amount:220, partSource:"inventory", partsCost:74, inventoryPaid:false, customerPaid:false, notes:"Waiting for bank transfer" }
-      ];
+      return [];
     }
     function normalizeRecord(record) {
       if (record.type === "activity") return { id:record.id || crypto.randomUUID(), type:"activity", date:record.date || today(), time:record.time || new Date().toISOString(), action:record.action || "Update", summary:record.summary || "", effect:record.effect || "", relatedId:record.relatedId || "", notes:record.notes || "" };
@@ -529,16 +663,7 @@
       syncAllRecords();
     }
     function saveLocalCache() {
-      const cache = dbReady && currentUser
-        ? [...records].sort((a,b) => ((b.time || b.date || "").localeCompare(a.time || a.date || ""))).slice(0, 1500)
-        : records;
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(cache));
-      } catch {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(cache.slice(0, 500)));
-        } catch {}
-      }
+      localStorage.removeItem(STORAGE_KEY);
     }
     function cloneRecords() {
       return JSON.parse(JSON.stringify(records));
@@ -631,7 +756,112 @@
       const focusTarget = className === "search-open" ? panel.querySelector('input[type="search"]') : panel.querySelector("select,input[type='date']");
       if (panel.classList.contains(className) && focusTarget) focusTarget.focus();
     }
-    function setView(view) { currentView = view; document.querySelectorAll(".nav-button").forEach(button => button.classList.toggle("active", button.dataset.view === view)); render(); }
+    function applyRoleUi() {
+      const signedIn = Boolean(currentProfile);
+      const isAdmin = currentProfile?.role === "admin";
+      const isDecoy = currentProfile?.role === "decoy";
+      if (isDecoy) currentView = "decoy";
+      els.businessNav.hidden = !signedIn || isDecoy;
+      els.adminNav.hidden = !isAdmin;
+      els.monthPicker.hidden = !signedIn || isDecoy || currentView === "admin";
+      els.topActions.hidden = !signedIn || isDecoy || currentView === "admin";
+      els.globalToolToggle.hidden = !signedIn || isDecoy || currentView === "admin";
+      document.getElementById("globalTools").hidden = !signedIn || isDecoy || currentView === "admin";
+      els.exportBtn.hidden = !signedIn || isDecoy;
+      els.importBtn.hidden = !signedIn || isDecoy;
+    }
+    function setView(view) {
+      if (!currentProfile) return;
+      if (currentProfile.role === "decoy") view = "decoy";
+      if (view === "admin" && currentProfile.role !== "admin") return;
+      currentView = view;
+      document.querySelectorAll(".nav-button").forEach(button => button.classList.toggle("active", button.dataset.view === view));
+      render();
+      if (view === "admin") loadAdminProfiles();
+    }
+    async function loadAdminProfiles() {
+      if (!db || currentProfile?.role !== "admin") return;
+      els.adminStatus.textContent = "Loading users...";
+      const { data, error } = await db.from("profiles").select("id,email,role,is_active,force_logout_at").order("email", { ascending:true });
+      if (error) {
+        els.adminStatus.textContent = "Users could not be loaded. Check admin access and try again.";
+        return;
+      }
+      adminProfiles = data || [];
+      els.adminStatus.textContent = `${adminProfiles.length} user${adminProfiles.length === 1 ? "" : "s"}`;
+      renderAdminPortal();
+      labelTableCells();
+    }
+    function renderAdminPortal() {
+      if (!els.adminTable || currentProfile?.role !== "admin") {
+        if (els.adminTable) els.adminTable.innerHTML = "";
+        return;
+      }
+      if (!adminProfiles.length) {
+        els.adminTable.innerHTML = `<div class="empty">No user profiles are available.</div>`;
+        return;
+      }
+      els.adminTable.innerHTML = `<table><thead><tr><th>Email</th><th>Role</th><th>Status</th><th>Last forced logout</th><th></th></tr></thead><tbody>${adminProfiles.map(profile => {
+        const protectedAdmin = profile.role === "admin";
+        const roleControl = protectedAdmin
+          ? `<span class="tag blue">Admin protected</span>`
+          : `<select data-admin-role="${profile.id}" aria-label="Role for ${esc(profile.email || "user")}"><option value="employee" ${profile.role === "employee" ? "selected" : ""}>Employee</option><option value="decoy" ${profile.role === "decoy" ? "selected" : ""}>Decoy</option></select>`;
+        const actions = protectedAdmin
+          ? `<span class="muted">${profile.id === currentUser?.id ? "Your admin access is protected" : "Protected admin"}</span>`
+          : `<button class="small-action" data-admin-force="${profile.id}">Force logout</button><button class="small-action" data-admin-active="${profile.id}" data-next-active="${profile.is_active ? "false" : "true"}">${profile.is_active ? "Disable" : "Enable"}</button>`;
+        return `<tr><td>${esc(profile.email || "-")}</td><td>${roleControl}</td><td>${paymentTag(profile.is_active,"Active","Disabled")}</td><td>${esc(profile.force_logout_at ? new Date(profile.force_logout_at).toLocaleString() : "Never")}</td><td><div class="row-actions">${actions}</div></td></tr>`;
+      }).join("")}</tbody></table>`;
+    }
+    async function updateManagedProfile(id, changes, successMessage) {
+      if (currentProfile?.role !== "admin") return false;
+      const target = adminProfiles.find(profile => profile.id === id);
+      if (!target || target.role === "admin") {
+        els.adminStatus.textContent = "Admin profiles are protected.";
+        renderAdminPortal();
+        return false;
+      }
+      els.adminStatus.textContent = "Saving...";
+      const { data, error } = await db.from("profiles").update(changes).eq("id", id).select("id,email,role,is_active,force_logout_at").limit(1);
+      if (error || !data?.length) {
+        els.adminStatus.textContent = "The account change could not be saved. Check admin access and try again.";
+        renderAdminPortal();
+        return false;
+      }
+      adminProfiles = adminProfiles.map(profile => profile.id === id ? data[0] : profile);
+      els.adminStatus.textContent = successMessage;
+      renderAdminPortal();
+      labelTableCells();
+      return true;
+    }
+    async function handleAdminTableClick(event) {
+      const forceButton = event.target.closest("[data-admin-force]");
+      if (forceButton) {
+        const profile = adminProfiles.find(item => item.id === forceButton.dataset.adminForce);
+        if (!profile || !confirm(`Force logout ${profile.email || "this employee"}?`)) return;
+        await updateManagedProfile(profile.id, { force_logout_at:new Date().toISOString() }, "Force logout requested.");
+        return;
+      }
+      const activeButton = event.target.closest("[data-admin-active]");
+      if (activeButton) {
+        const profile = adminProfiles.find(item => item.id === activeButton.dataset.adminActive);
+        const nextActive = activeButton.dataset.nextActive === "true";
+        if (!profile || !confirm(`${nextActive ? "Enable" : "Disable"} ${profile.email || "this employee"}?`)) return;
+        const changes = nextActive ? { is_active:true } : { is_active:false, force_logout_at:new Date().toISOString() };
+        await updateManagedProfile(profile.id, changes, nextActive ? "Account enabled." : "Account disabled and logout requested.");
+      }
+    }
+    async function handleAdminTableChange(event) {
+      const roleSelect = event.target.closest("[data-admin-role]");
+      if (!roleSelect) return;
+      const profile = adminProfiles.find(item => item.id === roleSelect.dataset.adminRole);
+      const nextRole = roleSelect.value;
+      if (!profile || !["employee","decoy"].includes(nextRole)) return;
+      if (!confirm(`Change ${profile.email || "this user"} from ${profile.role} to ${nextRole}?`)) {
+        renderAdminPortal();
+        return;
+      }
+      await updateManagedProfile(profile.id, { role:nextRole }, `Role changed to ${nextRole}.`);
+    }
     function syncRepairStatusButtons() { document.querySelectorAll("[data-repair-status]").forEach(button => button.classList.toggle("active", button.dataset.repairStatus === currentRepairStatus)); }
     function setRepairStatus(status) { currentRepairStatus = status; syncRepairStatusButtons(); renderTables(); }
     function setInventoryTab(tab) {
@@ -868,11 +1098,13 @@
       return { repairs, expenses, count:repairs.length, waitingCount, readyCount, pickedCount, invoiced, collected, customerPending, paidExpenses:totalPaidExpenses, inventoryUsedExpense, supplierExpenseRemaining, inventoryExpenseRemaining, generalExpenseRemaining, supplierRemaining, inventoryRemaining, inventoryPaid, techOwesShop:techs.techOwesShop, shopOwesTech:techs.shopOwesTech, netCash:collected - totalPaidExpenses };
     }
     function render() {
-      const titles = { dashboard:["Dashboard","Track all uncleared repairs, customer payments, parts balances, technician balances, and net cash."], repairs:["Repairs","Customer devices, serial numbers, invoices, and payment status."], supplier:["Supplier","See supplier balances, payments, dates, items, and totals."], inventory:["Inventory","See inventory parts, inventory purchases, paid dates, and remaining balances."], expenses:["Expenses","General shop expenses that are not linked to supplier or inventory."], technicians:["Technicians","Track what technicians owe the shop and what the shop owes technicians."], profit:["Shop Profit","Split positive net income between shop profit and technician salary."], archive:["All Time Income","Search cleared days, weeks, months, customers, serials, income, expenses, and profit."] };
+      applyRoleUi();
+      const titles = { dashboard:["Dashboard","Track all uncleared repairs, customer payments, parts balances, technician balances, and net cash."], repairs:["Repairs","Customer devices, serial numbers, invoices, and payment status."], supplier:["Supplier","See supplier balances, payments, dates, items, and totals."], inventory:["Inventory","See inventory parts, inventory purchases, paid dates, and remaining balances."], expenses:["Expenses","General shop expenses that are not linked to supplier or inventory."], technicians:["Technicians","Track what technicians owe the shop and what the shop owes technicians."], profit:["Shop Profit","Split positive net income between shop profit and technician salary."], archive:["All Time Income","Search cleared days, weeks, months, customers, serials, income, expenses, and profit."], admin:["Admin Portal","Manage employee access, roles, and active sessions."], decoy:["Repair Ledger",""] };
       els.pageTitle.textContent = titles[currentView][0]; els.pageSubtitle.textContent = titles[currentView][1];
-      els.dashboardView.hidden = currentView !== "dashboard"; els.repairsView.hidden = currentView !== "repairs"; els.supplierView.hidden = currentView !== "supplier"; els.inventoryView.hidden = currentView !== "inventory"; els.expensesView.hidden = currentView !== "expenses"; els.techniciansView.hidden = currentView !== "technicians"; els.profitView.hidden = currentView !== "profit"; els.archiveView.hidden = currentView !== "archive";
+      els.dashboardView.hidden = currentView !== "dashboard"; els.repairsView.hidden = currentView !== "repairs"; els.supplierView.hidden = currentView !== "supplier"; els.inventoryView.hidden = currentView !== "inventory"; els.expensesView.hidden = currentView !== "expenses"; els.techniciansView.hidden = currentView !== "technicians"; els.profitView.hidden = currentView !== "profit"; els.archiveView.hidden = currentView !== "archive"; els.adminView.hidden = currentView !== "admin"; els.decoyView.hidden = currentView !== "decoy";
       renderUndoButton();
       renderMetrics(); renderChart(); renderTables();
+      if (currentView === "admin") renderAdminPortal();
     }
     function renderMetrics() {
       const t = totals();
