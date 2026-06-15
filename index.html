@@ -149,7 +149,7 @@
             <div><label for="techName">Technician</label><select id="techName"></select></div>
             <div><label for="techDirection">Balance direction</label><select id="techDirection"><option value="shop_owes_tech">Shop owes technician</option><option value="tech_owes_shop">Technician owes shop</option><option value="advance_salary">Advance salary paid</option></select></div>
             <div><label for="techAmount">Total amount (€)</label><input id="techAmount" type="number" min="0" step="0.01"></div>
-            <div><label for="techPaidAmount">Paid amount (€)</label><input id="techPaidAmount" type="number" min="0" step="0.01"></div>
+            <div id="techPaidAmountWrap"><label for="techPaidAmount">Amount already settled (€)</label><input id="techPaidAmount" type="number" min="0" step="0.01"></div>
             <div><label for="techReason">For what</label><input id="techReason" type="text" placeholder="Labor, cash advance, tools, parts"></div>
           </div>
           <div style="margin-top:14px"><label for="techNotes">Notes</label><textarea id="techNotes" rows="3" placeholder="Extra detail about the balance or payment"></textarea></div>
@@ -201,6 +201,7 @@
     const els = {};
     ["authScreen","authForm","authEmail","authPassword","authStatus","signUpBtn","signOutBtn","dbStatus","menuToggle","monthPicker","month","businessNav","adminNav","pageTitle","pageSubtitle","topActions","globalToolToggle","globalSearch","globalFilter","metrics","chart","dailyActivity","supplierSummary","inventorySummary","expenseSummary","techSummary","repairsTable","repairBulkActions","repairSelectAll","bulkRepairTechnician","bulkAssignTechnician","bulkSelectedCount","supplierBulkActions","supplierSelectAll","supplierPaySelected","supplierPayAll","supplierSelectedCount","supplierMetrics","supplierTable","inventoryMetrics","inventoryTable","expensesTable","techniciansTable","profitTable","archiveMergeSelected","archiveExportAll","archiveMetrics","archiveTable","archivePeriod","archiveType","archiveStart","archiveEnd","archiveSearch","repairSearch","repairPaymentFilter","repairPartSourceFilter","repairPartBalanceFilter","repairStart","repairEnd","supplierSearch","supplierStart","supplierEnd","inventorySearch","inventoryTypeFilter","inventoryStart","inventoryEnd","expenseSearch","expenseFilterCategory","expensePaymentFilter","expenseStart","expenseEnd","techSearch","techStart","techEnd","dashboardView","repairsView","supplierView","inventoryView","expensesView","techniciansView","profitView","archiveView","adminView","adminRefresh","adminStatus","adminTable","decoyView","addRepairBtn","addExpenseBtn","addTechBtn","addTechProfileBtn","clearBalancesBtn","undoBtn","exportBtn","importBtn","importFile","recordDialog","recordForm","modalTitle","recordId","recordType","repairFields","expenseFields","techFields","techProfileFields","stockFields","repairDate","customerName","deviceType","serialNumber","repairTechnician","repairStatus","repairItems","addRepairItem","repairTitle","invoiceAmount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","repairNotes","expenseDate","expenseCategory","vendorName","expenseAmount","linkedRepair","expensePaid","expenseNotes","techDate","techName","techDirection","techAmount","techPaidAmount","techReason","techNotes","profileName","profileDefault","profileNotes","stockDate","stockKind","stockBrand","stockModel","stockPartNameWrap","stockPartName","stockQuantity","stockTotalCost","stockPaid","stockVendor","donorPartsSection","donorPartsGrid","selectAllDonorParts","customDonorPart","addCustomDonorPart","stockNotes"].forEach(id => els[id] = document.getElementById(id));
     els.stockSource = document.getElementById("stockSource");
+    els.techPaidAmountWrap = document.getElementById("techPaidAmountWrap");
     let records = [];
     reconcileStockUsage();
     let currentView = "dashboard";
@@ -263,6 +264,8 @@
     els.addRepairItem.addEventListener("click", () => { addRepairItemRow(); saveDraft(); });
     els.partSource.addEventListener("change", () => { updateRepairStockControls(); saveDraft(); });
     els.stockKind.addEventListener("change", updateStockKindFields);
+    els.techDirection.addEventListener("change", updateTechDirectionFields);
+    els.techAmount.addEventListener("input", () => { if (els.techDirection.value === "advance_salary") els.techPaidAmount.value = els.techAmount.value; });
     els.selectAllDonorParts.addEventListener("click", selectAllDonorParts);
     els.addCustomDonorPart.addEventListener("click", addCustomDonorPart);
     els.recordForm.addEventListener("submit", saveRecord);
@@ -519,7 +522,7 @@
       }
       if (record.type === "expense") return { id:record.id || crypto.randomUUID(), type:"expense", date:record.date || today(), category:record.category || "Other", vendor:record.vendor || record.customer || "", amount:Number(record.amount || 0), paid:record.paid !== false && record.paid !== "pending", linkedRepairId:record.linkedRepairId || "", settledAt:record.settledAt || "", settlementLabel:record.settlementLabel || "", settlementStartDate:record.settlementStartDate || "", settlementEndDate:record.settlementEndDate || "", notes:record.notes || "" };
       if (record.type === "technician_profile") return { id:record.id || crypto.randomUUID(), type:"technician_profile", date:record.date || today(), name:record.name || record.technician || "Technician", isDefault:record.isDefault === true || record.isDefault === "yes", notes:record.notes || "" };
-      if (record.type === "technician") return { id:record.id || crypto.randomUUID(), type:"technician", date:record.date || today(), technicianId:record.technicianId || findTechnicianIdByName(record.technician || record.techName), technician:record.technician || record.techName || technicianName(record.technicianId), direction:record.direction || "shop_owes_tech", reason:record.reason || "", amount:Number(record.amount || 0), paidAmount:Number(record.paidAmount || 0), settledAt:record.settledAt || "", settlementLabel:record.settlementLabel || "", settlementStartDate:record.settlementStartDate || "", settlementEndDate:record.settlementEndDate || "", notes:record.notes || "" };
+      if (record.type === "technician") return { id:record.id || crypto.randomUUID(), type:"technician", date:record.date || today(), technicianId:record.technicianId || findTechnicianIdByName(record.technician || record.techName), technician:record.technician || record.techName || technicianName(record.technicianId), direction:record.direction || "shop_owes_tech", reason:record.reason || "", amount:Number(record.amount || 0), paidAmount:Number(record.paidAmount || 0), salaryPeriodStart:record.salaryPeriodStart || "", settledAt:record.settledAt || "", settlementLabel:record.settlementLabel || "", settlementStartDate:record.settlementStartDate || "", settlementEndDate:record.settlementEndDate || "", notes:record.notes || "" };
       const repairItems = normalizeRepairItems(record);
       const status = record.status || "picked_up";
       const hasSavedPartAcquired = record.partAcquired === true || record.partAcquired === false || record.partAcquired === "yes" || record.partAcquired === "no";
@@ -651,6 +654,21 @@
     function technicianTransactions(list = monthRecords()) {
       return list.filter(record => record.type === "technician");
     }
+    function technicianRecordRemaining(record) {
+      return Math.max(0, Number(record?.amount || 0) - Number(record?.paidAmount || 0));
+    }
+    function technicianSalaryPaymentsForPeriod(list = monthRecords(), profileId = "") {
+      const isArchiveList = list.some(isSettled);
+      const periodDates = list.filter(record => record.type !== "activity" && record.type !== "technician_profile").map(record => record.date).filter(Boolean).sort();
+      const periodStart = periodDates[0] || "";
+      const source = isArchiveList ? list : records;
+      return source.filter(record =>
+        record.type === "technician" &&
+        record.direction === "salary_paid" &&
+        (!profileId || (record.technicianId || findTechnicianIdByName(record.technician)) === profileId) &&
+        (isArchiveList || !periodStart || (record.salaryPeriodStart || record.date || "") >= periodStart)
+      );
+    }
     function technicianSalaryShare(profileId, list = monthRecords()) {
       const repairs = list.filter(record => record.type === "repair" && record.customerPaid && isBillableRepair(record));
       const totalCollected = repairs.reduce((total, repair) => total + Number(repair.amount || 0), 0);
@@ -661,13 +679,17 @@
     function technicianBalance(profileId, list = monthRecords()) {
       const salary = technicianSalaryShare(profileId, list);
       const transactions = technicianTransactions(list).filter(record => (record.technicianId || findTechnicianIdByName(record.technician)) === profileId);
-      const shopOwes = transactions.filter(record => record.direction === "shop_owes_tech").reduce((total, record) => total + Math.max(0, Number(record.amount || 0) - Number(record.paidAmount || 0)), 0);
-      const deductions = transactions.filter(record => record.direction === "tech_owes_shop" || record.direction === "advance_salary").reduce((total, record) => total + Math.max(0, Number(record.amount || 0) - Number(record.paidAmount || 0)), 0);
-      const currentDates = list.map(record => record.date).filter(Boolean).sort();
-      const periodStart = currentDates[0] || "";
-      const salaryPaid = records.filter(record => record.type === "technician" && record.direction === "salary_paid" && (record.technicianId || findTechnicianIdByName(record.technician)) === profileId && (!periodStart || (record.date || "") >= periodStart)).reduce((total, record) => total + Number(record.amount || 0), 0);
-      const salaryDue = Math.max(0, salary - deductions - salaryPaid);
-      return { salary, shopOwes, deductions, salaryPaid, salaryDue, debtRemaining:Math.max(0, deductions - salary), totalOwed:salaryDue + shopOwes };
+      const shopOwes = transactions.filter(record => record.direction === "shop_owes_tech").reduce((total, record) => total + technicianRecordRemaining(record), 0);
+      const techDebt = transactions.filter(record => record.direction === "tech_owes_shop").reduce((total, record) => total + technicianRecordRemaining(record), 0);
+      const advances = transactions.filter(record => record.direction === "advance_salary").reduce((total, record) => total + Number(record.amount || 0), 0);
+      const salaryPaid = technicianSalaryPaymentsForPeriod(list, profileId).reduce((total, record) => total + Number(record.amount || 0), 0);
+      const debtApplied = Math.min(salary, techDebt);
+      const salaryAfterDebt = Math.max(0, salary - techDebt);
+      const advanceApplied = Math.min(salaryAfterDebt, advances);
+      const salaryAfterAdvance = Math.max(0, salaryAfterDebt - advances);
+      const salaryPaymentApplied = Math.min(salaryAfterAdvance, salaryPaid);
+      const salaryDue = Math.max(0, salaryAfterAdvance - salaryPaid);
+      return { salary, shopOwes, techDebt, advances, salaryPaid, debtApplied, advanceApplied, salaryPaymentApplied, salaryDue, debtRemaining:Math.max(0, techDebt - salary), advanceCarryForward:Math.max(0, advances - salaryAfterDebt), totalOwed:salaryDue + shopOwes };
     }
     function persist() {
       saveLocalCache();
@@ -1076,24 +1098,33 @@
     function technicianTotals(list = monthRecords()) {
       const techs = list.filter(r => r.type === "technician");
       return techs.reduce((totals, record) => {
-        if (record.direction === "salary_paid") return totals;
-        const remaining = Math.max(0, Number(record.amount || 0) - Number(record.paidAmount || 0));
-        if (record.direction === "tech_owes_shop" || record.direction === "advance_salary") totals.techOwesShop += remaining;
-        else totals.shopOwesTech += remaining;
+        if (record.direction === "advance_salary") totals.advanceSalaryPaid += Number(record.amount || 0);
+        else if (record.direction === "tech_owes_shop") totals.techOwesShop += technicianRecordRemaining(record);
+        else if (record.direction === "shop_owes_tech") totals.shopOwesTech += technicianRecordRemaining(record);
+        else if (record.direction === "salary_paid") totals.salaryPaid += Number(record.amount || 0);
         return totals;
-      }, { techOwesShop:0, shopOwesTech:0 });
+      }, { techOwesShop:0, shopOwesTech:0, advanceSalaryPaid:0, salaryPaid:0 });
+    }
+    function calculateTechnicianSplit(distributableNet, techDebt = 0, advances = 0, salaryPaid = 0) {
+      const shopBaseProfit = distributableNet / 2;
+      const technicianBaseIncome = distributableNet / 2;
+      const debtOffset = Math.min(technicianBaseIncome, techDebt);
+      const technicianIncomeAfterDebt = Math.max(0, technicianBaseIncome - techDebt);
+      const advanceApplied = Math.min(technicianIncomeAfterDebt, advances);
+      const technicianIncomeAfterAdvance = Math.max(0, technicianIncomeAfterDebt - advances);
+      const salaryPaymentApplied = Math.min(technicianIncomeAfterAdvance, salaryPaid);
+      const technicianSalaryDue = Math.max(0, technicianIncomeAfterAdvance - salaryPaid);
+      const technicianDebtRemaining = Math.max(0, techDebt - technicianBaseIncome);
+      const adjustedShopProfit = shopBaseProfit + debtOffset;
+      return { distributableNet, shopBaseProfit, technicianBaseIncome, debtOffset, technicianIncomeAfterDebt, advanceApplied, technicianIncomeAfterAdvance, salaryPaid, salaryPaymentApplied, adjustedShopProfit, technicianSalaryDue, technicianDebtRemaining, advanceCarryForward:Math.max(0, advances - technicianIncomeAfterDebt) };
     }
     function profitSplit(list = monthRecords()) {
       const t = totals(list);
       const distributableNet = Math.max(0, t.netCash);
-      const shopBaseProfit = distributableNet / 2;
-      const technicianBaseIncome = distributableNet / 2;
-      const debtOffset = Math.min(technicianBaseIncome, t.techOwesShop);
-      const technicianSalaryDue = Math.max(0, technicianBaseIncome - t.techOwesShop);
-      const technicianDebtRemaining = Math.max(0, t.techOwesShop - technicianBaseIncome);
-      const adjustedShopProfit = shopBaseProfit + debtOffset;
-      const totalShopOwesTechnician = technicianSalaryDue + t.shopOwesTech;
-      return { ...t, distributableNet, shopBaseProfit, technicianBaseIncome, debtOffset, adjustedShopProfit, technicianSalaryDue, technicianDebtRemaining, totalShopOwesTechnician };
+      const salaryPaid = technicianSalaryPaymentsForPeriod(list).reduce((total, record) => total + Number(record.amount || 0), 0);
+      const split = calculateTechnicianSplit(distributableNet, t.techOwesShop, t.advanceSalaryPaid, salaryPaid);
+      const totalShopOwesTechnician = split.technicianSalaryDue + t.shopOwesTech;
+      return { ...t, ...split, totalShopOwesTechnician };
     }
     function totals(list = monthRecords()) {
       const repairs = list.filter(r => r.type === "repair");
@@ -1117,7 +1148,7 @@
       const inventoryUsedExpense = repairs.filter(r => r.partSource === "inventory" && isSettled(r)).reduce((t,r) => t + effectivePartsCost(r), 0);
       const totalPaidExpenses = paidExpenses + inventoryUsedExpense;
       const inventoryPaid = 0;
-      return { repairs, expenses, count:repairs.length, waitingCount, readyCount, pickedCount, invoiced, collected, customerPending, paidExpenses:totalPaidExpenses, inventoryUsedExpense, supplierExpenseRemaining, supplierStockRemaining, inventoryExpenseRemaining, generalExpenseRemaining, supplierRemaining, inventoryRemaining, inventoryPaid, techOwesShop:techs.techOwesShop, shopOwesTech:techs.shopOwesTech, netCash:collected - totalPaidExpenses };
+      return { repairs, expenses, count:repairs.length, waitingCount, readyCount, pickedCount, invoiced, collected, customerPending, paidExpenses:totalPaidExpenses, inventoryUsedExpense, supplierExpenseRemaining, supplierStockRemaining, inventoryExpenseRemaining, generalExpenseRemaining, supplierRemaining, inventoryRemaining, inventoryPaid, techOwesShop:techs.techOwesShop, shopOwesTech:techs.shopOwesTech, advanceSalaryPaid:techs.advanceSalaryPaid, netCash:collected - totalPaidExpenses };
     }
     function render() {
       applyRoleUi();
@@ -1234,16 +1265,21 @@
       const profile = technicianProfiles().find(item => item.id === profileId);
       if (!profile) return;
       const balance = technicianBalance(profile.id);
-      const amount = Math.round(Number(balance.totalOwed || 0) * 100) / 100;
+      const salaryAmount = Math.round(Number(balance.salaryDue || 0) * 100) / 100;
+      const shopOwesRecords = technicianTransactions().filter(record => (record.technicianId || findTechnicianIdByName(record.technician)) === profile.id && record.direction === "shop_owes_tech" && technicianRecordRemaining(record) > 0);
+      const otherOwedAmount = Math.round(shopOwesRecords.reduce((total, record) => total + technicianRecordRemaining(record), 0) * 100) / 100;
+      const amount = salaryAmount + otherOwedAmount;
       if (amount <= 0) return;
-      if (!confirm(`Pay ${money.format(amount)} to ${profile.name} and clear this technician salary due?`)) return;
+      if (!confirm(`Pay ${money.format(amount)} to ${profile.name}?\nSalary due: ${money.format(salaryAmount)}\nOther shop-owes balances: ${money.format(otherOwedAmount)}`)) return;
       const beforeTotals = totals();
       rememberUndo("pay salary");
-      const record = { id:crypto.randomUUID(), type:"technician", date:today(), technicianId:profile.id, technician:profile.name, direction:"salary_paid", reason:"Technician got paid", amount, paidAmount:amount, settledAt:today(), settlementLabel:`Technician got paid ${today()}`, settlementStartDate:today(), settlementEndDate:today(), notes:"Salary payment recorded from technician page" };
-      records = records.concat(record);
+      const periodDates = monthRecords().filter(record => record.type !== "activity" && record.type !== "technician_profile").map(record => record.date).filter(Boolean).sort();
+      const salaryRecord = salaryAmount > 0 ? { id:crypto.randomUUID(), type:"technician", date:today(), technicianId:profile.id, technician:profile.name, direction:"salary_paid", reason:"Technician got paid", amount:salaryAmount, paidAmount:salaryAmount, salaryPeriodStart:periodDates[0] || today(), settledAt:today(), settlementLabel:`Technician got paid ${today()}`, settlementStartDate:today(), settlementEndDate:today(), notes:"Salary payment recorded from technician page" } : null;
+      shopOwesRecords.forEach(record => { record.paidAmount = Number(record.amount || 0); });
+      if (salaryRecord) records = records.concat(salaryRecord);
       saveLocalCache();
-      await syncRecord(record);
-      await logActivity("Technician paid", `${profile.name} paid ${money.format(amount)}`, beforeTotals, record.id);
+      await Promise.all([...(salaryRecord ? [salaryRecord] : []), ...shopOwesRecords].map(syncRecord));
+      await logActivity("Technician paid", `${profile.name} paid ${money.format(amount)}`, beforeTotals, salaryRecord?.id || profile.id);
       render();
     }
     function toggleVisibleSupplierPaySelection() {
@@ -1530,13 +1566,13 @@
     }
     function techniciansTable(profiles, list) {
       if (!profiles.length) return `<div class="empty">No technician profiles recorded.</div>`;
-      return `<table><thead><tr><th>Technician profile</th><th class="amount">Assigned repairs</th><th class="amount">Salary share</th><th class="amount">Advances / owes shop</th><th class="amount">Other shop owes</th><th class="amount">Salary due</th><th>Notes</th><th></th></tr></thead><tbody>${profiles.map(profile => {
+      return `<table><thead><tr><th>Technician profile</th><th class="amount">Assigned repairs</th><th class="amount">Gross salary</th><th class="amount">Advance paid</th><th class="amount">Tech owes shop</th><th class="amount">Salary paid</th><th class="amount">Other shop owes</th><th class="amount">Total due</th><th>Notes</th><th></th></tr></thead><tbody>${profiles.map(profile => {
         const balance = technicianBalance(profile.id, list);
         const assigned = list.filter(record => record.type === "repair" && (record.technicianId || defaultTechnicianId()) === profile.id).length;
         const defaultTag = profile.isDefault ? " <span class='tag blue'>Default</span>" : "";
         const editButtons = profile.id === "default" ? "" : `<button class="icon-button" data-edit="${profile.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${profile.id}" title="Delete" aria-label="Delete">X</button>`;
         const paySalaryButton = balance.totalOwed > 0 ? `<button class="small-action" data-pay-tech-salary="${profile.id}">Pay salary</button>` : "";
-        return `<tr><td><strong>${esc(profile.name)}</strong>${defaultTag}</td><td class="amount">${assigned}</td><td class="amount">${money.format(balance.salary)}</td><td class="amount">${money.format(balance.deductions + balance.salaryPaid)}</td><td class="amount">${money.format(balance.shopOwes)}</td><td class="amount">${money.format(balance.totalOwed)}</td><td>${esc(profile.notes || "-")}</td><td><div class="row-actions">${paySalaryButton}<button class="small-action" data-add-tech-balance="${profile.id}">Balance</button><button class="small-action" data-add-tech-advance="${profile.id}">Advance</button>${editButtons}</div></td></tr>`;
+        return `<tr><td><strong>${esc(profile.name)}</strong>${defaultTag}</td><td class="amount">${assigned}</td><td class="amount">${money.format(balance.salary)}</td><td class="amount">${money.format(balance.advances)}</td><td class="amount">${money.format(balance.techDebt)}</td><td class="amount">${money.format(balance.salaryPaid)}</td><td class="amount">${money.format(balance.shopOwes)}</td><td class="amount">${money.format(balance.totalOwed)}</td><td>${esc(profile.notes || "-")}</td><td><div class="row-actions">${paySalaryButton}<button class="small-action" data-add-tech-balance="${profile.id}">Balance</button><button class="small-action" data-add-tech-advance="${profile.id}">Advance</button>${editButtons}</div></td></tr>`;
       }).join("")}</tbody></table>`;
     }
     function techSummary(technicians) {
@@ -1545,7 +1581,7 @@
         const balance = technicianBalance(profile.id);
         return `<tr><td>${esc(profile.name)} salary due</td><td class="amount">${money.format(balance.totalOwed)}</td></tr>`;
       }).join("");
-      return `<table><thead><tr><th>Balance</th><th class="amount">Remaining</th></tr></thead><tbody>${profileRows}<tr><td>Manual shop owes technicians</td><td class="amount">${money.format(totals.shopOwesTech)}</td></tr><tr><td>Manual tech owes shop / advances</td><td class="amount">${money.format(totals.techOwesShop)}</td></tr></tbody></table>`;
+      return `<table><thead><tr><th>Balance</th><th class="amount">Remaining</th></tr></thead><tbody>${profileRows}<tr><td>Advance salary already paid</td><td class="amount">${money.format(totals.advanceSalaryPaid)}</td></tr><tr><td>Manual technician owes shop</td><td class="amount">${money.format(totals.techOwesShop)}</td></tr><tr><td>Manual shop owes technicians</td><td class="amount">${money.format(totals.shopOwesTech)}</td></tr></tbody></table>`;
     }
     function profitTable(list) {
       const split = profitSplit(list);
@@ -1554,11 +1590,14 @@
         <tr><td>Profit to divide</td><td>Only positive net income is divided</td><td class="amount">${money.format(split.distributableNet)}</td></tr>
         <tr><td>Shop base profit</td><td>50% of profit to divide</td><td class="amount">${money.format(split.shopBaseProfit)}</td></tr>
         <tr><td>Technician income before debts</td><td>50% of profit to divide</td><td class="amount">${money.format(split.technicianBaseIncome)}</td></tr>
-        <tr><td>Technician owes shop</td><td>Subtracted from technician income first</td><td class="amount">${money.format(split.techOwesShop)}</td></tr>
-        <tr><td>Debt offset kept by shop</td><td>Amount of technician income used to pay the shop back</td><td class="amount">${money.format(split.debtOffset)}</td></tr>
-        <tr><td><strong>Final shop profit</strong></td><td>Shop base profit plus debt offset</td><td class="amount"><strong>${money.format(split.adjustedShopProfit)}</strong></td></tr>
-        <tr><td><strong>Technician salary due</strong></td><td>Technician income after subtracting what technician owes the shop</td><td class="amount"><strong>${money.format(split.technicianSalaryDue)}</strong></td></tr>
+        <tr><td>Technician owes shop</td><td>Real technician debt subtracted from technician income</td><td class="amount">${money.format(split.techOwesShop)}</td></tr>
+        <tr><td>Debt offset kept by shop</td><td>Only real debt repayment increases shop profit</td><td class="amount">${money.format(split.debtOffset)}</td></tr>
+        <tr><td>Advance salary already paid</td><td>Reduces salary due without changing shop profit</td><td class="amount">${money.format(split.advanceSalaryPaid)}</td></tr>
+        <tr><td>Salary payments already made</td><td>Reduces the remaining technician salary due</td><td class="amount">${money.format(split.salaryPaid)}</td></tr>
+        <tr><td><strong>Final shop profit</strong></td><td>Shop base profit plus real debt offset only</td><td class="amount"><strong>${money.format(split.adjustedShopProfit)}</strong></td></tr>
+        <tr><td><strong>Technician salary due</strong></td><td>Technician income minus debt, advances, and salary payments</td><td class="amount"><strong>${money.format(split.technicianSalaryDue)}</strong></td></tr>
         <tr><td>Technician debt still remaining</td><td>Only if technician debt is bigger than technician income</td><td class="amount">${money.format(split.technicianDebtRemaining)}</td></tr>
+        <tr><td>Advance carried forward</td><td>Only if advances are bigger than current technician income after debt</td><td class="amount">${money.format(split.advanceCarryForward)}</td></tr>
         <tr><td>Total shop owes technician</td><td>Technician salary due plus other unpaid technician balances</td><td class="amount">${money.format(split.totalShopOwesTechnician)}</td></tr>
       </tbody></table>`;
     }
@@ -1585,7 +1624,7 @@
     }
     function archiveValues(record) {
       const income = record.type === "repair" && isBillableRepair(record) ? Number(record.amount || 0) : 0;
-      const expense = record.type === "stock" ? (record.paid ? Number(record.totalCost || 0) : 0) : record.type === "expense" ? Number(record.amount || 0) : record.type === "repair" && record.partSource === "inventory" ? effectivePartsCost(record) : record.type === "technician" && record.direction === "salary_paid" ? Number(record.amount || 0) : 0;
+      const expense = record.type === "stock" ? (record.paid ? Number(record.totalCost || 0) : 0) : record.type === "expense" ? Number(record.amount || 0) : record.type === "repair" && record.partSource === "inventory" ? effectivePartsCost(record) : record.type === "technician" && (record.direction === "salary_paid" || record.direction === "advance_salary") ? Number(record.amount || 0) : 0;
       return { income, expense, net:income - expense };
     }
     function archiveFolderKey(record) {
@@ -1617,7 +1656,7 @@
     function archiveRow(record) {
       const values = archiveValues(record);
       const name = record.type === "repair" ? `${esc(record.customer || "-")}<br><span class="muted">${esc(record.deviceType || "")} ${esc(record.serialNumber || "")}</span>` : record.type === "stock" ? esc(stockLabel(record)) : record.type === "technician" ? esc(record.technician || "-") : esc(record.vendor || "-");
-      const detail = record.type === "repair" ? repairItemsText(record) : record.type === "stock" ? `${record.stockKind === "complete_phone" ? "Complete donor phone" : `${record.quantity} ${esc(record.partName || "parts")}`} - ${esc(stockSourceLabel(record))} - ${record.paid ? "paid" : "pending"}` : record.type === "technician" && record.direction === "salary_paid" ? "Technician got paid" : esc(record.reason || record.category || record.notes || "-");
+      const detail = record.type === "repair" ? repairItemsText(record) : record.type === "stock" ? `${record.stockKind === "complete_phone" ? "Complete donor phone" : `${record.quantity} ${esc(record.partName || "parts")}`} - ${esc(stockSourceLabel(record))} - ${record.paid ? "paid" : "pending"}` : record.type === "technician" && record.direction === "salary_paid" ? "Technician got paid" : record.type === "technician" && record.direction === "advance_salary" ? "Advance salary paid" : esc(record.reason || record.category || record.notes || "-");
       return `<tr><td>${esc((settledDate(record) || "").slice(0, 10))}</td><td>${esc(record.type)}</td><td>${name}</td><td>${detail}</td><td class="amount">${money.format(values.income)}</td><td class="amount">${money.format(values.expense)}</td><td class="amount">${money.format(values.net)}</td><td><div class="row-actions"><button class="small-action" data-restore-record="${record.id}">Restore</button><button class="icon-button" data-edit="${record.id}" title="Edit" aria-label="Edit">E</button><button class="icon-button" data-delete="${record.id}" title="Delete" aria-label="Delete">X</button></div></td></tr>`;
     }
     function archiveRecordCategory(record) {
@@ -1660,7 +1699,7 @@
         } else if (record.type === "stock") {
           if (isSupplierStock(record)) totals.supplier += record.paid ? Number(record.totalCost || 0) : 0;
           else totals.inventory += record.paid ? Number(record.totalCost || 0) : 0;
-        } else if (record.type === "technician" && record.direction === "salary_paid") {
+        } else if (record.type === "technician" && (record.direction === "salary_paid" || record.direction === "advance_salary")) {
           totals.technicianPaid += Number(record.amount || 0);
         }
         return totals;
@@ -1705,7 +1744,7 @@
       const detailRows = folder.records.map(record => {
         const values = archiveValues(record);
         const title = record.type === "repair" ? `${record.customer || "-"} - ${record.deviceType || ""} ${record.serialNumber || ""}` : record.type === "technician" ? `${record.technician || technicianName(record.technicianId)}` : `${record.vendor || record.category || "-"}`;
-        const detail = record.type === "repair" ? repairItemsText(record) : record.type === "technician" && record.direction === "salary_paid" ? "Technician got paid" : esc(record.reason || record.category || record.notes || "-");
+        const detail = record.type === "repair" ? repairItemsText(record) : record.type === "technician" && record.direction === "salary_paid" ? "Technician got paid" : record.type === "technician" && record.direction === "advance_salary" ? "Advance salary paid" : esc(record.reason || record.category || record.notes || "-");
         return `<tr><td>${esc((settledDate(record) || record.date || "").slice(0,10))}</td><td>${esc(record.type)}</td><td>${esc(title)}</td><td>${detail}</td><td class="amount">${money.format(values.income)}</td><td class="amount">${money.format(values.expense)}</td><td class="amount">${money.format(values.net)}</td></tr>`;
       }).join("");
       return `<!doctype html><html><head><title>${esc(folder.name)} report</title><style>body{font-family:Arial,sans-serif;color:#111;padding:32px}h1,h2{margin:0 0 10px}.muted{color:#666}.page{min-height:92vh}.page-break{page-break-before:always}table{width:100%;border-collapse:collapse;margin-top:16px}td,th{border-bottom:1px solid #ddd;padding:9px;text-align:left;vertical-align:top}.amount{text-align:right;white-space:nowrap}@media print{button{display:none}.page{min-height:auto}}</style></head><body><button onclick="print()">Print or save PDF</button><section class="page"><h1>${esc(folder.name)}</h1><p class="muted">Start ${esc(folder.start)} - End ${esc(folder.end)} - ${folder.records.length} records</p><h2>Summary</h2><table><tbody>${categoryRows}</tbody></table></section><section class="page-break"><h2>Detailed information</h2><table><thead><tr><th>Date</th><th>Type</th><th>Name</th><th>Detail</th><th class="amount">Income</th><th class="amount">Expense</th><th class="amount">Net</th></tr></thead><tbody>${detailRows}</tbody></table></section><script>setTimeout(() => print(), 250)<\/script></body></html>`;
@@ -2126,6 +2165,12 @@
     function fillTechnician(record) {
       els.techName.innerHTML = technicianOptions(record?.technicianId || findTechnicianIdByName(record?.technician));
       els.techDate.value = record?.date || today(); els.techDirection.value = record?.direction || "shop_owes_tech"; els.techAmount.value = record?.amount ?? ""; els.techPaidAmount.value = record?.paidAmount ?? ""; els.techReason.value = record?.reason || ""; els.techNotes.value = record?.notes || "";
+      updateTechDirectionFields();
+    }
+    function updateTechDirectionFields() {
+      const isAdvance = els.techDirection.value === "advance_salary";
+      els.techPaidAmountWrap.classList.toggle("hidden", isAdvance);
+      if (isAdvance) els.techPaidAmount.value = els.techAmount.value || "";
     }
     function fillTechnicianProfile(record) {
       els.profileName.value = record?.name || ""; els.profileDefault.value = record?.isDefault ? "yes" : "no"; els.profileNotes.value = record?.notes || "";
@@ -2203,7 +2248,7 @@
         } else if (draft.type === "expense") {
           els.expenseDate.value = draft.expense.date || today(); els.expenseCategory.value = draft.expense.category || "Supplier expense"; els.vendorName.value = draft.expense.vendor || ""; els.expenseAmount.value = draft.expense.amount || ""; els.linkedRepair.value = draft.expense.linkedRepairId || ""; els.expensePaid.value = draft.expense.paid || "paid"; els.expenseNotes.value = draft.expense.notes || "";
         } else if (draft.type === "technician") {
-          els.techName.innerHTML = technicianOptions(draft.technician.technicianId || defaultTechnicianId()); els.techDate.value = draft.technician.date || today(); els.techDirection.value = draft.technician.direction || "shop_owes_tech"; els.techReason.value = draft.technician.reason || ""; els.techAmount.value = draft.technician.amount || ""; els.techPaidAmount.value = draft.technician.paidAmount || ""; els.techNotes.value = draft.technician.notes || "";
+          els.techName.innerHTML = technicianOptions(draft.technician.technicianId || defaultTechnicianId()); els.techDate.value = draft.technician.date || today(); els.techDirection.value = draft.technician.direction || "shop_owes_tech"; els.techReason.value = draft.technician.reason || ""; els.techAmount.value = draft.technician.amount || ""; els.techPaidAmount.value = draft.technician.paidAmount || ""; els.techNotes.value = draft.technician.notes || ""; updateTechDirectionFields();
         } else if (draft.type === "stock") {
           els.stockDate.value = draft.stock.date || today(); els.stockKind.value = draft.stock.stockKind || "part"; els.stockSource.value = draft.stock.stockSource || "shop"; els.stockBrand.value = draft.stock.brand || ""; els.stockModel.value = draft.stock.model || ""; els.stockPartName.value = draft.stock.partName || ""; els.stockQuantity.value = draft.stock.quantity || 1; els.stockTotalCost.value = draft.stock.totalCost || ""; els.stockPaid.value = draft.stock.paid || "paid"; els.stockVendor.value = draft.stock.vendor || ""; els.stockNotes.value = draft.stock.notes || ""; renderDonorPartsGrid(draft.stock.donorParts || []); updateStockKindFields();
         }
@@ -2226,7 +2271,7 @@
         : type === "expense"
           ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.expenseDate.value || today(), category:els.expenseCategory.value, vendor:els.vendorName.value.trim(), amount:Number(els.expenseAmount.value || 0), paid:els.expensePaid.value === "paid", linkedRepairId:els.linkedRepair.value, notes:els.expenseNotes.value.trim() }
           : type === "technician"
-            ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.techDate.value || today(), technicianId:els.techName.value || defaultTechnicianId(), technician:technicianName(els.techName.value), direction:els.techDirection.value, reason:els.techReason.value.trim(), amount:Number(els.techAmount.value || 0), paidAmount:Number(els.techPaidAmount.value || 0), notes:els.techNotes.value.trim() }
+            ? { id:els.recordId.value || crypto.randomUUID(), type, date:els.techDate.value || today(), technicianId:els.techName.value || defaultTechnicianId(), technician:technicianName(els.techName.value), direction:els.techDirection.value, reason:els.techReason.value.trim(), amount:Number(els.techAmount.value || 0), paidAmount:els.techDirection.value === "advance_salary" ? Number(els.techAmount.value || 0) : Number(els.techPaidAmount.value || 0), notes:els.techNotes.value.trim() }
             : type === "technician_profile"
               ? { id:els.recordId.value || crypto.randomUUID(), type:"technician_profile", date:today(), name:els.profileName.value.trim() || "Technician", isDefault:els.profileDefault.value === "yes", notes:els.profileNotes.value.trim() }
               : { id:els.recordId.value || crypto.randomUUID(), type:"stock", date:els.stockDate.value || today(), stockKind:els.stockKind.value, stockSource:els.stockSource.value, brand:els.stockBrand.value.trim(), model:els.stockModel.value.trim(), partName:els.stockKind.value === "part" ? els.stockPartName.value.trim() : "", quantity:els.stockKind.value === "complete_phone" ? 1 : Math.max(1, Number(els.stockQuantity.value || 1)), usedQuantity:Number(existing?.usedQuantity || 0), totalCost:Number(els.stockTotalCost.value || 0), paid:els.stockPaid.value === "paid", vendor:els.stockVendor.value.trim(), donorParts:els.stockKind.value === "complete_phone" ? selectedDonorParts() : [], consumedParts:existing?.consumedParts || [], notes:els.stockNotes.value.trim() };
@@ -2262,7 +2307,7 @@
       win.document.write(html); win.document.close();
     }
     function exportCsv() {
-      const headers = ["id","type","date","time","action","summary","effect","relatedId","customer","deviceType","serialNumber","technicianId","name","isDefault","status","repairItems","title","amount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","category","vendor","paid","linkedRepairId","technician","direction","reason","paidAmount","stockKind","stockSource","brand","model","partName","quantity","usedQuantity","totalCost","donorParts","consumedParts","settledAt","settlementLabel","settlementStartDate","settlementEndDate","notes"];
+      const headers = ["id","type","date","time","action","summary","effect","relatedId","customer","deviceType","serialNumber","technicianId","name","isDefault","status","repairItems","title","amount","partSource","partsCost","partAcquired","inventoryPaid","customerPaid","category","vendor","paid","linkedRepairId","technician","direction","reason","paidAmount","salaryPeriodStart","stockKind","stockSource","brand","model","partName","quantity","usedQuantity","totalCost","donorParts","consumedParts","settledAt","settlementLabel","settlementStartDate","settlementEndDate","notes"];
       const csv = [headers.join(",")].concat(records.map(r => headers.map(h => csvCell(typeof r[h] === "object" && r[h] !== null ? JSON.stringify(r[h]) : r[h] ?? "")).join(","))).join("\n");
       const blob = new Blob([csv], { type:"text/csv;charset=utf-8" }); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = `repair-ledger-${today()}.csv`; a.click(); URL.revokeObjectURL(url);
     }
