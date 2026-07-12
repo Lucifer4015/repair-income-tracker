@@ -1760,7 +1760,7 @@
       els.archiveTable.innerHTML = `<div class="archive-folders">${folders.map((folder, index) => {
         const open = expandedArchiveFolders.has(folder.key);
         const selected = selectedArchiveFolderKeys.has(folder.key);
-        return `<section class="archive-folder"><button class="folder-button" type="button" data-toggle-archive-folder-index="${index}"><div><strong>${esc(folder.name)}</strong><span>Start ${esc(folder.start)} - End ${esc(folder.end)}</span></div><div class="folder-summary"><span class="tag">${folder.records.length} records</span></div></button><div class="subnav"><label class="check-row"><input type="checkbox" data-select-archive-folder-index="${index}" ${selected ? "checked" : ""}> Show in dashboard</label><button class="small-action" type="button" data-edit-archive-folder-index="${index}">Edit dates</button><button class="small-action" type="button" data-export-archive-folder-index="${index}">Export report</button></div>${open ? `<div class="folder-body"><div class="filters" style="border-bottom:1px solid var(--line)"><div><label>Start date</label><input type="date" data-folder-start-index="${index}" value="${esc(folder.start)}"></div><div><label>End date</label><input type="date" data-folder-end-index="${index}" value="${esc(folder.end)}"></div><button class="small-action" type="button" data-folder-end-today-index="${index}">Today</button><button class="small-action" type="button" data-save-archive-folder-index="${index}">Save dates</button></div>${archiveFolderCategorySummary(folder, index)}</div>` : ""}</section>`;
+        return `<section class="archive-folder"><button class="folder-button" type="button" data-toggle-archive-folder-index="${index}"><div><strong>${esc(folder.name)}</strong><span>Start ${esc(folder.start)} - End ${esc(folder.end)}</span></div><div class="folder-summary"><span class="tag">${folder.records.length} records</span></div></button><div class="subnav"><label class="check-row"><input type="checkbox" data-select-archive-folder-index="${index}" ${selected ? "checked" : ""}> Show in dashboard</label><button class="small-action" type="button" data-edit-archive-folder-index="${index}">Edit dates</button><button class="small-action" type="button" data-export-archive-folder-index="${index}">Export report</button><button class="small-action" type="button" data-delete-archive-folder-index="${index}">Delete folder</button></div>${open ? `<div class="folder-body"><div class="filters" style="border-bottom:1px solid var(--line)"><div><label>Start date</label><input type="date" data-folder-start-index="${index}" value="${esc(folder.start)}"></div><div><label>End date</label><input type="date" data-folder-end-index="${index}" value="${esc(folder.end)}"></div><button class="small-action" type="button" data-folder-end-today-index="${index}">Today</button><button class="small-action" type="button" data-save-archive-folder-index="${index}">Save dates</button></div>${archiveFolderCategorySummary(folder, index)}</div>` : ""}</section>`;
       }).join("")}</div>`;
       labelTableCells();
     }
@@ -1822,6 +1822,13 @@
         event.preventDefault();
         event.stopPropagation();
         exportArchiveFolderReport(Number(exportButton.dataset.exportArchiveFolderIndex));
+        return;
+      }
+      const deleteFolderButton = event.target.closest("[data-delete-archive-folder-index]");
+      if (deleteFolderButton) {
+        event.preventDefault();
+        event.stopPropagation();
+        deleteArchiveFolder(Number(deleteFolderButton.dataset.deleteArchiveFolderIndex));
         return;
       }
       const categoryButton = event.target.closest("[data-toggle-archive-category-index]");
@@ -1961,6 +1968,32 @@
         if (!endDate) return;
       }
       await updateArchiveFolderDates(folder.key, startDate, endDate);
+    }
+    async function deleteArchiveFolder(index) {
+      const visibleFolder = currentArchiveFolders[index];
+      if (!visibleFolder) return;
+      const folder = archiveFolders(archiveRecords()).find(item => item.key === visibleFolder.key) || visibleFolder;
+      const recordsToDelete = [...new Map(folder.records.map(record => [record.id, record])).values()];
+      if (!recordsToDelete.length) return;
+      const deleteIds = new Set(recordsToDelete.map(record => record.id));
+      const blockedStock = recordsToDelete.find(record => record.type === "stock" && records.some(item => item.type === "repair" && !deleteIds.has(item.id) && repairStockUses(item).some(use => use.stockItemId === record.id)));
+      if (blockedStock) {
+        alert(`${stockLabel(blockedStock)} is used by a repair outside this cleared folder. Restore or edit that repair before deleting this folder.`);
+        return;
+      }
+      if (!confirm(`Delete ${recordsToDelete.length} cleared records from ${folder.name}? This removes them from All Time Income and Supabase. You can press Undo right after deleting if this was a mistake.`)) return;
+      const beforeTotals = dashboardSnapshot();
+      rememberUndo("delete cleared folder");
+      records = records.filter(record => !deleteIds.has(record.id));
+      reconcileStockUsage();
+      saveLocalCache();
+      await Promise.all([...deleteIds].map(deleteRemoteRecord));
+      await Promise.all(stockRecords().map(syncRecord));
+      await logActivity("Cleared folder deleted", `${recordsToDelete.length} records removed from ${folder.name}`, beforeTotals);
+      selectedArchiveFolderKeys.delete(folder.key);
+      expandedArchiveFolders.delete(folder.key);
+      [...expandedArchiveCategoryKeys].filter(key => key.startsWith(`${folder.key}|`)).forEach(key => expandedArchiveCategoryKeys.delete(key));
+      render();
     }
     async function deleteRecord(id) {
       const record = records.find(r => r.id === id);
